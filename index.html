@@ -1,0 +1,1649 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Family Medicine & Emergency Quick Review</title>
+<style>
+:root{
+ --bg:#f4f6f9; --panel:#ffffff; --ink:#1f2733; --muted:#5b6878; --line:#e3e8ef;
+ --brand:#1d4ed8; --brand2:#0b2a6b; --sidebar:#0e1726; --sidebarink:#c7d2e0;
+ --def:#2563eb; --defbg:#eef4ff; --why:#64748b; --whybg:#f3f5f8;
+ --clin:#0d9488; --clinbg:#e7f7f4; --dx:#7c3aed; --dxbg:#f3edff;
+ --tx:#16a34a; --txbg:#e9f8ee; --flag:#dc2626; --flagbg:#fdeced;
+ --buzz:#b45309; --buzzbg:#fff6e6; --ok:#16a34a; --bad:#dc2626;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+ background:var(--bg);color:var(--ink);line-height:1.5;font-size:15.5px}
+a{color:var(--brand);text-decoration:none}
+/* layout */
+#layout{display:flex;min-height:100vh}
+#sidebar{width:248px;flex:0 0 248px;background:var(--sidebar);color:var(--sidebarink);
+ position:sticky;top:0;height:100vh;overflow-y:auto;padding:0 0 30px}
+#sidebar .brand{padding:18px 18px 12px;border-bottom:1px solid #1d2942}
+#sidebar .brand h1{font-size:16px;margin:0 0 3px;color:#fff;letter-spacing:.2px}
+#sidebar .brand .sub{font-size:11.5px;color:#8aa0bd}
+#sidebar .countdown{margin:12px 14px;padding:9px 12px;background:#15213a;border:1px solid #25324f;
+ border-radius:9px;font-size:12px;color:#ffd9a8}
+#sidebar .countdown b{color:#ffb866}
+.navsec{font-size:10.5px;text-transform:uppercase;letter-spacing:.12em;color:#6f84a4;padding:14px 18px 6px}
+#sidebar ul{list-style:none;margin:0;padding:0}
+#sidebar li a.navlink{display:block;padding:7px 18px;color:var(--sidebarink);font-size:13.4px;border-left:3px solid transparent}
+#sidebar li a.navlink:hover{background:#16223c;color:#fff}
+#sidebar li a.navlink.active{background:#16223c;color:#fff;border-left-color:var(--def);font-weight:600}
+#sidebar .navtool{display:block;width:calc(100% - 28px);margin:6px 14px 0;padding:8px 10px;border:1px solid #2a3a59;
+ background:#14203a;color:#cfe0f5;border-radius:8px;font-size:12.5px;cursor:pointer;text-align:left}
+#sidebar .navtool:hover{background:#1c2c4d}
+#sidebar .navtool.primary{background:var(--brand);border-color:var(--brand);color:#fff;font-weight:600;text-align:center}
+#sidebar .navtool.primary:hover{background:#1b43c0}
+/* main */
+#main{flex:1 1 auto;min-width:0}
+#topbar{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);
+ border-bottom:1px solid var(--line);padding:10px 26px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+#topbar .ttl{font-weight:700;font-size:14px;color:var(--brand2);margin-right:auto}
+#search{flex:1 1 220px;max-width:340px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;font-size:13.5px}
+#topbar button{padding:8px 12px;border:1px solid var(--line);background:#fff;border-radius:8px;cursor:pointer;font-size:12.5px;color:var(--ink)}
+#topbar button:hover{background:#f0f4fa;border-color:#c9d4e3}
+#hamburger{display:none}
+.wrap{max-width:1000px;margin:0 auto;padding:22px 26px 80px}
+.intro-card{background:linear-gradient(135deg,#0b2a6b,#1d4ed8);color:#fff;border-radius:16px;padding:22px 24px;margin-bottom:22px}
+.intro-card h2{margin:0 0 8px;font-size:21px}
+.intro-card p{margin:6px 0;font-size:14px;color:#dce6ff}
+.intro-card .pills{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+.intro-card .pill{background:rgba(255,255,255,.16);padding:5px 11px;border-radius:20px;font-size:12px}
+/* part banner */
+.part-banner{background:linear-gradient(135deg,#0b2a6b,#1d4ed8);color:#fff;border-radius:14px;padding:16px 22px;margin:36px 0 18px;scroll-margin-top:64px}
+.part-banner .part-kicker{font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:#bcd2ff}
+.part-banner h2{margin:2px 0 4px;font-size:25px;border:none;color:#fff;padding:0}
+.part-banner p{margin:0;font-size:13px;color:#dce6ff;font-style:italic}
+/* system */
+.system{background:transparent;margin:0 0 30px;scroll-margin-top:64px}
+.sys-title{font-size:23px;color:var(--brand2);border-bottom:3px solid var(--def);padding-bottom:8px;margin:30px 0 6px}
+.sys-intro{color:var(--muted);font-size:14px;margin:0 0 16px;font-style:italic}
+.topic{background:var(--panel);border:1px solid var(--line);border-radius:13px;margin:0 0 16px;overflow:hidden;box-shadow:0 1px 2px rgba(16,30,54,.04)}
+.topic-title{margin:0;padding:14px 18px;font-size:17px;color:var(--brand2);cursor:pointer;display:flex;align-items:center;gap:10px;background:#fbfcfe;border-bottom:1px solid var(--line)}
+.topic-title:before{content:"\25be";font-size:13px;color:var(--brand);transition:transform .18s;flex:0 0 auto}
+.topic.collapsed .topic-title:before{transform:rotate(-90deg)}
+.topic.collapsed .topic-title{border-bottom:none}
+.topic-body{padding:15px 18px}
+.topic.collapsed .topic-body{display:none}
+.topic > .box, .topic > table, .topic > .mnem{margin-left:18px;margin-right:18px}
+/* boxes */
+.box{border-left:4px solid #ccc;background:#fafbfc;border-radius:0 9px 9px 0;padding:9px 13px;margin:9px 0;font-size:14px}
+.box .lbl{display:inline-block;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;
+ padding:2px 8px;border-radius:5px;margin-right:8px;color:#fff;vertical-align:middle}
+.box ul{margin:7px 0 2px;padding-left:20px}
+.box li{margin:3px 0}
+.box.def{border-color:var(--def);background:var(--defbg)} .box.def .lbl{background:var(--def)}
+.box.why{border-color:var(--why);background:var(--whybg);font-style:italic;color:#42505f} .box.why .lbl{background:var(--why)}
+.box.clin{border-color:var(--clin);background:var(--clinbg)} .box.clin .lbl{background:var(--clin)}
+.box.dx{border-color:var(--dx);background:var(--dxbg)} .box.dx .lbl{background:var(--dx)}
+.box.tx{border-color:var(--tx);background:var(--txbg)} .box.tx .lbl{background:var(--tx)}
+.box.flag{border-color:var(--flag);background:var(--flagbg)} .box.flag .lbl{background:var(--flag)}
+.box.buzz{border-color:var(--buzz);background:var(--buzzbg)} .box.buzz .lbl{background:var(--buzz)}
+.mnem{background:#fff7ed;border:1px dashed #f0b366;border-radius:9px;padding:8px 12px;margin:9px 0;font-size:13.5px}
+/* tables */
+table.cmp{border-collapse:collapse;width:100%;margin:12px 0;font-size:13.3px;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+table.cmp th,table.cmp td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+table.cmp thead th{background:var(--brand2);color:#fff;font-size:12.5px;position:sticky;top:0}
+table.cmp tbody tr:nth-child(even){background:#f6f9fc}
+table.cmp td:first-child{font-weight:600;color:var(--brand2);background:#eef3fb}
+/* mcq */
+.mcq-block{background:#0e1726;color:#e8eef7;border-radius:14px;padding:18px 20px;margin:16px 0 8px}
+.mcq-head{margin:0 0 12px;color:#ffd9a8;font-size:17px}
+.mcq{background:#16223c;border:1px solid #25324f;border-radius:10px;padding:13px 15px;margin:11px 0}
+.mcq .q{margin:0 0 9px;font-size:14.4px;color:#fff}
+.mcq ol.opts{margin:0 0 10px;padding-left:24px}
+.mcq ol.opts li{margin:4px 0;font-size:13.8px;color:#cdd8ea}
+.mcq button.reveal{background:#1d4ed8;color:#fff;border:none;border-radius:7px;padding:6px 14px;font-size:12.5px;cursor:pointer}
+.mcq button.reveal:hover{background:#2a5cf0}
+.mcq .ans{display:none;margin-top:10px;padding:9px 12px;background:#0c3320;border-left:4px solid var(--ok);
+ border-radius:0 7px 7px 0;font-size:13.6px;color:#d6ffe4}
+.mcq.revealed .ans{display:block}
+mark{background:#ffe680;color:#000;padding:0 2px;border-radius:2px}
+.hiddenbysearch{display:none !important}
+/* mock */
+#mock-section{scroll-margin-top:64px}
+#mockStart{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px;text-align:center}
+#mockStart h2{color:var(--brand2);margin:0 0 8px}
+#mockStart p{color:var(--muted);max-width:560px;margin:6px auto}
+#mockStart button{margin-top:14px;background:var(--brand);color:#fff;border:none;border-radius:10px;padding:12px 26px;font-size:15px;font-weight:600;cursor:pointer}
+#mockBar{position:sticky;top:52px;z-index:20;display:none;gap:12px;align-items:center;background:#0e1726;color:#fff;
+ padding:10px 16px;border-radius:10px;margin-bottom:14px;flex-wrap:wrap}
+#mockBar .timer{font-size:20px;font-weight:700;font-variant-numeric:tabular-nums;color:#ffd9a8}
+#mockBar .prog{font-size:13px;color:#bcd}
+#mockBar button{margin-left:auto;background:#16a34a;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-weight:600;cursor:pointer}
+#mockBar button.secondary{background:#334; margin-left:0}
+.mq{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:14px 16px;margin:11px 0;scroll-margin-top:120px}
+.mq .qh{font-weight:600;margin:0 0 4px;color:var(--brand2);font-size:12.5px;text-transform:uppercase;letter-spacing:.05em}
+.mq .qt{margin:0 0 11px;font-size:14.6px}
+.mq label{display:block;border:1px solid var(--line);border-radius:8px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:14px}
+.mq label:hover{background:#f2f6fc}
+.mq label.sel{border-color:var(--brand);background:#eef4ff}
+.mq label.correct{border-color:var(--ok);background:#e9f8ee}
+.mq label.wrong{border-color:var(--bad);background:#fdeced}
+.mq .exp{display:none;margin-top:9px;padding:9px 12px;background:#f3f5f8;border-left:4px solid var(--brand);border-radius:0 7px 7px 0;font-size:13.6px}
+.mq.graded .exp{display:block}
+#scorecard{display:none;background:linear-gradient(135deg,#0b2a6b,#1d4ed8);color:#fff;border-radius:14px;padding:24px;margin:14px 0;text-align:center}
+#scorecard .big{font-size:46px;font-weight:800;margin:6px 0}
+#scorecard .grade{font-size:20px;font-weight:700}
+#scorecard button{margin-top:14px;background:#fff;color:var(--brand2);border:none;border-radius:9px;padding:10px 20px;font-weight:600;cursor:pointer}
+.footer{color:var(--muted);font-size:12px;text-align:center;padding:30px 0 10px;border-top:1px solid var(--line);margin-top:30px}
+/* responsive */
+@media(max-width:900px){
+ #sidebar{position:fixed;left:0;top:0;z-index:60;transform:translateX(-100%);transition:transform .2s}
+ #sidebar.open{transform:translateX(0)}
+ #hamburger{display:inline-block}
+ .wrap{padding:16px 14px 70px}
+ .topic > .box,.topic > table,.topic > .mnem{margin-left:0;margin-right:0}
+ body{font-size:15px}
+}
+@media print{
+ #sidebar,#topbar,#mockBar,.mcq button.reveal,#search{display:none}
+ .topic.collapsed .topic-body{display:block}
+ .mcq .ans,.mq .exp{display:block}
+ body{background:#fff}
+}
+</style></head><body>
+<div id="layout">
+<aside id="sidebar">
+ <div class="brand"><h1>Family Medicine & Emergency Quick Review</h1><div class="sub">Compiled from official study sheets</div></div>
+ <div class="countdown">Exam format<br><b>70 MCQs &middot; 80 minutes</b><br>~68&nbsp;s per question</div>
+ <button class="navtool primary" onclick="document.getElementById('mock-section').scrollIntoView()">Take the 70-Q Mock Exam</button>
+ <div class="navsec">Part 1 &middot; Family Medicine</div>
+ <ul><li><a href="#sys-fm-principles" class="navlink" data-target="sys-fm-principles">1. Family Medicine Principles &amp;amp; Consultation Skills</a></li>
+<li><a href="#sys-cardiometabolic" class="navlink" data-target="sys-cardiometabolic">2. Cardiometabolic &amp;amp; Endocrine</a></li>
+<li><a href="#sys-common-presentations" class="navlink" data-target="sys-common-presentations">3. Common Symptom Presentations</a></li>
+<li><a href="#sys-msk-injuries" class="navlink" data-target="sys-msk-injuries">4. Musculoskeletal &amp;amp; Minor Injuries</a></li>
+<li><a href="#sys-womens-geriatrics" class="navlink" data-target="sys-womens-geriatrics">5. Women&#x27;s Health &amp;amp; Geriatrics</a></li>
+<li><a href="#sys-mental-behavioral" class="navlink" data-target="sys-mental-behavioral">6. Mental Health &amp;amp; Behavioural</a></li></ul>
+ <div class="navsec">Part 2 &middot; Emergency</div>
+ <ul><li><a href="#sys-resus-trauma" class="navlink" data-target="sys-resus-trauma">7. Resuscitation &amp;amp; Trauma</a></li>
+<li><a href="#sys-cardioresp" class="navlink" data-target="sys-cardioresp">8. Cardiorespiratory Emergencies</a></li>
+<li><a href="#sys-neuro-emergencies" class="navlink" data-target="sys-neuro-emergencies">9. Neurological Emergencies</a></li>
+<li><a href="#sys-metabolic-emergencies" class="navlink" data-target="sys-metabolic-emergencies">10. Metabolic &amp;amp; Endocrine Emergencies</a></li>
+<li><a href="#sys-tox-environmental" class="navlink" data-target="sys-tox-environmental">11. Toxicology, Anaphylaxis &amp;amp; Environmental</a></li>
+<li><a href="#sys-gi-abdominal" class="navlink" data-target="sys-gi-abdominal">12. GI &amp;amp; Abdominal Emergencies</a></li></ul>
+ <div class="navsec">Exam</div>
+ <ul><li><a href="#mock-section" class="navlink" data-target="mock-section">Mock Exam (70 Q)</a></li></ul>
+ <div class="navsec">Tools</div>
+ <button class="navtool" id="expandAll">Expand all topics</button>
+ <button class="navtool" id="collapseAll">Collapse all topics</button>
+</aside>
+<div id="main">
+ <div id="topbar">
+   <button id="hamburger">&#9776;</button>
+   <span class="ttl">Family Medicine & Emergency Study Hub</span>
+   <input id="search" placeholder="Search topics (e.g. DKA, headache, anaphylaxis)…">
+   <button id="toggleAns">Show all answers</button>
+ </div>
+ <div class="wrap">
+   <div class="intro-card">
+     <h2>Family Medicine & Emergency &mdash; quick review</h2>
+     <p>One cohesive hub for the joint exam: <b>Part 1 Family Medicine</b> and <b>Part 2 Emergency</b>, across 12 clinical clusters. Every topic is stripped to its <b>essential definition, the single most useful comparison table, and the MCQ pearls</b> that map a question stem to its answer.</p>
+     <p><b>How to use it:</b> topics start collapsed &mdash; tap any topic to open it. Sweep a cluster, lock in the tables and the amber pearls, then test yourself with the 5 questions at the end of each cluster. Use the search box to jump anywhere. Finish with the mixed 70-question timed mock.</p>
+     <div class="pills"><span class="pill">2 parts &middot; 12 clusters &middot; 38 topics</span><span class="pill">High-yield only</span><span class="pill">60 practice MCQs</span><span class="pill">70-question mixed mock</span></div>
+   </div>
+<div class="part-banner" id="part-fammed"><span class="part-kicker">Part 1</span><h2>Family Medicine</h2><p>Chronic disease, common presentations &amp; the principles of general practice.</p></div>
+<section class="system" id="sys-fm-principles" data-system="Family Medicine Principles &amp; Consultation Skills">
+<h2 class="sys-title">1. Family Medicine Principles &amp; Consultation Skills</h2>
+<p class="sys-intro">Core principles of family practice plus the consultation, communication, counselling, EBM and screening frameworks.</p>
+
+<article class="topic">
+<h3 class="topic-title">Family Medicine (Definition &amp; Principles)</h3>
+<div class="box def"><span class="lbl">Definition</span> Medical specialty providing <b>continuing</b> and <b>comprehensive</b> care for the individual and family, integrating biological, clinical and behavioral sciences across <b>all ages, both sexes, every organ system and disease entity</b>.</div>
+<div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
+<li>"Treats the patient who has the disease, not just the disease" → defining ethos; care of the <b>whole patient</b> is the primary goal.</li>
+<li>Roles of the family physician → <b>care provider, decision-maker, communicator, community leader, team leader</b> (5 roles).</li>
+<li>First-contact physician acting as <b>gatekeeper / manager of resources</b> → controls admissions, investigations, prescribing and referral.</li>
+<li>Of all illnesses in a community, <b>3 of 4 are self-managed</b>; only 1 in 4 reach a primary care doctor, and only ~1 in 10 of those are referred to hospital.</li>
+<li>Stem "single personal physician, most logical &amp; economical management" → answer = primary care is the <b>most cost-effective</b> system.</li>
+</ul></div>
+</article>
+
+<article class="topic">
+<h3 class="topic-title">Consultation Models</h3>
+<div class="box def"><span class="lbl">Definition</span> The consultation is the <b>central act of medicine</b>; it consists of the <b>interview</b> (why the patient came) and the <b>exposition</b> (the doctor's conclusions, diagnosis and advice).</div>
+<table class="cmp"><thead><tr><th>Style</th><th>Doctor-centred</th><th>Patient-centred</th></tr></thead>
+<tbody>
+<tr><td>Authority</td><td>Doctor has authority</td><td>Shared / patient active</td></tr>
+<tr><td>Patient role</td><td>Passive, relies on doctor's judgment</td><td>Reports symptoms <b>plus ideas, feelings, expectations</b></td></tr>
+<tr><td>Focus</td><td>Disease &amp; pathology</td><td>People &amp; their problems</td></tr>
+</tbody></table>
+<div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
+<li><b>Pendleton model</b> stem → "define reason for attendance incl. nature/history, etiology, and the patient's <b>ideas, concerns &amp; expectations</b> (ICE)".</li>
+<li><b>Roger Neighbour's inner consultation</b> → Connecting, Summarising, Handing over, Safety-netting, <b>Housekeeping</b> ("am I in good enough shape for the next patient?").</li>
+<li><b>Stott &amp; Davies</b> → management of presenting problem, modification of help-seeking behaviour, management of continuing problems, <b>opportunistic health promotion</b>.</li>
+<li>Management headings mnemonic <b>RAPRIOP</b> → Reassurance, Advice, Prescription, Referral, Investigation, Observation, Prevention.</li>
+<li><b>Breaking bad news</b> → give a <b>"warning shot"</b> ("I'm afraid it looks rather serious") then pause; allow denial as a coping mechanism.</li>
+</ul></div>
+</article>
+
+<article class="topic">
+<h3 class="topic-title">Communication Skills</h3>
+<div class="box def"><span class="lbl">Definition</span> Multi-level information exchange (verbal + non-verbal) where both parties are actively engaged; aims = <b>to be heard &amp; accepted, to be understood, to get action</b>.</div>
+<table class="cmp"><thead><tr><th>Channel</th><th>Share of communication</th><th>Note</th></tr></thead>
+<tbody>
+<tr><td>Verbal (words)</td><td><b>7%</b></td><td>Choice of spoken words</td></tr>
+<tr><td>Tone of voice</td><td><b>38%</b></td><td>Part of the 93% non-verbal</td></tr>
+<tr><td>Body language</td><td><b>55%</b></td><td>"More influenced by what we see than what we hear"</td></tr>
+</tbody></table>
+<div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
+<li><b>90% of complaints</b> about doctors relate to diagnosis, of which <b>82% are due to history</b> (exam 9%, investigations 9%).</li>
+<li>A good history gives a correct diagnosis in <b>&gt;50%</b> of all patients and up to <b>80% in primary care</b>.</li>
+<li>Average time before the doctor first interrupts the patient = <b>18 seconds</b>.</li>
+<li><b>Video recording</b> = method of choice for monitoring consultation communication skills.</li>
+<li>Open vs closed vs <b>leading</b> questions → leading questions are "best avoided" (e.g. "would you say you get loose motions after spicy food?").</li>
+</ul></div>
+</article>
+
+<article class="topic">
+<h3 class="topic-title">Counselling</h3>
+<div class="box def"><span class="lbl">Definition</span> Structured patient education/reassurance for a chronic condition: introduce yourself &amp; take permission, establish "what you know and what you want to know", then explain disease, investigations, and management.</div>
+<div class="box flag"><span class="lbl">Red flags</span> In an IBS counselling stem, <b>weight loss, IDA, age &gt;50, melena/hematemesis, persistent vomiting, jaundice, or family Hx of IBD/celiac/cancer</b> mandate exclusion of organic disease before labelling it IBS.</div>
+<div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
+<li><b>IBS</b> → diagnosed by <b>Rome IV</b> criteria (recurrent abdominal pain ≥1 day/week × 3 months, linked to defecation / stool frequency / stool form); functional, "manageable but not curable".</li>
+<li><b>DM</b> diagnosis cut-offs → <b>HbA1c ≥6.5%</b>, <b>FPG ≥126</b> mg/dL, <b>OGTT/random ≥200</b> mg/dL; pre-diabetes HbA1c 5.7–6.4%; target HbA1c <b>&lt;7%</b>.</li>
+<li><b>Metformin</b> = first oral DM2 drug → ↓ hepatic glucose output, no hypos, weight loss; C/I in <b>renal impairment</b>; S/E B12 deficiency, lactic acidosis.</li>
+<li><b>HTN</b> management target <b>&lt;140/90</b>; DASH diet salt <b>&lt;5 g/day</b>; ACEI preferred in diabetics (S/E cough, angioedema, hyperkalemia).</li>
+<li><b>IDA</b> → ferrous sulphate on empty stomach, take with <b>lemon/vitamin C</b> (↑ absorption), avoid Ca/tea/coffee; check reticulocytes at day 10.</li>
+</ul></div>
+</article>
+
+<article class="topic">
+<h3 class="topic-title">Evidence-Based Medicine</h3>
+<div class="box def"><span class="lbl">Definition</span> The <b>integration of best research evidence with clinical expertise and patient values</b> to guide clinical decisions.</div>
+<table class="cmp"><thead><tr><th>Evidence type</th><th>POEM</th><th>DOE</th></tr></thead>
+<tbody>
+<tr><td>Stands for</td><td>Patient-Oriented Evidence that Matters</td><td>Disease-Oriented Evidence</td></tr>
+<tr><td>Measures</td><td>Morbidity, mortality, symptoms, QoL, cost</td><td>Surrogate endpoints (lab values, BP, flow rate)</td></tr>
+<tr><td>Patient value</td><td>Directly matters to patients</td><td>May or may not reflect real patient outcomes</td></tr>
+</tbody></table>
+<div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
+<li>Gold standard for a <b>therapeutic</b> question = prospectively designed <b>double-blind randomized clinical trial</b>; <b>meta-analysis/systematic review</b> = highest level of evidence.</li>
+<li><b>5 A's of practising EBM</b> → Asking, Accessing, Appraising, Applying, Assessing.</li>
+<li>Appraisal assesses three things → <b>Validity</b> (closeness to truth), <b>Impact</b> (size of effect), <b>Applicability</b>.</li>
+<li>Usefulness of information = <b>(relevance × validity) ÷ work</b>.</li>
+<li>Quality improvement = reducing <b>underuse, overuse and misuse</b>; ~20% of what we do can be safely eliminated.</li>
+</ul></div>
+</article>
+
+<article class="topic">
+<h3 class="topic-title">Periodic Health Assessment &amp; Screening</h3>
+<div class="box def"><span class="lbl">Definition</span> Systematic program to <b>prevent illness, maintain function and promote health</b> via immunizations, cancer screening and screening for common diseases.</div>
+<table class="cmp"><thead><tr><th>Level</th><th>Primary</th><th>Secondary</th><th>Tertiary</th></tr></thead>
+<tbody>
+<tr><td>Aim</td><td>Prevent disease before it occurs</td><td>Early detection (screening)</td><td>Management once diagnosed</td></tr>
+<tr><td>Example</td><td>Immunization, removal of colon polyps</td><td>Mammography for breast cancer</td><td>Rehabilitation after stroke</td></tr>
+</tbody></table>
+<div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
+<li><b>Wilson's screening criteria</b> → condition is an important problem with a <b>latent/asymptomatic phase</b>, a treatment exists, an acceptable test exists, natural history understood, case-finding is <b>continuous (not "once and for all")</b>.</li>
+<li>Ideal screening test = highly <b>sensitive</b> (few false negatives) <b>and</b> highly <b>specific</b> (few false positives), safe, cheap, acceptable.</li>
+<li><b>USPSTF grades</b> → A &amp; B = recommend, C = clinician's judgment, <b>D = recommend against</b>, I = insufficient evidence; A/B grades = "gold standard".</li>
+<li>Cervical cancer → start at <b>age 21</b>; cytology every 3 yrs (21–29); co-testing every 5 yrs (30–65).</li>
+<li>Lung cancer screening → <b>LDCT</b> at age 50 in ≥30 pack-year smokers (or quit &lt;15 yrs); AAA → one-time <b>ultrasound</b> in men &gt;65 who ever smoked.</li>
+</ul></div>
+</article>
+
+<div class="mcq-block"><h3 class="mcq-head">Test Yourself — Family Medicine Principles &amp; Consultation Skills</h3>
+
+<div class="mcq"><p class="q"><b>Q1.</b> In a community of 1000 people experiencing illness in a given month, roughly how many are seen by a primary care physician, with the rest self-managing?</p>
+<ol class="opts" type="A"><li>About 1 in 2</li><li>About 1 in 4</li><li>About 1 in 10</li><li>About 3 in 4</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: B.</b> The sheet states 3 of 4 illnesses are self-managed and only 1 in 4 reach a primary care physician; option C (1 in 10) is the further fraction of those who are then referred to hospital.</div></div>
+
+<div class="mcq"><p class="q"><b>Q2.</b> A trainee is assessed on a consultation model that explicitly includes a "<b>housekeeping</b>" stage — checking the doctor is in good enough shape for the next patient. Which model is this?</p>
+<ol class="opts" type="A"><li>Pendleton model</li><li>Stott &amp; Davies model</li><li>Roger Neighbour's inner consultation</li><li>Health belief model</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: C.</b> Housekeeping is one of Neighbour's stages (Connecting, Summarising, Handing over, Safety-netting, Housekeeping). Pendleton focuses on defining attendance and ICE; it has no "housekeeping" step.</div></div>
+
+<div class="mcq"><p class="q"><b>Q3.</b> According to the communication sheet, the single largest share of human communication is carried by which channel?</p>
+<ol class="opts" type="A"><li>The actual words spoken (verbal)</li><li>Tone of voice</li><li>Body language</li><li>Written notes</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: C.</b> 93% of communication is non-verbal — body language 55% and tone of voice 38% — leaving only 7% for the actual words.</div></div>
+
+<div class="mcq"><p class="q"><b>Q4.</b> A study reports its outcome as a reduction in <b>HbA1c</b>, a surrogate laboratory value, rather than a change in mortality or quality of life. This is best classified as which type of evidence?</p>
+<ol class="opts" type="A"><li>POEM (patient-oriented evidence that matters)</li><li>DOE (disease-oriented evidence)</li><li>A systematic review</li><li>Level A USPSTF recommendation</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: B.</b> DOE deals with surrogate endpoints (e.g. blood sugar, BP, flow rate) that may or may not reflect real patient outcomes; POEM measures morbidity, mortality, symptoms, QoL or cost.</div></div>
+
+<div class="mcq"><p class="q"><b>Q5.</b> A new program proposes mass screening for a disease. To satisfy <b>Wilson's criteria</b>, which feature of the disease is essential?</p>
+<ol class="opts" type="A"><li>It must be rapidly fatal once symptoms appear</li><li>It must have a recognisable latent or asymptomatic stage</li><li>It must have no available treatment</li><li>The screening test should be highly invasive</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: B.</b> Wilson's criteria require a latent/asymptomatic stage so early detection is useful; a treatment must exist (not C) and the test should be acceptable/non-invasive (not D).</div></div>
+
+</div>
+</section>
+<section class="system" id="sys-cardiometabolic" data-system="Cardiometabolic &amp; Endocrine">
+<h2 class="sys-title">2. Cardiometabolic &amp; Endocrine</h2>
+<p class="sys-intro">Diagnosis-by-numbers: know the cut-offs cold.</p>
+
+<article class="topic">
+<h3 class="topic-title">Hypertension</h3>
+<div class="box def"><span class="lbl">Definition</span> <b>Essential (primary) HTN</b> = sustained BP elevation without identifiable cause (95% of cases); <b>secondary HTN</b> = identifiable, potentially curable cause (5%).</div>
+
+<table class="cmp"><thead><tr><th>Stage</th><th>JNC7</th><th>AHA</th><th>ESC</th></tr></thead>
+<tbody>
+<tr><td>Normal</td><td>&lt;120 / &lt;80</td><td>&lt;120 and &lt;80</td><td>SBP 120–129 or DBP 80–84</td></tr>
+<tr><td>Pre/Elevated/High-normal</td><td>120–139 or 80–89</td><td>120–129 and &lt;80</td><td>130–139 or 85–89</td></tr>
+<tr><td>Stage/Grade 1</td><td>140–159 or 90–99</td><td>130–139 or 80–89</td><td>140–159 or 90–99</td></tr>
+<tr><td>Stage/Grade 2</td><td>≥160 or ≥100</td><td>≥140 or ≥90</td><td>160–179 or 100–109</td></tr>
+<tr><td>Grade 3</td><td>—</td><td>—</td><td>≥180 or ≥110</td></tr>
+</tbody></table>
+
+<div class="box flag"><span class="lbl">Red flags</span> <b>Emergency</b> = SBP ≥180 and/or DBP ≥110 <b>+ end-organ damage</b> (reduce MAP by 25% over 1–2 h, IV agents). <b>Urgency</b> = SBP ≥180/DBP ≥120 <b>without</b> end-organ damage (lower over 24 h, oral agents). Most commonly due to non-compliance.</div>
+
+<div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
+<li>Single visit diagnoses HTN if <b>≥200/120</b>, or <b>≥140/90 with end-organ damage</b>.</li>
+<li>First-line agents (all equal): <b>thiazide, ACEI, ARB, CCB</b>; β-blockers are 2nd line.</li>
+<li>Diabetic / CKD → <b>ACEI or ARB</b> (renoprotective; may ↑ creatinine in RAS — bilateral RAS is a contraindication).</li>
+<li>African-American or aged &gt;55 → <b>thiazide or CCB</b>; HF → ACEI + β-blocker.</li>
+<li>Pregnancy → <b>methyldopa, nifedipine, or labetalol</b> (ACEI/ARB contraindicated).</li>
+<li>Thiazide stem: "<b>hyper</b>glycemia/uricemia/lipidemia/calcemia + <b>hypo</b>kalemia/natremia" → gout flare points away from thiazide.</li>
+<li>ACEI dry cough/angioedema → switch to ARB.</li>
+</ul></div>
+</article>
+
+<article class="topic">
+<h3 class="topic-title">Diabetes Mellitus</h3>
+<div class="box def"><span class="lbl">Definition</span> Chronic hyperglycaemia: <b>Type 1</b> = autoimmune insulitis → absolute insulin deficiency; <b>Type 2</b> = insulin resistance + relative deficiency.</div>
+
+<table class="cmp"><thead><tr><th>Feature</th><th>Type 1 DM</th><th>Type 2 DM</th></tr></thead>
+<tbody>
+<tr><td>Age of onset</td><td>&lt;40 years</td><td>&gt;40 years</td></tr>
+<tr><td>Duration to onset</td><td>Weeks</td><td>Months–years</td></tr>
+<tr><td>Ketonuria</td><td>Common</td><td>Rare</td></tr>
+<tr><td>Insulin</td><td>Dependent</td><td>Independent</td></tr>
+<tr><td>Autoantibody</td><td>Yes</td><td>No</td></tr>
+<tr><td>Insulin level</td><td>Very low (insulitis)</td><td>Normal or high / exhaustion</td></tr>
+<tr><td>Complications</td><td>Acute &amp; metabolic</td><td>Late &amp; vascular</td></tr>
+</tbody></table>
+
+<div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
+<li>Diagnosis: <b>HbA1c ≥6.5%</b>, <b>FPG ≥126</b> mg/dL, <b>OGTT 2-h ≥200</b>, or <b>random ≥200 + symptoms</b>. With symptoms → 1 abnormal test; without → 2 abnormal tests.</li>
+<li>Prediabetes: <b>HbA1c 5.7–6.4%</b>, <b>FPG 100–125</b> (IFG), <b>OGTT 140–199</b>.</li>
+<li>Targets: BP &lt;140/90, LDL &lt;100 (&lt;70 high-risk), FBS &lt;130, post-prandial &lt;180, <b>HbA1c &lt;7</b>.</li>
+<li>First-line drug = <b>Metformin</b> (no weight gain, no hypoglycaemia; risk: B12 deficiency, lactic acidosis; avoid in renal impairment).</li>
+<li>Weight loss drugs = <b>metformin, SGLT2, GLP-1</b>; hypoglycaemia = sulfonylureas &amp; meglitinides.</li>
+<li>Retinal screen: <b>T1DM at 5 years</b> from diagnosis, <b>T2DM at diagnosis</b>.</li>
+<li>Microalbuminuria = <b>30–300 mg/day</b> (early nephropathy).</li>
+</ul></div>
+</article>
+
+<article class="topic">
+<h3 class="topic-title">Dyslipidemia</h3>
+<div class="box def"><span class="lbl">Definition</span> ↑ total cholesterol and/or ↑ LDL-C (or non-HDL-C); <b>LDL is the primary target</b> of therapy, HDL &gt;60 is protective.</div>
+
+<table class="cmp"><thead><tr><th>10-yr CHD risk</th><th>CHD / equivalent</th><th>2+ risk factors</th><th>0–1 risk factor</th></tr></thead>
+<tbody>
+<tr><td>Risk %</td><td>&gt;20%</td><td>10–20%</td><td>&lt;10%</td></tr>
+<tr><td>LDL goal</td><td>&lt;100 (prefer &lt;70)</td><td>&lt;130</td><td>&lt;160</td></tr>
+<tr><td>Non-HDL goal</td><td>&lt;130</td><td>&lt;160</td><td>&lt;190</td></tr>
+<tr><td>Start drug at LDL</td><td>≥130</td><td>≥160</td><td>≥190</td></tr>
+</tbody></table>
+
+<div class="box flag"><span class="lbl">Red flags</span> <b>TG ≥500 mg/dL</b> → high risk of <b>acute pancreatitis</b>; very low-fat diet (&lt;15% calories) + fibrate/niacin. Stop statin if <b>CPK &gt;10×</b>, <b>LFT &gt;3×</b>, or muscle pain.</div>
+
+<div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
+<li>LDL (calculated) = <b>TC − (HDL + TG/5)</b>; fasting needed for TG.</li>
+<li>Most effective: <b>LDL → statin</b>; <b>TG → fibrate or niacin</b>; <b>HDL → niacin</b>.</li>
+<li>CHD equivalents: <b>DM, symptomatic carotid stenosis, PAD, AAA</b>.</li>
+<li>Statin counselling: take <b>at night</b>, baseline LFT &amp; CPK, no grapefruit juice; absolute C/I = acute/chronic liver disease.</li>
+<li>Familial hypercholesterolaemia (AD, 1 in 500): ↑↑ LDL, <b>tendon xanthomas</b>, premature CHD.</li>
+<li>Metabolic syndrome (any 3): central obesity, TG ≥150, low HDL (M&lt;40/F&lt;50), BP ≥130/85, FPG ≥100.</li>
+</ul></div>
+</article>
+
+<article class="topic">
+<h3 class="topic-title">Thyroid Disease</h3>
+<div class="box def"><span class="lbl">Definition</span> <b>Hypothyroidism</b> = deficient thyroid hormone (most common cause: Hashimoto's); <b>hyperthyroidism/thyrotoxicosis</b> = hormone excess (most common cause: Graves').</div>
+
+<table class="cmp"><thead><tr><th>Feature</th><th>Hypothyroidism</th><th>Hyperthyroidism</th></tr></thead>
+<tbody>
+<tr><td>TSH / T4</td><td><b>↑ TSH, ↓ T4</b></td><td><b>↓ TSH, ↑ T3/T4</b></td></tr>
+<tr><td>Commonest cause</td><td>Hashimoto's (anti-TPO)</td><td>Graves' (76%, TSH-R Ab)</td></tr>
+<tr><td>Weight / appetite</td><td>Gain, ↓ appetite</td><td>Loss despite ↑ appetite</td></tr>
+<tr><td>Temperature</td><td>Cold intolerance</td><td>Heat intolerance, sweating</td></tr>
+<tr><td>HR / skin</td><td>Bradycardia, dry skin</td><td>Tachycardia, warm moist skin</td></tr>
+<tr><td>Lipids</td><td>↑ LDL, ↓ HDL, ↑ chol</td><td>—</td></tr>
+<tr><td>Treatment</td><td>Levothyroxine (T4)</td><td>Carbimazole / PTU, β-blocker, radio-iodine</td></tr>
+<tr><td>Emergency</td><td>Myxedema coma</td><td>Thyroid storm (≤20% mortality)</td></tr>
+</tbody></table>
+
+<div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
+<li>Hashimoto's marker = <b>anti-TPO</b>; Graves' marker = <b>TSH-receptor antibodies</b>.</li>
+<li>Levothyroxine: once daily in the <b>morning, ≥30 min before food</b>/caffeine/calcium/iron; start lower in over-50s or heart disease.</li>
+<li>Subclinical <b>hypo</b> (↑TSH, normal T3/T4): treat if <b>TSH &gt;10</b>, pregnant, symptomatic, or +anti-TPO.</li>
+<li>Subclinical <b>hyper</b>: treat if <b>TSH &lt;0.1</b> + heart disease/osteoporosis/age &gt;60.</li>
+<li>Pregnancy: add <b>2 extra levothyroxine doses/week</b> once confirmed; check TSH every 4 weeks.</li>
+<li>Radio-iodine <b>worsens Graves' ophthalmopathy</b> (especially smokers); de Quervain's = viral, fever + ↑ESR, self-limiting.</li>
+</ul></div>
+</article>
+
+<article class="topic">
+<h3 class="topic-title">Obesity</h3>
+<div class="box def"><span class="lbl">Definition</span> Chronic excess body fat; <b>BMI = weight(kg)/height(m)²</b>, used for weight status and disease risk.</div>
+
+<table class="cmp"><thead><tr><th>Category</th><th>BMI (kg/m²)</th></tr></thead>
+<tbody>
+<tr><td>Underweight</td><td>&lt;18.5</td></tr>
+<tr><td>Normal</td><td>18.5–24.9</td></tr>
+<tr><td>Overweight</td><td>≥25 (morbidity begins to rise)</td></tr>
+<tr><td>Obesity class I</td><td>30–34.9</td></tr>
+<tr><td>Obesity class II</td><td>35–39.9</td></tr>
+<tr><td>Morbid (class III)</td><td>≥40</td></tr>
+<tr><td>Super obesity (class IV)</td><td>≥50</td></tr>
+</tbody></table>
+
+<div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
+<li>Central obesity by waist: <b>≥102 cm men / ≥88 cm women</b> (USA/Europe); WHR risk if <b>≥1.0</b>.</li>
+<li>BMI inaccurate in: <b>heart failure, pregnancy, body-builders/athletes, elderly</b>, some ethnic groups → use waist circumference.</li>
+<li>Diet: <b>500 kcal/day deficit</b> → 1–2 lb/week loss; &gt;5% loss improves CVD risk.</li>
+<li>Drugs offered at <b>BMI ≥30, or ≥27 with comorbidity</b> (HTN/DM/dyslipidemia) after diet fails.</li>
+<li>GLP-1 agonists (<b>semaglutide, liraglutide</b>) contraindicated with personal/family history of <b>medullary thyroid cancer or MEN2</b>.</li>
+<li>Bariatric surgery at <b>BMI ≥40, or 30–39.9 with comorbidities</b>; gastric bypass = most weight loss, most common worldwide.</li>
+</ul></div>
+</article>
+
+<div class="mcq-block"><h3 class="mcq-head">Test Yourself — Cardiometabolic &amp; Endocrine</h3>
+
+<div class="mcq"><p class="q"><b>Q1.</b> A &lt;45-year-old man&gt; has a single office reading of 185/115 mmHg and presents with new-onset blurred vision and papilledema on fundoscopy. What is the single best immediate step?</p>
+<ol class="opts" type="A"><li>Re-check BP in one week and start a thiazide</li><li>Reduce mean arterial pressure by 25% over 1–2 hours with IV agents</li><li>Start oral amlodipine and review in 24 hours</li><li>Reassure; this is white-coat hypertension</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: B.</b> SBP ≥180/DBP ≥110 with end-organ damage (papilledema) = hypertensive emergency → lower MAP by 25% over 1–2 h with IV agents. Option C (24 h oral) describes urgency, which has no end-organ damage.</div></div>
+
+<div class="mcq"><p class="q"><b>Q2.</b> A &lt;19-year-old&gt; with a 2-week history of polyuria, polydipsia and weight loss has ketonuria and a very low insulin level. Which feature most strongly points to Type 1 rather than Type 2 DM?</p>
+<ol class="opts" type="A"><li>Strong family history</li><li>Onset over months to years</li><li>Presence of autoantibodies with insulitis</li><li>Normal or high insulin level</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: C.</b> T1DM is autoimmune (autoantibodies, insulitis, very low insulin, ketosis-prone). Options A, B and D describe Type 2 DM.</div></div>
+
+<div class="mcq"><p class="q"><b>Q3.</b> A &lt;55-year-old man&gt; with established coronary heart disease has an LDL of 145 mg/dL despite lifestyle changes. According to the sheet's targets, what LDL goal should you aim for?</p>
+<ol class="opts" type="A"><li>&lt;70 mg/dL (preferred for CHD/equivalent)</li><li>&lt;130 mg/dL</li><li>&lt;160 mg/dL</li><li>&lt;190 mg/dL</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: A.</b> CHD or CHD-equivalent patients have an LDL goal &lt;100, and &lt;70 is preferred. &lt;130 and &lt;160 apply to the 2+ and 0–1 risk-factor categories respectively.</div></div>
+
+<div class="mcq"><p class="q"><b>Q4.</b> A &lt;30-year-old woman&gt; has heat intolerance, palpitations, weight loss despite increased appetite, and a diffuse smooth goiter. Labs show suppressed TSH. Which antibody confirms the most likely cause?</p>
+<ol class="opts" type="A"><li>Anti-thyroid peroxidase (anti-TPO)</li><li>TSH-receptor antibodies</li><li>Anti-thyroglobulin (anti-Tg)</li><li>TSH receptor-blocking antibodies (TBII)</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: B.</b> Picture is Graves' disease (commonest cause of hyperthyroidism); TSH-receptor antibodies activate the receptor. Anti-TPO and anti-Tg are typical of Hashimoto's hypothyroidism.</div></div>
+
+<div class="mcq"><p class="q"><b>Q5.</b> A patient has a BMI of 41 kg/m² with no response to diet and lifestyle. Per the sheet, what is the most effective intervention for weight loss in this patient?</p>
+<ol class="opts" type="A"><li>Orlistat alone</li><li>Phentermine/topiramate</li><li>Bariatric surgery</li><li>Continued behavioural counselling only</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: C.</b> Bariatric surgery (offered at BMI ≥40, or 30–39.9 with comorbidities) is the most effective intervention for weight loss and gives the greatest diabetes remission. Medications are adjuncts when diet/lifestyle fail.</div></div>
+
+</div>
+</section>
+<section class="system" id="sys-common-presentations" data-system="Common Symptom Presentations">
+<h2 class="sys-title">3. Common Symptom Presentations</h2>
+<p class="sys-intro">Differential-diagnosis approach to the six most frequent primary-care complaints.</p>
+
+<article class="topic">
+<h3 class="topic-title">Upper Respiratory Tract Infections (URTIs)</h3>
+<div class="box def"><span class="lbl">Definition</span> Inflammation of respiratory mucosa from nasal cavity to bronchus (above carina); <b>70–80% viral</b> (rhinovirus & adenovirus MC).</div>
+
+<table class="cmp"><thead><tr><th>Feature</th><th>Viral pharyngitis</th><th>Bacterial (GABHS)</th></tr></thead>
+<tbody>
+<tr><td>Onset</td><td>Gradual</td><td><b>Abrupt</b></td></tr>
+<tr><td>Cough/rhinorrhea</td><td><b>Present</b> (± conjunctivitis, hoarseness)</td><td>Absent</td></tr>
+<tr><td>Fever</td><td>Low-grade</td><td><b>High</b></td></tr>
+<tr><td>Tonsillar exudate</td><td>± (EBV: prominent)</td><td><b>Present</b></td></tr>
+<tr><td>Lymph nodes</td><td>Posterior cervical (EBV)</td><td><b>Tender anterior cervical</b></td></tr>
+<tr><td>Clue</td><td>Coxsackie → herpangina; EBV → hepatosplenomegaly</td><td>Toxic appearance, abdominal pain/vomiting</td></tr>
+</tbody></table>
+
+<div class="box flag"><span class="lbl">Red flags</span> Epiglottitis (drooling, tripod, toxic, thumb sign → airway emergency, 3rd-gen cephalosporin); croup (barking cough, stridor, steeple sign); sinusitis with periorbital swelling/ophthalmoplegia/altered consciousness → image.</div>
+
+<div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
+<li>Centor/McIsaac high score + GABHS → <b>amoxicillin</b> (azithromycin if penicillin-allergic); goal = prevent <b>rheumatic fever</b> (NOT PSGN).</li>
+<li>Sore throat + posterior cervical nodes + splenomegaly + exudates → <b>EBV mono</b>; throat culture negative doesn't rule out GABHS.</li>
+<li>Barking "seal-like" cough + inspiratory stridor, 6mo–3yr → <b>croup</b> (parainfluenza) → dexamethasone ± nebulized epinephrine; steeple sign.</li>
+<li>Drooling, tripod, toxic child, thumb sign on lateral neck → <b>epiglottitis</b> (HiB) → secure airway, don't examine throat.</li>
+<li>Sinusitis antibiotics only if symptoms ≥10 days, fever <b>≥39°C</b>, or "double-sickening" → amoxicillin/augmentin first-line.</li>
+<li>Avoid <b>aspirin in children</b> (Reye syndrome); honey for nocturnal cough.</li>
+</ul></div>
+</article>
+
+<article class="topic">
+<h3 class="topic-title">Dyspepsia</h3>
+<div class="box def"><span class="lbl">Definition</span> Discomfort/pain in upper abdomen, especially after eating; <b>75% functional</b> (non-ulcer), 25% organic.</div>
+
+<table class="cmp"><thead><tr><th>Feature</th><th>Functional dyspepsia</th><th>PUD</th><th>GERD</th></tr></thead>
+<tbody>
+<tr><td>Cause</td><td>None on endoscopy (Dx of exclusion)</td><td><b>H. pylori</b> (MC), NSAIDs</td><td>Acid reflux</td></tr>
+<tr><td>Hallmark</td><td>Epigastric pain/postprandial fullness ≥3mo</td><td>Episodic epigastric pain, food-related</td><td><b>Heartburn</b> (cardinal), regurgitation</td></tr>
+<tr><td>Criteria/Dx</td><td>Rome IV (EPS vs PDS)</td><td>H. pylori test, endoscopy</td><td>PPI trial, 24h pH monitoring</td></tr>
+<tr><td>1st-line Rx</td><td>Reassure, PPI, TCA</td><td>H. pylori eradication, PPI</td><td><b>Lifestyle</b> then PPI</td></tr>
+</tbody></table>
+
+<div class="box flag"><span class="lbl">Red flags (ALARM → upper endoscopy)</span> Unexplained iron-deficiency <b>anemia</b>, haematemesis/melena, weight loss, progressive dysphagia/odynophagia, persistent vomiting, FHx GI malignancy, palpable mass/lymphadenopathy; or <b>age ≥60</b>.</div>
+
+<div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
+<li>Dyspepsia, age <b>&lt;60, no alarm features</b> → test-and-treat H. pylori + empirical PPI (NOT endoscopy first).</li>
+<li>H. pylori triple therapy (1st line, 1 week) = <b>PPI + clarithromycin + amoxicillin</b> (or metronidazole).</li>
+<li>Most accurate non-invasive H. pylori test = <b>urea breath test</b>.</li>
+<li>Heartburn worse lying down, relieved sitting → GERD; long-standing (>10 yr) reflux → <b>Barrett's oesophagus</b> risk.</li>
+<li>Abrupt stabbing pain radiating to back + alcohol Hx → <b>pancreatitis</b>; postprandial RUQ pain after fatty meals → biliary.</li>
+</ul></div>
+</article>
+
+<article class="topic">
+<h3 class="topic-title">Headache</h3>
+<div class="box def"><span class="lbl">Definition</span> <b>90% primary</b> (tension > migraine > cluster); brain parenchyma has no pain receptors — pain from meninges/vessels.</div>
+
+<table class="cmp"><thead><tr><th>Feature</th><th>Migraine</th><th>Tension</th><th>Cluster</th></tr></thead>
+<tbody>
+<tr><td>Location</td><td><b>Unilateral</b>, pulsating</td><td><b>Bilateral</b>, pressing (nonpulsating)</td><td><b>Unilateral orbital</b>/temporal</td></tr>
+<tr><td>Duration</td><td>4–72 h</td><td>30 min–7 days</td><td>15–180 min (1–8/day)</td></tr>
+<tr><td>Associated</td><td>Nausea, photo/phonophobia, ± aura</td><td>None (no N/V, no photo/phonophobia)</td><td><b>Autonomic</b>: lacrimation, rhinorrhea, ptosis, miosis</td></tr>
+<tr><td>Typical pt</td><td>Woman 25–50, FHx</td><td>Majority of population</td><td>Middle-aged male smoker, M:F 6:1</td></tr>
+<tr><td>Abortive</td><td>NSAID/triptan</td><td>NSAID, acetaminophen</td><td><b>High-flow O₂</b>, parenteral triptan</td></tr>
+</tbody></table>
+
+<div class="box flag"><span class="lbl">Red flags (SNNOOP10)</span> Systemic/fever, Neoplasm Hx, Neurologic deficit, Onset sudden (thunderclap → SAH), Older >50, Pattern change, Positional, Precipitated by cough/exercise, Papilledema, Progressive, Pregnancy, Painful eye + autonomic, Post-traumatic, immune Pathology (HIV), Painkiller overuse.</div>
+
+<div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
+<li>"<b>Worst headache of my life</b>", thunderclap, peaks in seconds → <b>SAH</b> → CT then LP (RBCs); missed in 30%.</li>
+<li>Elderly + scalp tenderness + jaw claudication + visual loss + <b>↑ESR</b> → <b>giant cell arteritis</b> → start steroids immediately (biopsy = gold standard).</li>
+<li>Severe unilateral orbital pain at night, lacrimation/ptosis, smoker male → <b>cluster</b> → high-flow O₂.</li>
+<li>Migraine prophylaxis if <b>>2/month</b>: propranolol, topiramate, amitriptyline.</li>
+<li>Headache >15 days/month with chronic abortive use → <b>medication-overuse headache</b> → withdraw agent.</li>
+</ul></div>
+</article>
+
+<article class="topic">
+<h3 class="topic-title">Dizziness / Vertigo</h3>
+<div class="box def"><span class="lbl">Definition</span> Vertigo = false sensation of spinning; <b>peripheral causes 80%</b> (vestibular), vs central (brainstem/cerebellum).</div>
+
+<table class="cmp"><thead><tr><th>Feature</th><th>BPPV</th><th>Ménière's</th><th>Vestibular neuritis</th><th>Central</th></tr></thead>
+<tbody>
+<tr><td>Trigger/onset</td><td><b>Head position</b>, episodic</td><td>Spontaneous, recurrent</td><td>Post-viral URTI, acute</td><td>Gradual</td></tr>
+<tr><td>Duration</td><td><b>10–60 sec</b></td><td><b>1–8 hours</b></td><td>Hours–days</td><td>Continuous</td></tr>
+<tr><td>Hearing/tinnitus</td><td>None</td><td><b>Triad</b>: tinnitus + hearing loss + vertigo</td><td><b>None</b> (vs labyrinthitis)</td><td>± dysarthria, diplopia, weakness</td></tr>
+<tr><td>Dx/Rx</td><td>Dix-Hallpike → Epley/Semont maneuver</td><td>Low-salt diet + diuretics</td><td>Symptomatic (metoclopramide, diazepam)</td><td>MRI/MRA, treat cause</td></tr>
+</tbody></table>
+
+<div class="box flag"><span class="lbl">Red flags (central/serious)</span> New severe/different headache, blurred vision, speech impairment, limb weakness, loss of consciousness, falling/difficulty walking, numbness/tingling, chest pain.</div>
+
+<div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
+<li>Brief vertigo (<b>seconds</b>) triggered by rolling over, latency then nystagmus on Dix-Hallpike → <b>BPPV</b> → Epley maneuver.</li>
+<li>Vertigo (hours) + <b>tinnitus + fluctuating hearing loss</b> → Ménière's.</li>
+<li>Acute prolonged vertigo after URTI <b>with</b> hearing loss → labyrinthitis; <b>without</b> hearing loss → vestibular neuritis.</li>
+<li>Progressive unilateral <b>sensorineural hearing loss</b> + dizziness → acoustic neuroma (MRI).</li>
+<li>Central signs (dysarthria/diplopia/weakness) → suspect brainstem/cerebellar stroke, not peripheral.</li>
+</ul></div>
+</article>
+
+<article class="topic">
+<h3 class="topic-title">Fatigue</h3>
+<div class="box def"><span class="lbl">Definition</span> Inability to initiate/sustain activity or mental fatigue; organic cause found in only <b>~15%</b> of primary-care patients.</div>
+
+<table class="cmp"><thead><tr><th>Feature</th><th>Physiologic</th><th>Secondary</th><th>Chronic (CFS/ME)</th></tr></thead>
+<tbody>
+<tr><td>Cause</td><td>Sleep/exercise/diet imbalance</td><td><b>Underlying medical condition</b></td><td>Uncertain (post-infectious?)</td></tr>
+<tr><td>Duration</td><td>Short</td><td>&lt;6 months</td><td><b>&gt;6 months</b></td></tr>
+<tr><td>Relief by rest</td><td><b>Yes</b></td><td>Variable</td><td><b>No</b></td></tr>
+<tr><td>Key feature</td><td>—</td><td>Treat cause (anemia, thyroid, depression)</td><td>Post-exertional malaise + sleep/cognitive problems</td></tr>
+</tbody></table>
+
+<div class="box flag"><span class="lbl">Red flags</span> Suicidal ideation/social withdrawal; fever >39.5°C, chills, neck stiffness; severe/worsening fatigue with <b>pallor, jaundice, or recent blood loss</b>; HIV risk factors; orthopnea/edema/crackles; polydipsia/polyuria.</div>
+
+<div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
+<li>Initial screening labs: <b>CBC, electrolytes, glucose, BUN/creatinine, TSH</b> (± B12, D, folate, iron).</li>
+<li>Disease-related fatigue → <b>moderate aerobic exercise</b> reduces it more than rest.</li>
+<li>CFS/ME diagnosis requires fatigue ≥6mo + <b>post-exertional malaise</b> + sleep problems + (cognitive OR orthostatic intolerance); no biomarker.</li>
+<li>Fatigue + depression features → 6-week SSRI trial; review meds as a cause.</li>
+<li>Chronic fatigue → ominous: 50–70% fail to improve at 1 year.</li>
+</ul></div>
+</article>
+
+<article class="topic">
+<h3 class="topic-title">Anemia</h3>
+<div class="box def"><span class="lbl">Definition</span> ↓ RBC mass / Hb 2 SD below normal; <b>&lt;13 g/dL men, &lt;12 g/dL women</b> (WHO); classified by MCV.</div>
+
+<table class="cmp"><thead><tr><th>Feature</th><th>Microcytic (&lt;80)</th><th>Normocytic (80–100)</th><th>Macrocytic (&gt;100)</th></tr></thead>
+<tbody>
+<tr><td>Causes</td><td><b>IDA</b>, thalassemia, lead, sideroblastic, ACD</td><td>Acute blood loss, hemolysis, CKD, ACD, SCD, G6PD</td><td>Megaloblastic (<b>B12/folate</b>); non-mega (alcohol, liver, hypothyroid)</td></tr>
+<tr><td>Iron studies</td><td>IDA: ↓ferritin, ↓Fe, <b>↑TIBC</b>, ↓transferrin sat</td><td>Variable</td><td>Normal/↑ferritin (thal high/normal)</td></tr>
+<tr><td>Blood film</td><td>Hypochromic microcytic; thal → target cells</td><td>SCD → sickle/Howell-Jolly; G6PD → bite/Heinz</td><td><b>Hypersegmented neutrophils</b>, macro-ovalocytes</td></tr>
+</tbody></table>
+
+<div class="box flag"><span class="lbl">Red flags / key Dx</span> IDA + age >60 (or unexplained in premenopausal women) → <b>colonoscopy/bidirectional endoscopy</b> (rule out GI malignancy); in males MC source is GI bleed.</div>
+
+<div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
+<li>Microcytic + ↓ferritin + ↑TIBC → <b>IDA</b> (MC nutritional disorder; ferritin &lt;45 ng/mL diagnostic).</li>
+<li><b>Mentzer index</b> = MCV/RBC: <b>&gt;13 → IDA</b>; &lt;13 → β-thalassemia trait (normal RBC count, high/normal ferritin).</li>
+<li>Macrocytic + hypersegmented neutrophils → B12/folate; <b>neuro signs</b> (proprioception loss, peripheral neuropathy) → B12.</li>
+<li>Pernicious anemia = autoimmune gastritis → anti-intrinsic factor antibodies; <b>replace B12 before folate</b> (avoid SCD of cord).</li>
+<li>Iron Rx: continue <b>3 months after Hb corrected</b>; recheck Hb at 1 month (no ↑1 g/dL → adherence/malabsorption/blood loss).</li>
+<li>Hemolysis precipitated by fava beans/drugs/infection, bite cells + Heinz bodies → <b>G6PD</b> (X-linked).</li>
+</ul></div>
+</article>
+
+<div class="mcq-block"><h3 class="mcq-head">Test Yourself — Common Symptom Presentations</h3>
+
+<div class="mcq"><p class="q"><b>Q1.</b> A 19-year-old presents with sore throat, marked fatigue, and high fever. Exam shows prominent tonsillar exudates, posterior cervical lymphadenopathy, and splenomegaly. Most likely diagnosis?</p>
+<ol class="opts" type="A"><li>GABHS pharyngitis</li><li>Infectious mononucleosis (EBV)</li><li>Herpangina</li><li>Diphtheria</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: B.</b> Posterior cervical nodes + splenomegaly + exudates = EBV mono. GABHS gives <i>anterior</i> cervical nodes and abrupt fever without splenomegaly.</div></div>
+
+<div class="mcq"><p class="q"><b>Q2.</b> A 45-year-old with 4 weeks of epigastric pain also reports a 4 kg unintentional weight loss and one episode of melena. What is the best next step?</p>
+<ol class="opts" type="A"><li>Empirical PPI and reassess in 4 weeks</li><li>Test-and-treat for H. pylori</li><li>Upper GI endoscopy</li><li>Low-FODMAP diet</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: C.</b> Weight loss + melena are ALARM features → upper endoscopy regardless of age. Empirical PPI/test-and-treat is only for &lt;60 yr <i>without</i> alarm features.</div></div>
+
+<div class="mcq"><p class="q"><b>Q3.</b> A 68-year-old woman has a new unilateral temporal headache, scalp tenderness, jaw pain when chewing, and transient visual blurring. ESR is elevated. Best immediate action?</p>
+<ol class="opts" type="A"><li>Start high-dose corticosteroids</li><li>Order CT then lumbar puncture</li><li>Prescribe sumatriptan</li><li>Reassure and give NSAIDs</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: A.</b> Giant cell arteritis — start steroids immediately to prevent blindness; biopsy is gold standard but should not delay treatment. CT/LP is for suspected SAH.</div></div>
+
+<div class="mcq"><p class="q"><b>Q4.</b> A 60-year-old has brief recurrent spinning episodes lasting under a minute, triggered by rolling over in bed, with no hearing loss or tinnitus. Which finding confirms the diagnosis?</p>
+<ol class="opts" type="A"><li>Low-salt diet response</li><li>Sensorineural hearing loss on audiometry</li><li>Nystagmus after latency on Dix-Hallpike</li><li>Cerebellar signs on exam</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: C.</b> Positional vertigo lasting seconds with no hearing change = BPPV, confirmed by Dix-Hallpike (latency then nystagmus) and treated with Epley. Hearing loss + tinnitus would suggest Ménière's.</div></div>
+
+<div class="mcq"><p class="q"><b>Q5.</b> A 30-year-old vegan woman is fatigued. CBC shows macrocytic anemia (MCV 112) and the blood film shows hypersegmented neutrophils; she has lost vibration sense in her feet. Which deficiency is most likely and what is the management priority?</p>
+<ol class="opts" type="A"><li>Folate deficiency; give folic acid</li><li>Iron deficiency; give ferrous sulfate</li><li>Vitamin B12 deficiency; replace B12 before folate</li><li>Anemia of chronic disease; treat underlying cause</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: C.</b> Macrocytosis + hypersegmented neutrophils + neurologic signs (loss of proprioception) point to B12. B12 must be replaced before folate to avoid subacute combined degeneration of the cord; folate deficiency lacks neuro signs.</div></div>
+
+</div>
+</section>
+<section class="system" id="sys-msk-injuries" data-system="Musculoskeletal &amp; Minor Injuries">
+<h2 class="sys-title">4. Musculoskeletal &amp; Minor Injuries</h2>
+<p class="sys-intro">Back pain red flags and minor injury management — wounds, burns, sprains, tetanus.</p>
+
+<article class="topic">
+<h3 class="topic-title">Back Pain</h3>
+
+<div class="box def"><span class="lbl">Definition</span> Pain felt in the back originating from muscles, nerves, bones, joints or other spinal structures; lifetime prevalence <b>90%</b>, and <b>90% resolve in 4 weeks</b> with conservative therapy.</div>
+
+<div class="box flag"><span class="lbl">Red flags</span> <b>Cauda equina</b> (saddle anaesthesia, ↓anal sphincter tone, bowel/bladder retention or incontinence, progressive/bilateral motor deficits) = emergency; plus <b>infection</b> (fever, IV drug use, immunosuppression), <b>cancer</b> (Hx of cancer, ↑night/supine pain, weight loss), <b>fracture</b> (major trauma, or minor trauma with osteoporosis risk), <b>AAA</b> (pulsating mass), and age <b>&lt;20 or &gt;50</b>.</div>
+
+<table class="cmp"><thead><tr><th>Feature</th><th>Mechanical</th><th>Inflammatory</th><th>Non-mechanical (red-flag)</th></tr></thead>
+<tbody>
+<tr><td>Frequency</td><td>97% (simple LBP &gt;90%)</td><td>Seronegative arthropathy</td><td>3% (malignancy, infection)</td></tr>
+<tr><td>Onset/age</td><td>Sudden, age 20–55, after lifting/bending</td><td>Gradual, often before 30 yrs</td><td>Variable; age &lt;20 or &gt;50</td></tr>
+<tr><td>Pain pattern</td><td>Varies with activity, improves with rest</td><td>Axial, many segments; morning stiffness improves with activity</td><td>Constant, progressive, poor relation to activity, ↑at night/rest</td></tr>
+<tr><td>Systemic</td><td>Systemically well</td><td>± peripheral arthritis</td><td>Fever, weight loss, neuro deficit</td></tr>
+</tbody></table>
+
+<div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
+<li>Saddle anaesthesia + bladder retention + ↓anal tone &rarr; <b>cauda equina syndrome</b> &rarr; emergency MRI/decompression.</li>
+<li>Unilateral leg pain &gt; back pain, radiates below knee, +SLRT &rarr; <b>radicular/disc prolapse</b> (commonest L4 or L5).</li>
+<li>Disc-prolapse level: squatting weak = <b>L4</b>; back of foot = <b>L5</b>; toes (plantarflexion) = <b>S1</b>.</li>
+<li>SLRT positive if pain at <b>30–60°</b>; same side = sensitive, crossed (opposite) leg raise = highly <b>specific</b>.</li>
+<li>Night/supine pain + Hx cancer + weight loss &rarr; suspect <b>malignancy/mets</b>; MRI changes seen in 50% of asymptomatic people, so image only with red flags.</li>
+</ul></div>
+</article>
+
+<article class="topic">
+<h3 class="topic-title">Minor Injuries</h3>
+
+<div class="box def"><span class="lbl">Definition</span> Outpatient lacerations, abrasions, burns and puncture wounds; the most important step is <b>irrigation and cleaning</b> (no evidence antiseptic is superior to sterile saline or tap water).</div>
+
+<div class="box flag"><span class="lbl">Red flags</span> Head trauma warning signs needing urgent assessment: <b>LOC even briefly</b>, vomiting &gt;once, severe headache or stiff neck, apnoea, abnormal drowsiness, vision/muscle changes (countercoup injury can occur opposite the impact).</div>
+
+<table class="cmp"><thead><tr><th>Wound location</th><th>Suture size</th><th>Removal (days)</th></tr></thead>
+<tbody>
+<tr><td>Face</td><td>5-0 or 6-0</td><td>3–5</td></tr>
+<tr><td>Scalp</td><td>3-0 or 4-0</td><td>5–7</td></tr>
+<tr><td>Trunk or extremities</td><td>4-0 or 5-0</td><td>7–10</td></tr>
+<tr><td>Over joint surfaces</td><td>3-0 or 4-0</td><td>10–14</td></tr>
+<tr><td>Palms or soles</td><td>3-0 or 4-0</td><td>14–21</td></tr>
+</tbody></table>
+
+<div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
+<li>Tetanus <b>toxoid</b>: &lt;3 doses/unknown &rarr; give for clean &amp; dirty; ≥3 doses &rarr; clean if &gt;10 yrs since last dose, dirty if &gt;5 yrs.</li>
+<li>Tetanus <b>immunoglobulin (IG)</b>: for a dirty wound in a patient not fully vaccinated (&lt;3 doses or unknown).</li>
+<li>Sprain = <b>ligament</b> tear; strain = <b>muscle/tendon</b> tear &rarr; both managed with <b>RICE</b> immediately.</li>
+<li>Burns: 1st degree = no therapy; deep 2nd/3rd degree &rarr; topical antimicrobials + <b>refer to burn subspecialist</b> (may progress 2–3 days after injury).</li>
+<li>Needlestick HIV PEP: start <b>within 72 h</b>, give for <b>28 days</b> (e.g. tenofovir+emtricitabine + dolutegravir); not recommended ≥72 h after exposure.</li>
+</ul></div>
+</article>
+
+<div class="mcq-block"><h3 class="mcq-head">Test Yourself — Musculoskeletal &amp; Minor Injuries</h3>
+
+<div class="mcq"><p class="q"><b>Q1.</b> A &lt;62-yr-old man&gt; with sudden severe back pain reports new <b>saddle numbness</b>, urinary retention and reduced anal sphincter tone. Best next step?</p>
+<ol class="opts" type="A"><li>Reassure and prescribe NSAIDs</li><li>Plain lumbar X-ray in 6 weeks</li><li>Urgent MRI for cauda equina syndrome</li><li>Physiotherapy referral</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: C.</b> Saddle anaesthesia + retention + ↓anal tone is cauda equina — a medical emergency needing urgent MRI/decompression; conservative options waste critical time.</div></div>
+
+<div class="mcq"><p class="q"><b>Q2.</b> A &lt;28-yr-old&gt; has unilateral leg pain worse than the back pain, radiating below the knee, with a positive straight leg raise. Most likely cause?</p>
+<ol class="opts" type="A"><li>Radicular pain from disc prolapse</li><li>Simple mechanical strain</li><li>Inflammatory (seronegative) back pain</li><li>Referred pain from AAA</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: A.</b> Unilateral leg pain &gt; back pain radiating below the knee with +SLRT is classic radicular pain from disc prolapse (commonest L4/L5); mechanical pain has no clear nerve-root distribution.</div></div>
+
+<div class="mcq"><p class="q"><b>Q3.</b> Testing a suspected disc prolapse, weakness is found when the patient stands on his <b>toes/plantarflexes</b>. Which root level is affected?</p>
+<ol class="opts" type="A"><li>L4</li><li>L5</li><li>S1</li><li>L3</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: C.</b> Toes (plantarflexion) maps to S1; squatting weakness = L4 and back-of-foot = L5 per the sheet's localisation.</div></div>
+
+<div class="mcq"><p class="q"><b>Q4.</b> A &lt;30-yr-old&gt; with a dirty wound has had only <b>2 prior tetanus doses</b>. Which is correct?</p>
+<ol class="opts" type="A"><li>No prophylaxis needed</li><li>Toxoid only</li><li>Toxoid plus tetanus immunoglobulin</li><li>Immunoglobulin only</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: C.</b> With &lt;3 doses, toxoid is given for any wound and IG is added for a dirty wound; toxoid alone is insufficient when not fully vaccinated and the wound is dirty.</div></div>
+
+<div class="mcq"><p class="q"><b>Q5.</b> A nurse sustains a needlestick from an HIV-positive source and presents <b>4 hours later</b>. Regarding antiretroviral PEP?</p>
+<ol class="opts" type="A"><li>Start PEP now, continue for 28 days</li><li>Wait for the 6-month antibody test first</li><li>PEP is not indicated this soon</li><li>Single dose of tenofovir only</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: A.</b> HIV PEP should start as soon as possible (within 72 h) and run for 28 days; HIV testing is done before starting, not as a reason to delay.</div></div>
+
+</div>
+</section>
+<section class="system" id="sys-womens-geriatrics" data-system="Women's Health & Geriatrics">
+<h2 class="sys-title">5. Women's Health &amp; Geriatrics</h2>
+<p class="sys-intro">High-yield women's health (screening, PCOS, osteoporosis, menopause) plus the geriatric giants.</p>
+
+<article class="topic"><h3 class="topic-title">Women's Health</h3>
+
+<div class="box def"><span class="lbl">Definition</span> A cluster of female-specific concerns — contraception/STIs, female cancers and their screening, menopause/HRT, osteoporosis, and common gynae presentations (PCOS, menorrhagia, dysmenorrhea).</div>
+
+<div class="box flag"><span class="lbl">Red flags</span> Cervical cancer is typically <b>asymptomatic until advanced</b> — <b>postcoital / intermenstrual bleeding</b> is the can't-miss clue. Osteoporosis is also silent until a <b>fragility fracture</b>.</div>
+
+<table class="cmp"><thead><tr><th>Screening</th><th>Cervical cancer</th><th>Breast / Osteoporosis</th></tr></thead>
+<tbody>
+<tr><td><b>Tool</b></td><td>Cervical cytology, or high-risk HPV testing, or co-testing</td><td>Osteoporosis: DEXA (T-score)</td></tr>
+<tr><td><b>Interval</b></td><td>Cytology alone <b>every 3y</b>; HPV testing <b>every 5y</b>; co-testing <b>every 5y</b></td><td>DEXA: women <b>≥65</b>; men <b>≥70</b> (earlier if risk factors)</td></tr>
+<tr><td><b>Cause / cut-off</b></td><td>HPV <b>16 &amp; 18</b> → 70% of cases; from transformation zone</td><td>T-score ≤ <b>−2.5</b> = osteoporosis; −1 to −2.5 = osteopenia</td></tr>
+</tbody></table>
+
+<div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
+<li>Obese woman, oligomenorrhea + hirsutism/acne → <b>PCOS</b>; dx by <b>Rotterdam</b> (2 of 3: hyperandrogenism, oligo-/anovulation, polycystic ovaries — ≥12 follicles/ovary or volume &gt;10 mL).</li>
+<li>PCOS 1st-line tx = <b>lifestyle/weight loss</b>; OCPs to regulate cycles; <b>clomiphene/letrozole</b> for ovulation induction; <b>spironolactone</b> for hirsutism.</li>
+<li>Postcoital or intermenstrual bleeding → think <b>cervical cancer</b>; nearly all cases are HPV-driven (16 &amp; 18).</li>
+<li>T-score ≤ <b>−2.5</b> = osteoporosis; ↑ bone resorption / ↓ formation; 1st-line drug = <b>bisphosphonates</b> (stay upright 30 min, take with water).</li>
+<li>Breast cancer patient needing contraception → <b>condoms</b> or <b>copper IUD</b> (non-hormonal); avoid hormonal methods.</li>
+<li>12 consecutive months without a period = <b>menopause</b>; hot flashes → systemic HRT, or non-hormonal <b>SSRIs/SNRIs (venlafaxine)/gabapentin/clonidine</b>.</li>
+<li>Dysmenorrhea / menorrhagia 1st-line = <b>NSAIDs</b>; alternative/add <b>OCPs</b>; treat IDA with iron.</li>
+</ul></div>
+</article>
+
+<article class="topic"><h3 class="topic-title">Geriatric Medicine</h3>
+
+<div class="box def"><span class="lbl">Definition</span> Care of patients <b>&gt;65y</b> focused on the geriatric syndromes — <b>falls, delirium, dementia, polypharmacy</b> — using Comprehensive Geriatric Assessment to find problems hidden beneath the presenting "tip of the iceberg".</div>
+
+<div class="box flag"><span class="lbl">Red flags</span> <b>Delirium</b> = acute, fluctuating, impaired attention → look for a reversible cause (UTI, pneumonia, drug toxicity, metabolic). Mortality is <b>20%/year in those &gt;70</b>.</div>
+
+<table class="cmp"><thead><tr><th>Feature</th><th>Delirium</th><th>Dementia</th></tr></thead>
+<tbody>
+<tr><td><b>Onset</b></td><td>Acute, over hours–days</td><td>Insidious; minor symptoms that gradually worsen</td></tr>
+<tr><td><b>Attention</b></td><td>Significantly impaired</td><td>Generally alert in early stages</td></tr>
+<tr><td><b>Course</b></td><td>Fluctuates markedly through the day</td><td>Fairly constant level over the course of a day</td></tr>
+<tr><td><b>Reversible?</b></td><td>Yes — treat the cause (1st line non-pharmacologic)</td><td>No cure; ChEIs / memantine slow progression</td></tr>
+</tbody></table>
+
+<div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
+<li>Polypharmacy = use of <b>&gt;5 drugs</b> at once; tools to rationalise = <b>Beers, STOPP, START</b> criteria.</li>
+<li>Acute fluctuating confusion + inattention in a hospitalised elder → <b>delirium</b> (affects 60% of older surgical patients); 1st-line = <b>non-pharmacologic reorientation</b>, then haloperidol/risperidone/olanzapine/lorazepam.</li>
+<li>Gradual memory + ≥2 cognitive domains declining, family notices first → <b>dementia</b>; Alzheimer's is the leading type; work-up bloods exclude reversible causes (<b>TSH, B12, folate</b>).</li>
+<li>Falls work-up: check <b>orthostatic drop</b> (≈25% of falls); culprit drugs = diuretics, antihypertensives, benzodiazepines.</li>
+<li><b>Timed Up and Go</b>: ≤10s normal; ≤20s high fall risk; ≤30s cannot go out alone / needs gait aid.</li>
+<li>Persistent low mood in an elder is <b>not normal aging</b> = <b>depression</b>; screen with <b>PHQ-9</b>; treat with SSRIs/SNRIs.</li>
+</ul></div>
+</article>
+
+<div class="mcq-block"><h3 class="mcq-head">Test Yourself — Women's Health &amp; Geriatrics</h3>
+
+<div class="mcq"><p class="q"><b>Q1.</b> An obese 24-year-old woman has oligomenorrhea, hirsutism and acne. Ultrasound shows 14 follicles in each ovary. By the Rotterdam criteria, what is the diagnosis?</p>
+<ol class="opts" type="A"><li>Premature ovarian insufficiency</li><li>Polycystic ovary syndrome</li><li>Hypothyroidism</li><li>Cushing syndrome</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: B.</b> Two of three Rotterdam features present (hyperandrogenism + oligo-ovulation + polycystic ovaries ≥12 follicles/ovary). POI causes amenorrhea without hyperandrogenism.</div></div>
+
+<div class="mcq"><p class="q"><b>Q2.</b> A 38-year-old woman reports recurrent <b>postcoital</b> bleeding. Which infection is responsible for nearly all cases of the most likely underlying malignancy?</p>
+<ol class="opts" type="A"><li>HPV types 16 &amp; 18</li><li>Chlamydia trachomatis</li><li>Herpes simplex virus</li><li>HIV</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: A.</b> Postcoital/intermenstrual bleeding suggests cervical cancer, of which HPV 16 &amp; 18 cause ~70%. The other organisms are STIs but not the principal cervical cancer cause.</div></div>
+
+<div class="mcq"><p class="q"><b>Q3.</b> A postmenopausal woman's DEXA shows a T-score of −2.8. What is the first-line pharmacologic treatment?</p>
+<ol class="opts" type="A"><li>Calcitonin</li><li>HRT (estrogen)</li><li>Bisphosphonate</li><li>Teriparatide</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: C.</b> T-score ≤ −2.5 is osteoporosis; bisphosphonates are first-line FDA-approved therapy (take with water, stay upright 30 min). HRT is used for prevention, not treatment.</div></div>
+
+<div class="mcq"><p class="q"><b>Q4.</b> A 78-year-old develops confusion over 2 days after surgery, with markedly impaired attention that fluctuates through the day. What is the best first-line management?</p>
+<ol class="opts" type="A"><li>Start a cholinesterase inhibitor</li><li>Non-pharmacologic reorientation and treat the underlying cause</li><li>Start scheduled lorazepam</li><li>Reassure — this is normal aging</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: B.</b> Acute, fluctuating, inattentive picture = delirium; non-pharmacologic reorientation is first-line for all patients while the reversible cause is found. ChEIs are for dementia.</div></div>
+
+<div class="mcq"><p class="q"><b>Q5.</b> An 80-year-old takes 7 different medications and recently had two falls. Which validated tool is used to identify potentially inappropriate prescribing in this patient?</p>
+<ol class="opts" type="A"><li>PHQ-9</li><li>Timed Up and Go test</li><li>Beers criteria</li><li>Rotterdam criteria</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: C.</b> &gt;5 drugs = polypharmacy; Beers (with STOPP/START) flags inappropriate medications. PHQ-9 screens depression, TUG assesses falls, Rotterdam is for PCOS.</div></div>
+
+</div>
+</section>
+<section class="system" id="sys-mental-behavioral" data-system="Mental Health & Behavioural">
+<h2 class="sys-title">6. Mental Health &amp; Behavioural</h2>
+<p class="sys-intro">Primary-care psychiatry: mood/anxiety screening &amp; criteria, plus tobacco cessation.</p>
+
+<article class="topic">
+<h3 class="topic-title">Mental Health (Mood &amp; Anxiety)</h3>
+
+<div class="box def"><span class="lbl">Definition</span> Primary mental care = diagnosing, treating &amp; preventing mental disorders within primary healthcare, integrated with secondary/tertiary services. PC visits average <b>13 min</b> with ~6 problems vs a psychiatric visit ≥<b>30 min</b> on one issue.</div>
+
+<table class="cmp"><thead><tr><th>Feature</th><th>Major Depressive Episode</th><th>Dysthymic Disorder</th><th>Generalized Anxiety (GAD)</th></tr></thead>
+<tbody>
+<tr><td>Core mood</td><td>Depressed mood &amp;/or loss of interest/pleasure</td><td>Depressed mood most of the day</td><td>Excessive, unrealistic worry about everyday things</td></tr>
+<tr><td>Minimum duration</td><td>≥<b>2 weeks</b></td><td>≥<b>2 years</b> (more days than not)</td><td>≥<b>6 months</b> (more days than not)</td></tr>
+<tr><td>Symptom count</td><td>≥<b>5</b> symptoms, almost every day</td><td>≥<b>2</b> additional symptoms</td><td>≥<b>3</b> of 6 (only <b>1</b> in children)</td></tr>
+<tr><td>Key symptoms</td><td>Weight change, insomnia/hypersomnia, agitation/retardation, fatigue, worthlessness/guilt, poor concentration, recurrent thoughts of death</td><td>Poor appetite/overeating, insomnia/hypersomnia, low energy, low self-esteem, poor concentration, hopelessness</td><td>Restlessness/keyed up, easily fatigued, poor concentration, irritability, muscle tension, sleep disturbance</td></tr>
+<tr><td>Disorder needs</td><td><b>≥2 episodes</b> = MDD</td><td>Chronic low-grade</td><td>Not due to substance/medical (e.g. hyperthyroidism)</td></tr>
+</tbody></table>
+
+<div class="box flag"><span class="lbl">Red flags</span> The major cause of mortality from mental illness is <b>suicide</b> — may occur before the patient ever seeks care. <b>40%</b> of major-depression patients don't perceive a need for treatment; patients underreport &amp; somatize. <b>1 in 3</b> ER acute chest-pain patients actually has <b>panic disorder or depression</b> — screen recurrent thoughts of death.</div>
+
+<div class="box buzz"><span class="lbl">MCQ pearls</span>
+<ul>
+<li>Low mood + anhedonia ≥<b>2 weeks</b> with ≥5 symptoms → <b>Major depressive episode</b>; two episodes → <b>MDD</b>.</li>
+<li>Depressed mood ≥<b>2 years</b>, milder, chronic → <b>Dysthymic disorder</b>.</li>
+<li>Worry ≥<b>6 months</b> + ≥3 of (restless, fatigue, poor concentration, irritability, muscle tension, sleep) → <b>GAD</b>.</li>
+<li>Abrupt intense fear peaking in <b>≤10 min</b> with ≥4 somatic symptoms (palpitations, SOB, chest pain, derealization) → <b>panic disorder</b>; rule out hyperthyroidism, hypoglycaemia, MVP, stimulants.</li>
+<li>Mania ≥<b>1 week</b> (or any duration if hospitalized) of elevated/irritable mood → <b>Bipolar I</b>; recurrent depression + hypomania → <b>Bipolar II</b>.</li>
+<li>Major depression in <b>winter</b>, short days → <b>SAD</b> → light therapy (15–30 min/day) ± antidepressants.</li>
+<li>Anxiety disorders: <b>1st-line = SSRI/SNRI</b> + CBT; SSRIs ↑ synaptic serotonin by blocking reuptake.</li>
+</ul></div>
+</article>
+
+<article class="topic">
+<h3 class="topic-title">Smoking Cessation</h3>
+
+<div class="box def"><span class="lbl">Definition</span> Tobacco use is the <b>5th vital sign</b> and the single most important preventable cause of morbidity/mortality. Cessation = the most cost-effective measure &amp; most correctable risk factor for CHD; CHD risk ↓ to half one year after quitting.</div>
+
+<table class="cmp"><thead><tr><th>Aid</th><th>Nicotine patch (NRT)</th><th>Varenicline</th><th>Bupropion</th></tr></thead>
+<tbody>
+<tr><td>Dose</td><td><b>21 mg</b> if &gt;10 cig/day; <b>14 mg</b> if ≤10/day (gum: 2 mg if 1st cig ≥30 min after waking, 4 mg if &lt;30 min)</td><td><b>0.5 mg</b> start → titrate to <b>1 mg</b></td><td><b>150 mg</b> pill</td></tr>
+<tr><td>Regimen</td><td>One patch daily, rotate site</td><td>0.5 mg/day ×3 d → 0.5 mg BID ×4 d → 1 mg BID; start 1–2 wk (up to 5 wk) before quit date</td><td>150 mg/day ×3 d → 150 mg BID; start 1–2 wk before quit date</td></tr>
+<tr><td>Key S/E</td><td>Skin irritation, insomnia, vivid dreams</td><td>Nausea, insomnia, vivid dreams, headache, rash</td><td>Insomnia, agitation, dry mouth, headache</td></tr>
+<tr><td>Contraindication</td><td>—</td><td><b>Psychiatric patients</b></td><td><b>Seizure disorder</b></td></tr>
+<tr><td>Advantage</td><td>Steady levels, easiest to use; <b>NRT doubles</b> cessation rate</td><td>Relieves withdrawal &amp; blocks reward of smoking</td><td>Blunts post-cessation weight gain</td></tr>
+</tbody></table>
+
+<div class="mnem"><b>Mnemonic — 5 A's:</b> <b>Ask</b> (all patients, dependence) → <b>Advise</b> (brief advice to quit) → <b>Assess</b> (stage of change) → <b>Assist</b> (behavioural + pharmacotherapy, set quit date 2–4 wk) → <b>Arrange</b> (follow-up within 1–2 wk).</div>
+
+<div class="box buzz"><span class="lbl">MCQ pearls</span>
+<ul>
+<li>Stages of change: <b>Pre-contemplation → Contemplation → Preparation → Action → Maintenance</b>.</li>
+<li>Most effective = <b>combination of behavioural support + pharmacotherapy</b>; no single method guarantees success.</li>
+<li>Cessation at 1 yr: brief advice <b>3–13%</b>, intensive intervention <b>19–38%</b>; only <b>2–3%</b> succeed without Rx/support.</li>
+<li>Patient on an <b>antidepressant aid that blunts weight gain</b> but has a seizure history → avoid <b>bupropion</b>.</li>
+<li>Quit aid <b>contraindicated in psychiatric illness</b> → <b>varenicline</b>.</li>
+<li>Most relapses occur in the <b>first 3 months</b>; if first drug fails, switch to another pharmacotherapy &amp; retry (multiple attempts are the norm).</li>
+<li>Tar → cancer; nicotine → addictive &amp; ↑ cholesterol; carbon monoxide → ↓ oxygen; gas components → COPD.</li>
+</ul></div>
+</article>
+
+<div class="mcq-block"><h3 class="mcq-head">Test Yourself — Mental Health &amp; Behavioural</h3>
+
+<div class="mcq"><p class="q"><b>Q1.</b> A &lt;34-year-old&gt; reports low mood and loss of interest for the past 3 weeks, with insomnia, fatigue, poor concentration and recurrent thoughts of death. Most likely diagnosis?</p>
+<ol class="opts" type="A"><li>Dysthymic disorder</li><li>Generalized anxiety disorder</li><li>Major depressive episode</li><li>Cyclothymic disorder</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: C.</b> Depressed mood/anhedonia ≥2 weeks with ≥5 symptoms = major depressive episode. Dysthymia requires ≥2 years of milder symptoms.</div></div>
+
+<div class="mcq"><p class="q"><b>Q2.</b> A &lt;28-year-old woman&gt; has worried excessively about everyday matters most days for the past 8 months, with muscle tension, irritability and trouble sleeping; TSH is normal. Best diagnosis?</p>
+<ol class="opts" type="A"><li>Generalized anxiety disorder</li><li>Panic disorder</li><li>Social phobia</li><li>Major depression</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: A.</b> Worry ≥6 months + ≥3 of restless/fatigue/concentration/irritability/muscle tension/sleep = GAD; normal TSH excludes hyperthyroidism. Panic is abrupt, peaks in ≤10 min.</div></div>
+
+<div class="mcq"><p class="q"><b>Q3.</b> A &lt;40-year-old&gt; presents to the ER with sudden intense fear, palpitations, chest pain and a feeling of detachment that peaked within 10 minutes; ECG and troponin are normal. Most likely cause?</p>
+<ol class="opts" type="A"><li>Acute coronary syndrome</li><li>Dysthymia</li><li>Panic disorder</li><li>Bipolar I disorder</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: C.</b> Abrupt fear with ≥4 somatic symptoms peaking in ≤10 min = panic disorder — 1 in 3 ER acute chest-pain patients has panic or depression.</div></div>
+
+<div class="mcq"><p class="q"><b>Q4.</b> A &lt;45-year-old&gt; smoker with a history of a seizure disorder wants pharmacotherapy that also limits weight gain after quitting. Which agent is contraindicated?</p>
+<ol class="opts" type="A"><li>Bupropion</li><li>Nicotine patch</li><li>Nicotine gum</li><li>Varenicline</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: A.</b> Bupropion blunts post-cessation weight gain but is contraindicated in seizure disorder. Varenicline is the agent contraindicated in psychiatric patients.</div></div>
+
+<div class="mcq"><p class="q"><b>Q5.</b> A &lt;50-year-old&gt; smoker says he is "thinking about quitting someday but not now." Using the 5 A's, what is the next step after assessing his stage of change?</p>
+<ol class="opts" type="A"><li>Start varenicline immediately</li><li>Discharge with no follow-up</li><li>Assist with behavioural support plus pharmacotherapy and set a quit date</li><li>Tell him to quit cold turkey</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: C.</b> After Ask–Advise–Assess comes <b>Assist</b> (combine behavioural + pharmacotherapy, set a quit date 2–4 wk) then <b>Arrange</b> follow-up within 1–2 wk. Combination therapy is most effective.</div></div>
+
+</div>
+</section>
+<div class="part-banner" id="part-er"><span class="part-kicker">Part 2</span><h2>Emergency Medicine</h2><p>Acute, time-critical presentations &mdash; resuscitation, toxicology &amp; the can&rsquo;t-miss diagnoses.</p></div>
+<section class="system" id="sys-resus-trauma" data-system="Resuscitation &amp; Trauma">
+<h2 class="sys-title">7. Resuscitation &amp; Trauma</h2>
+<p class="sys-intro">Time-critical resuscitation: structured trauma assessment and cardiac arrest algorithms.</p>
+
+<article class="topic">
+<h3 class="topic-title">Trauma — Primary Survey (ABCDE) &amp; Shock</h3>
+
+<div class="box def"><span class="lbl">Definition</span> Structured trauma management proceeding through <b>preparation → triage → primary survey (ABCDE) → resuscitation → adjuncts → secondary survey (AMPLE) → re-evaluation → definitive care</b>.</div>
+
+<table class="cmp"><thead><tr><th>Step</th><th>Focus</th><th>Key actions</th></tr></thead>
+<tbody>
+<tr><td><b>A</b></td><td>Airway + C-spine</td><td>Talk to patient (most important measure); if can't talk, open airway; assume C-spine injury &amp; immobilize (manual, collar, sandbags, tape)</td></tr>
+<tr><td><b>B</b></td><td>Breathing</td><td>High-flow O2; treat pneumothorax/hemothorax; look for flail chest, sucking wound, tracheal shift</td></tr>
+<tr><td><b>C</b></td><td>Circulation</td><td>Stop obvious bleeding; <b>two large IV cannulae</b>; 2L 0.9% saline/Ringer's then reassess; aim systolic BP &gt;90 + HR &lt;100</td></tr>
+<tr><td><b>D</b></td><td>Disability</td><td>GCS (out of 15); <b>GCS ≤8 = severe, intubate</b>; pupils; trend of GCS most useful</td></tr>
+<tr><td><b>E</b></td><td>Exposure</td><td>Full exposure; prevent hypothermia; in pregnancy, diagnose pregnancy</td></tr>
+</tbody></table>
+
+<div class="box flag"><span class="lbl">Red flags</span> <b>Tension pneumothorax</b> = clinical diagnosis (no X-ray), treat first with urgent needle decompression then chest tube; mediastinal shift → ↓ venous return → ↓ CO. Hidden hemorrhage = <b>"blood on the floor and four more"</b> (chest, abdomen, pelvis, femur, external). Hypoxia + hypotension <b>double</b> head-injury mortality.</div>
+
+<div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
+<li><b>Lucid interval</b> + middle meningeal artery + overlying skull fracture + ipsilateral fixed pupil → <b>acute extradural hematoma</b>.</li>
+<li>Torn <b>bridging vein</b>, no lucid interval, worse prognosis → <b>acute subdural hematoma</b>.</li>
+<li><b>Warm dry extremities + bradycardia</b> → <b>neurogenic shock</b> (vs cold/pale/tachycardic hypovolemic shock).</li>
+<li>Basal skull fracture signs (raccoon eyes, Battle's sign, rhino-/otorrhea) → <b>avoid nasopharyngeal airway</b>.</li>
+<li>Stony dull percussion + ↓ breath sounds + shock → <b>hemothorax</b>; thoracotomy if &gt;1500 mL immediately or 200 mL/h ×2h.</li>
+<li>Tube size: ETT = <b>Age/4 + 4</b>; weight = <b>(age+4)×2</b>; cricothyroidotomy not used in children &lt;12 y.</li>
+</ul></div>
+</article>
+
+<article class="topic">
+<h3 class="topic-title">Cardiac Arrest — BLS/ACLS &amp; Rhythms</h3>
+
+<div class="box def"><span class="lbl">Definition</span> Resuscitation via <b>CABD</b> (Circulation, Airway, Breathing, Defibrillate); ROSC = restored cardiac function, successful resuscitation = restored <b>neurologic</b> function.</div>
+
+<table class="cmp"><thead><tr><th>Feature</th><th>Shockable</th><th>Non-shockable</th></tr></thead>
+<tbody>
+<tr><td>Rhythms</td><td><b>VF, pulseless VT</b></td><td><b>Asystole, PEA</b></td></tr>
+<tr><td>Defibrillation</td><td>Yes — single most important therapy</td><td>No (CPR only)</td></tr>
+<tr><td>Epinephrine</td><td>After <b>2 shocks</b></td><td>At the <b>beginning</b>, then every 3–5 min</td></tr>
+<tr><td>Antiarrhythmic</td><td>Amiodarone or lidocaine after <b>3 shocks</b></td><td>—</td></tr>
+<tr><td>If not shockable</td><td>—</td><td>5 cycles CPR, then recheck rhythm</td></tr>
+</tbody></table>
+
+<div class="box flag"><span class="lbl">Red flags</span> <b>Early defibrillation is the single most important therapy</b> for survival — defibrillate as soon as the AED arrives. STEMI after ROSC → immediate PCI regardless of neurological status. Comatose post-arrest → targeted <b>hypothermia 32–36°C for 24h</b> (only intervention shown to improve survival/function).</div>
+
+<div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
+<li>Quality CPR: rate <b>100–120/min</b>, depth <b>5–6 cm</b>, compression fraction <b>≥80%</b>, full recoil.</li>
+<li>Adult CPR ratio = <b>30:2</b>; switch compressor/breather every 5 cycles (~2 min).</li>
+<li>No advanced airway → <b>6 breaths/min</b> (1 every 10 s); with advanced airway → <b>10 breaths/min</b> (1 every 6 s).</li>
+<li>Pulse but not breathing → <b>10 rescue breaths/min</b>, recheck pulse every 2 min.</li>
+<li><b>Biphasic 200 J</b> (more effective, less myocardial damage) vs monophasic 360 J.</li>
+<li>Unwitnessed collapse / drowning / trauma → <b>jaw thrust</b>; witnessed, no C-spine concern → head tilt-chin lift.</li>
+</ul></div>
+</article>
+
+<div class="mcq-block"><h3 class="mcq-head">Test Yourself — Resuscitation &amp; Trauma</h3>
+
+<div class="mcq"><p class="q"><b>Q1.</b> A &lt;25-year-old&gt; struck by a car is in shock but has <b>warm, dry extremities and bradycardia</b> without obvious blood loss. Most likely type of shock?</p>
+<ol class="opts" type="A"><li>Hypovolemic shock</li><li>Neurogenic shock</li><li>Cardiogenic shock</li><li>Septic shock</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: B.</b> Warm dry extremities + bradycardia define neurogenic shock; hypovolemic shock is cold, pale, sweaty with tachycardia.</div></div>
+
+<div class="mcq"><p class="q"><b>Q2.</b> A &lt;30-year-old&gt; with penetrating chest trauma has respiratory distress, hypoxia, tracheal shift and ↓ CO. There is no time for imaging. Best immediate step?</p>
+<ol class="opts" type="A"><li>Urgent needle decompression</li><li>Order an urgent CXR first</li><li>Pericardiocentesis</li><li>Intubation only</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: A.</b> Tension pneumothorax is a clinical diagnosis — treat first with urgent needle decompression (then chest tube), confirm with CXR afterward.</div></div>
+
+<div class="mcq"><p class="q"><b>Q3.</b> A &lt;40-year-old&gt; head-injury patient has a brief loss of consciousness, a <b>lucid interval</b>, then deterioration with an ipsilateral fixed pupil and overlying skull fracture. Most likely diagnosis?</p>
+<ol class="opts" type="A"><li>Acute subdural hematoma</li><li>Diffuse axonal injury</li><li>Acute extradural hematoma</li><li>Cerebral contusion</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: C.</b> Lucid interval + middle meningeal artery bleed + overlying fracture + ipsilateral fixed pupil = extradural; subdural tears a bridging vein with no lucid interval.</div></div>
+
+<div class="mcq"><p class="q"><b>Q4.</b> During an adult cardiac arrest the monitor shows <b>ventricular fibrillation</b>. Per this sheet, when is the first dose of epinephrine given?</p>
+<ol class="opts" type="A"><li>At the very beginning</li><li>After 2 shocks</li><li>After 3 shocks</li><li>Only after amiodarone</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: B.</b> In shockable rhythms (VF/pVT) epinephrine is given after 2 shocks and amiodarone/lidocaine after 3; in non-shockable rhythms epinephrine is given at the beginning.</div></div>
+
+<div class="mcq"><p class="q"><b>Q5.</b> You are performing single-rescuer adult CPR <b>without</b> an advanced airway. What is the correct ventilation approach?</p>
+<ol class="opts" type="A"><li>10 breaths/min (1 every 6 s)</li><li>Continuous compressions, no breaths</li><li>30 compressions : 2 breaths, ~6 breaths/min</li><li>15 compressions : 1 breath</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: C.</b> Adult CPR ratio is 30:2; without an advanced airway give 6 rescue breaths/min — 10 breaths/min (option A) applies only with an advanced airway.</div></div>
+
+</div>
+</section>
+<section class="system" id="sys-cardioresp" data-system="Cardiorespiratory Emergencies">
+<h2 class="sys-title">8. Cardiorespiratory Emergencies</h2>
+<p class="sys-intro">Identify and treat the can't-miss causes; reassure and discharge the rest.</p>
+
+<article class="topic">
+<h3 class="topic-title">Chest Pain</h3>
+
+<div class="box def"><span class="lbl">Definition</span> A symptom with a broad differential; the priority is excluding the life-threatening causes (most diagnosed clinically with focused Hx, exam, ECG and CXR).</div>
+
+<div class="box flag"><span class="lbl">Red flags</span> Life-threatening "big 5": <b>Acute MI</b>, <b>aortic dissection</b> (tearing, radiates to back, asymmetrical arm BP &gt;20 mmHg), <b>PE</b> (pleuritic + SOB ± haemoptysis), <b>tension pneumothorax</b> (hypotension, tracheal deviation, ↑ JVP), <b>oesophageal rupture</b> (Hamman's sign, subcutaneous emphysema).</div>
+
+<table class="cmp"><thead><tr><th>Feature</th><th>STEMI</th><th>NSTEMI</th><th>Unstable angina</th></tr></thead>
+<tbody>
+<tr><td>ECG</td><td><b>ST elevation &gt;1 mm</b> in contiguous leads; new LBBB; new Q wave &gt;0.04 s</td><td><b>T-wave inversion or ST depression</b></td><td>Often <b>normal</b> or non-specific changes</td></tr>
+<tr><td>Troponin (cTnT/cTnI)</td><td>Elevated</td><td>Elevated</td><td><b>Not elevated</b></td></tr>
+<tr><td>Reperfusion</td><td><b>Urgent PCI</b> (door-to-balloon ≤90 ± 30 min) or thrombolysis if PCI not available within 120 min</td><td>Medical therapy; no acute thrombolysis</td><td>Medical therapy</td></tr>
+</tbody></table>
+
+<div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
+<li>Tearing chest pain → back + <b>BP difference &gt;20 mmHg</b> between arms / mediastinal widening on CXR → <b>aortic dissection</b> (Stanford A = ascending → surgery; B = descending → medical, esmolol/labetalol).</li>
+<li>Most specific cardiac marker = <b>cardiac troponin</b> (rises 3–12 h); first marker to rise = <b>myoglobin</b>; CK-MB rises 3–6 h.</li>
+<li>STEMI management mnemonic = <b>MONA-BASHED</b>; <b>avoid nitrates &amp; B-blockers in inferior MI</b>.</li>
+<li>Thrombolysis door-to-needle ≤30 min, best within 3–6 h, usable up to 12–24 h (alteplase, streptokinase).</li>
+<li>PE ABG = hypoxaemia + <b>respiratory alkalosis</b>; pneumothorax = hypoxaemia + <b>respiratory acidosis</b>.</li>
+<li>Transient ST elevation at rest/night, normal coronaries → <b>Prinzmetal (variant) angina</b> → CCBs + nitrates.</li>
+</ul></div>
+</article>
+
+<article class="topic">
+<h3 class="topic-title">Dyspnea</h3>
+
+<div class="box def"><span class="lbl">Definition</span> An uncomfortable awareness of breathing difficulty; normal respiratory rate 14–20 (tachypnoea = RR &gt;20).</div>
+
+<div class="box flag"><span class="lbl">Red flags</span> Life-threatening asthma: <b>silent chest</b>, paradoxical breathing, <b>bradycardia</b>, altered mental status, PEFR &lt;25% predicted, type 1 and/or type 2 respiratory failure.</div>
+
+<table class="cmp"><thead><tr><th>Cause</th><th>Key discriminators</th><th>Diagnosis / Mx</th></tr></thead>
+<tbody>
+<tr><td><b>Asthma</b></td><td>Reversible bronchoconstriction, wheeze, chest tightness, worse at night; <b>pulsus paradoxus</b></td><td>PFTs (<b>reversible</b>: FEV1 ↑ &gt;12% post-bronchodilator); SABA/LABA/LAMA</td></tr>
+<tr><td><b>COPD</b></td><td>Smoker, productive cough, decreased breath sounds, prolonged expiratory phase</td><td>Bronchodilators, corticosteroids, ± O2/antibiotics</td></tr>
+<tr><td><b>Pulmonary oedema</b></td><td>Extreme dyspnoea, blood-tinged sputum, <b>inspiratory fine crackles</b>, diaphoresis</td><td>↑ <b>BNP</b>; O2, IV diuretic, nitrates, IV inotropes</td></tr>
+<tr><td><b>PE</b></td><td>Dyspnoea (70%), pleuritic pain, tachycardia &gt;100, ± haemoptysis/DVT</td><td>Well's score; <b>CT angio (gold standard)</b>; LMWH</td></tr>
+</tbody></table>
+
+<div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
+<li>Obstructive spirometry → <b>FEV1/FVC &lt;0.7</b>, ↑ RV/TLC/FRC, PEFR &lt;400; restrictive → ratio <b>preserved/increased</b>, ↓ TLC.</li>
+<li>Asthma reversibility = post-bronchodilator <b>FEV1 increase &gt;12%</b>.</li>
+<li>PE ECG = <b>sinus tachycardia</b> (most common), <b>S1Q3T3</b> (specific), RBBB.</li>
+<li>PE anticoagulation duration: <b>provoked 3–6 months, unprovoked lifelong</b>; Virchow's triad = venostasis, hypercoagulability, vessel wall inflammation.</li>
+<li>Pulmonary oedema lab marker = elevated <b>BNP</b>.</li>
+<li>Respiratory alkalosis causes include anxiety, high altitude, salicylates (early), <b>PE</b> and pregnancy.</li>
+</ul></div>
+</article>
+
+<article class="topic">
+<h3 class="topic-title">Arrhythmia</h3>
+
+<div class="box def"><span class="lbl">Definition</span> A disturbance of heart rate/rhythm; classify by rate (brady vs tachy) and QRS width (narrow vs wide), then treat per stability.</div>
+
+<div class="box flag"><span class="lbl">Red flags</span> Any <b>unstable</b> tachyarrhythmia → <b>immediate (synchronised/electrical) cardioversion</b>; <b>VF</b> → CPR + unsynchronised DC shock; complete (third-degree) AV block / Mobitz II → pacemaker.</div>
+
+<table class="cmp"><thead><tr><th>Arrhythmia</th><th>Key ECG pattern</th><th>Acute management</th></tr></thead>
+<tbody>
+<tr><td><b>SVT</b> (narrow)</td><td>Narrow QRS; AVNRT commonest cause</td><td>Synchronized cardioversion</td></tr>
+<tr><td><b>Atrial fibrillation</b></td><td>Absent P waves, <b>irregularly irregular</b></td><td>Unstable → cardioversion; stable → rate (B-blocker) or rhythm (amiodarone)</td></tr>
+<tr><td><b>Atrial flutter</b></td><td><b>Sawtooth</b> appearance</td><td>As per SVT / cardioversion</td></tr>
+<tr><td><b>VT</b> (wide)</td><td>Wide QRS</td><td>Unstable → electrical cardioversion; stable → amiodarone</td></tr>
+<tr><td><b>Torsades de pointes</b></td><td>Polymorphic VT (twisting), QT prolongation</td><td><b>Magnesium sulfate</b></td></tr>
+<tr><td><b>VF</b></td><td>Chaotic, no organised complexes</td><td><b>CPR + unsynchronised DC shock</b></td></tr>
+<tr><td><b>Mobitz I</b></td><td>Progressive PR prolongation then dropped beat</td><td>—</td></tr>
+<tr><td><b>Mobitz II / 3rd-degree</b></td><td>Dropped beat without PR prolongation / AV dissociation</td><td><b>Pacemaker</b></td></tr>
+</tbody></table>
+
+<div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
+<li>Irregularly irregular, no P waves → <b>AF</b>; sawtooth → <b>atrial flutter</b>.</li>
+<li>Polymorphic VT "twisting around baseline" + long QT → <b>torsades</b> → <b>magnesium sulfate</b>.</li>
+<li>VF → <b>unsynchronised</b> shock (defibrillation); unstable SVT/VT/AF → <b>synchronised</b> cardioversion.</li>
+<li>1st-degree = constant PR &gt;200 ms; Mobitz I = progressive PR then drop; Mobitz II &amp; complete block → <b>pacemaker</b>.</li>
+<li><b>Delta wave</b> = WPW; peaked/hyperacute T wave = earliest STEMI change <b>and</b> hyperkalaemia (Rx: IV calcium, glucose + insulin, salbutamol).</li>
+<li>RBBB = V1 <b>M-shape/RSR'</b>; LBBB = V1 deep S (QS/rS), V6 M-shape (wide QRS in both).</li>
+</ul></div>
+</article>
+
+<div class="mcq-block"><h3 class="mcq-head">Test Yourself — Cardiorespiratory Emergencies</h3>
+
+<div class="mcq"><p class="q"><b>Q1.</b> A 60-year-old man has sudden <b>tearing</b> chest pain radiating to the back. BP is 180/100 in the right arm and 150/90 in the left arm. Most likely diagnosis?</p>
+<ol class="opts" type="A"><li>Acute STEMI</li><li>Aortic dissection</li><li>Pulmonary embolism</li><li>Pericarditis</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: B.</b> Tearing pain to the back with an inter-arm BP difference &gt;20 mmHg is classic aortic dissection. STEMI gives pressure-type pain, not a pulse deficit.</div></div>
+
+<div class="mcq"><p class="q"><b>Q2.</b> A patient with ischaemic chest pain has ST depression and T-wave inversion on ECG, with elevated troponin. Which diagnosis fits best?</p>
+<ol class="opts" type="A"><li>STEMI</li><li>Unstable angina</li><li>NSTEMI</li><li>Prinzmetal angina</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: C.</b> ST depression/T-inversion <b>with</b> raised troponin = NSTEMI. Unstable angina has the same ECG but troponin is <b>not</b> elevated; STEMI shows ST elevation.</div></div>
+
+<div class="mcq"><p class="q"><b>Q3.</b> A young woman 3 weeks post-surgery has sudden pleuritic chest pain and dyspnoea. ABG shows hypoxaemia with respiratory alkalosis and ECG shows S1Q3T3. Best confirmatory test?</p>
+<ol class="opts" type="A"><li>CT pulmonary angiography</li><li>Echocardiography</li><li>Chest X-ray</li><li>D-dimer alone</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: A.</b> The picture is PE; CT angiography is the gold-standard diagnostic test. S1Q3T3 is specific but sinus tachycardia is the most common ECG finding.</div></div>
+
+<div class="mcq"><p class="q"><b>Q4.</b> An ECG shows polymorphic VT twisting around the baseline in a patient with a prolonged QT interval. Best acute management?</p>
+<ol class="opts" type="A"><li>Amiodarone</li><li>Magnesium sulfate</li><li>Synchronised cardioversion</li><li>Adenosine</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: B.</b> This is torsades de pointes, treated with magnesium sulfate. Amiodarone prolongs QT and is avoided.</div></div>
+
+<div class="mcq"><p class="q"><b>Q5.</b> A patient is in ventricular fibrillation with no pulse. Which is the correct immediate intervention?</p>
+<ol class="opts" type="A"><li>Synchronised cardioversion</li><li>IV B-blocker</li><li>CPR and unsynchronised DC shock</li><li>Vagal manoeuvres</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: C.</b> VF is treated with CPR and unsynchronised defibrillation. Synchronised cardioversion is for organised unstable rhythms (SVT/VT/AF), not VF.</div></div>
+
+</div>
+</section>
+<section class="system" id="sys-neuro-emergencies" data-system="Neurological Emergencies">
+<h2 class="sys-title">9. Neurological Emergencies</h2>
+<p class="sys-intro">Time-critical seizure and consciousness presentations in the ED.</p>
+
+<article class="topic"><h3 class="topic-title">Seizure</h3>
+
+<div class="box def"><span class="lbl">Definition</span> Excessive excitatory neuronal activity with hyper-synchrony of neighboring cells, causing sensory, motor, autonomic, or cognitive alteration (<b>convulsion</b> = the motor manifestation).</div>
+
+<div class="box def"><span class="lbl">Status epilepticus</span> A seizure reaching a pre-specified duration, or recurring so frequently the patient does not return to baseline between seizures. Abort treatment if seizing <b>&gt;5 min</b> or if airway/hemodynamic compromise; any patient still seizing on arrival is assumed to be in status.</div>
+
+<table class="cmp"><thead><tr><th>Feature</th><th>Seizure</th><th>Syncope</th></tr></thead>
+<tbody>
+<tr><td>Onset</td><td><b>Abrupt</b>, aura may precede</td><td>Diaphoresis, palpitations, nausea, dizziness precede</td></tr>
+<tr><td>Motor</td><td>Non-suppressible rhythmic shaking, dystonic posturing</td><td>Brief tonic trunk extension / myoclonic jerks, often with bradycardia</td></tr>
+<tr><td>Tongue</td><td><b>Lateral tongue biting</b></td><td>No tongue biting (incontinence may occur)</td></tr>
+<tr><td>Recovery</td><td><b>Postictal</b> disorientation &amp; amnesia, cyanosis during event</td><td>No postictal period; recovers as perfusion restored</td></tr>
+</tbody></table>
+
+<div class="box flag"><span class="lbl">Red flags</span> Still seizing on arrival = <b>status epilepticus</b> → give a benzodiazepine immediately. <b>IM midazolam 0.2 mg/kg</b> first-line in the field; <b>IV lorazepam 0.1 mg/kg</b> once access established. Repeat first-line dose before moving to second-line.</div>
+
+<div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
+<li><b>Provoked (acute symptomatic)</b> = identified inciting pathology; <b>unprovoked (primary)</b> = no acute cause — still "unprovoked" if a trigger wouldn't seize a normal person.</li>
+<li>Stem: lateral tongue bite + postictal confusion → <b>seizure</b>, not syncope.</li>
+<li>First-line abortive in status = <b>benzodiazepine</b> (IM midazolam or IV lorazepam), then second-line = <b>valproate / phenytoin / levetiracetam</b> (equal efficacy when dosed right).</li>
+<li>Refractory seizures despite benzos → look for <b>isoniazid overdose</b> (give <b>pyridoxine</b>) and <b>eclampsia</b> (give <b>IV magnesium</b>).</li>
+<li>Most common metabolic triggers: <b>hyponatremia</b> &amp; <b>hypocalcemia</b>; consider empiric <b>magnesium</b> in malnutrition/chronic alcoholism.</li>
+<li><b>Epilepsy</b> = ≥2 unprovoked seizures &gt;24 h apart, or 1 seizure with ≥60% recurrence risk, or an epilepsy syndrome.</li>
+</ul></div>
+</article>
+
+<article class="topic"><h3 class="topic-title">Altered Mental Status</h3>
+
+<div class="box def"><span class="lbl">Definition</span> Disturbance of consciousness, comprising <b>arousal</b> (subcortical — brainstem/thalamus/ARAS) and/or <b>awareness/content</b> (cortical); overlaps with delirium and ranges along the coma spectrum.</div>
+
+<table class="cmp"><thead><tr><th>Feature</th><th>Delirium</th><th>Dementia</th></tr></thead>
+<tbody>
+<tr><td>Onset</td><td><b>Acute</b> — hours to days (may persist weeks)</td><td>Progressive over <b>months to years</b></td></tr>
+<tr><td>Course</td><td><b>Fluctuating</b> attention &amp; consciousness</td><td>Stable, slowly declining</td></tr>
+<tr><td>Arousal</td><td>Often affected (along coma spectrum)</td><td>Typically <b>not</b> affected (may agitate in unfamiliar settings)</td></tr>
+<tr><td>Domains</td><td>Acute confusion, inattention</td><td>Whole spectrum: attention, executive, memory, language, behavior</td></tr>
+</tbody></table>
+
+<div class="box flag"><span class="lbl">Red flags / can't-miss reversible causes</span> Empiric <b>dextrose</b> (hypoglycemia) and <b>naloxone</b> (opioid) — response identifies the cause. Major reversible groups: <b>systemic disease affecting CNS, primary intracranial disease, exogenous toxins, drug-withdrawal states.</b></div>
+
+<div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
+<li>Two domains of consciousness: <b>arousal</b> (subcortical/ARAS) vs <b>awareness</b> (cortical) — either can fail alone; both fail in <b>coma</b>.</li>
+<li><b>Coma</b> = unaware, not awake, no response to vigorous stimulation; from damage to dorsal brainstem, thalamus, cortical projections, or bilateral cortices.</li>
+<li>Quantify consciousness with the <b>Glasgow Coma Scale (GCS)</b> or <b>FOUR score</b>.</li>
+<li>Diagnosis of a psychiatric disorder requires <b>exclusion of organic causes</b>; attention is normal in primary psychiatric disease unless psychosis/agitation is severe.</li>
+<li>Orientation questions alone miss delirium → screen with <b>DTS</b>, confirm with <b>bCAM</b>.</li>
+<li>Don't diagnose <b>dementia during delirium</b> — refer onward instead.</li>
+</ul></div>
+</article>
+
+<div class="mcq-block"><h3 class="mcq-head">Test Yourself — Neurological Emergencies</h3>
+
+<div class="mcq"><p class="q"><b>Q1.</b> A &lt;28-year-old&gt; collapses at work. Witnesses report rhythmic limb shaking; on arrival he is disoriented with a bleeding <b>lateral</b> tongue laceration. Most likely diagnosis?</p>
+<ol class="opts" type="A"><li>Vasovagal syncope</li><li>Seizure</li><li>Cardiac arrhythmia</li><li>Psychogenic non-epileptic spell</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: B.</b> Lateral tongue biting plus postictal disorientation strongly favour seizure; syncope has no postictal period and typically spares the tongue.</div></div>
+
+<div class="mcq"><p class="q"><b>Q2.</b> A patient is actively convulsing on arrival to the ED with no IV access yet. What is the best first-line intervention?</p>
+<ol class="opts" type="A"><li>IM midazolam 0.2 mg/kg</li><li>IV phenytoin loading dose</li><li>Rectal diazepam</li><li>IV levetiracetam</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: A.</b> A patient still seizing is assumed to be in status; IM midazolam 0.2 mg/kg is first-line when there is no access. Rectal diazepam is not recommended (erratic absorption); phenytoin/levetiracetam are second-line.</div></div>
+
+<div class="mcq"><p class="q"><b>Q3.</b> A &lt;25-week pregnant woman&gt; at 30 weeks gestation has a new generalized seizure preceded by hypertension. What is the treatment of choice?</p>
+<ol class="opts" type="A"><li>IV phenytoin</li><li>IV lorazepam only</li><li>IV magnesium sulfate</li><li>IV pyridoxine</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: C.</b> Eclampsia is the major consideration in seizures at ≥20 weeks; IV magnesium is the treatment of choice and outperforms phenytoin. Pyridoxine is for isoniazid overdose.</div></div>
+
+<div class="mcq"><p class="q"><b>Q4.</b> An elderly patient develops confusion over <b>two days</b> with attention that waxes and wanes through the day; arousal is impaired at times. Which best describes this?</p>
+<ol class="opts" type="A"><li>Dementia</li><li>Delirium</li><li>Primary depression</li><li>Schizophrenia</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: B.</b> Acute (hours–days), fluctuating course with impaired arousal/attention defines delirium; dementia develops over months–years with preserved arousal.</div></div>
+
+<div class="mcq"><p class="q"><b>Q5.</b> A comatose patient is brought in with unknown history. After airway and vitals are addressed, which two empiric agents best identify a reversible cause?</p>
+<ol class="opts" type="A"><li>Magnesium and pyridoxine</li><li>Lorazepam and phenytoin</li><li>Dextrose and naloxone</li><li>Methylprednisolone and IVIG</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: C.</b> Response to dextrose (hypoglycemia) and naloxone (opioid) can identify critical reversible causes of altered mental status.</div></div>
+
+</div>
+</section>
+<section class="system" id="sys-metabolic-emergencies" data-system="Metabolic &amp; Endocrine Emergencies">
+<h2 class="sys-title">10. Metabolic &amp; Endocrine Emergencies</h2>
+<p class="sys-intro">Three can't-miss derangements of glucose and potassium — diagnose on the numbers, treat in order.</p>
+
+<article class="topic">
+<h3 class="topic-title">Diabetic Ketoacidosis (DKA)</h3>
+
+<div class="box def"><span class="lbl">Definition</span> Diagnostic <b>triad</b>: <b>ketonaemia &gt;3.0 mmol/L</b> (or ketonuria &gt;+2), <b>glucose &gt;11.0 mmol/L</b> (or known DM), and <b>venous HCO3 &lt;15.0 mmol/L</b> (or venous pH &lt;7.3).</div>
+
+<table class="cmp"><thead><tr><th>Feature</th><th>DKA</th><th>HHS</th></tr></thead>
+<tbody>
+<tr><td>Typical type</td><td>Type 1 (first presentation 10–22%)</td><td>Type 2 / elderly</td></tr>
+<tr><td>Ketones</td><td>High (&gt;3.0 mmol/L)</td><td>Minimal / absent</td></tr>
+<tr><td>Acidosis</td><td>Present (pH &lt;7.3, HCO3 &lt;15)</td><td>Absent / mild</td></tr>
+<tr><td>Glucose</td><td>&gt;11.0 mmol/L</td><td>Markedly higher</td></tr>
+<tr><td>Breath / breathing</td><td>Sweet smell, <b>Kussmaul</b> respirations</td><td>No Kussmaul</td></tr>
+<tr><td>Management order</td><td><b>Fluids first</b> → insulin → K+</td><td>Fluids (cautious), insulin later</td></tr>
+</tbody></table>
+
+<div class="box flag"><span class="lbl">Red flags</span> If <b>K+ &lt;3.5 mmol/L, correct potassium BEFORE starting insulin</b> — insulin drives K+ intracellularly and can precipitate fatal arrhythmia. Bicarbonate is <b>not indicated</b> and may harm.</div>
+
+<div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
+<li>Management order = <b>Fluids → Insulin → K+</b>. Fluids are the single most important first intervention (70 kg adult may be ~7 L deficit).</li>
+<li>Fixed-rate IV insulin infusion at <b>0.1 units/kg/hr</b> (IV preferred — faster fall in glucose/ketones than SC).</li>
+<li>Once glucose &lt;14 mmol/L → add <b>10% dextrose</b> and consider dropping insulin to <b>0.05 units/kg/hr</b>.</li>
+<li>K+ replacement when level <b>&lt;5.5 mmol/L</b> with urine output ≥0.5 ml/kg/hr; aim K+ 4.0–5.5. K+ &lt;3.5 → hold insulin, replace K+ first.</li>
+<li>Targets: ketones ↓0.5, HCO3 ↑3.0, glucose ↓3.0 mmol/L/hr; if not met, ↑insulin by 1 unit/hr.</li>
+<li>"Unresponsive after treatment" stem → <b>hypoglycaemia, cerebral oedema, or ARDS</b> (NOT hyperkalaemia — K+ falls with treatment).</li>
+</ul></div>
+</article>
+
+<article class="topic">
+<h3 class="topic-title">Hypoglycaemia</h3>
+
+<div class="box def"><span class="lbl">Definition</span> In diabetics, <b>capillary glucose &lt;4.0 mmol/L</b> indicates hypoglycaemia needing treatment; in non-diabetics, diagnose only on <b>clinical symptoms + a lab glucose</b> (<b>Whipple's triad</b>: hypo symptoms + low glucose + relief once glucose normalises).</div>
+
+<table class="cmp"><thead><tr><th>Treatment route</th><th>When used</th><th>Key caveat</th></tr></thead>
+<tbody>
+<tr><td>Oral carbohydrate</td><td>Conscious, cooperative</td><td>Needs safe swallow</td></tr>
+<tr><td>Buccal glucose gel</td><td>Conscious, can swallow</td><td>Faster than complex carbs</td></tr>
+<tr><td><b>IV 10% dextrose</b></td><td>IV access, rapid response</td><td>100 ml 10% preferred — 50% causes inflammation; stimulates insulin → rebound (esp. <b>sulphonylurea</b>)</td></tr>
+<tr><td><b>Glucagon (IM)</b></td><td>No IV access / neuroglycopenia</td><td>Less effective if alcoholic liver disease / cachexia / type 2; uses up glycogen → give carbs after</td></tr>
+</tbody></table>
+
+<div class="box flag"><span class="lbl">Red flags</span> Always check glucose in any <b>reduced GCS, confusion, unusual behaviour, seizure, intoxication, or elderly</b> patient — the main pitfall is not considering the diagnosis. Sulphonylurea hypoglycaemia recurs → admit.</div>
+
+<div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
+<li><b>Whipple's triad</b> = symptoms + low glucose + relief on correction → classic exam definition.</li>
+<li>Cut-off for treatment in diabetics = <b>&lt;4.0 mmol/L</b>; target post-treatment CBG <b>5–10 mmol/L</b>.</li>
+<li>Drug culprits: <b>insulin and sulphonylurea</b> cause hypos; metformin/glitazones rarely alone. β-blockers <b>mask</b> warning signs.</li>
+<li><b>Alcohol</b> inhibits gluconeogenesis and blunts warning signs.</li>
+<li>Severe hypoglycaemia = episode <b>requiring the help of another person</b>.</li>
+<li>IV dextrose stimulates insulin → <b>rebound hypoglycaemia</b>, especially with sulphonylureas — monitor / admit.</li>
+</ul></div>
+</article>
+
+<article class="topic">
+<h3 class="topic-title">Hyperkalaemia</h3>
+
+<div class="box def"><span class="lbl">Definition</span> Serum K+ <b>&gt;5.5 mEq/L</b> (normal 3.5–5.5). Severity: <b>mild 5.5–5.9</b>, <b>moderate 6.0–6.4</b>, <b>severe ≥6.5 mEq/L</b>.</div>
+
+<table class="cmp"><thead><tr><th>Step</th><th>Goal</th><th>Agent (per sheet)</th></tr></thead>
+<tbody>
+<tr><td>1 — Stabilise membrane</td><td>Protect the heart</td><td><b>Calcium gluconate</b></td></tr>
+<tr><td>2 — Shift into cells</td><td>Lower serum K+ fast</td><td><b>Insulin + glucose</b>; nebulised β-agonist (albuterol); NaHCO3 if acidotic</td></tr>
+<tr><td>3 — Remove K+</td><td>Eliminate from body</td><td>Diuretics (<b>furosemide</b>); <b>dialysis</b> (severe); binders (Kayexalate)</td></tr>
+<tr><td>4 — Treat cause</td><td>Stop the source</td><td>Manage DKA (insulin/fluids); stop offending drugs</td></tr>
+</tbody></table>
+
+<div class="box flag"><span class="lbl">Red flags</span> ECG progression (order): <b>tall peaked T waves → flattened/absent P waves → widened QRS → sine wave → cardiac arrest</b>. Severe (≥6.5) or ECG changes = stabilise the heart with <b>calcium gluconate first</b>.</div>
+
+<div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
+<li>Stepwise order = <b>Stabilise (Ca gluconate) → Shift (insulin+glucose / β-agonist / NaHCO3) → Remove (furosemide / dialysis / binders) → Treat cause</b>.</li>
+<li><b>Calcium does NOT lower K+</b> — it only protects the myocardium; give it first when ECG changes are present.</li>
+<li>Drug causes of ↓excretion: <b>spironolactone, ACEi/ARBs, NSAIDs</b>; redistribution: acidosis (DKA), insulin deficiency, β-blockers.</li>
+<li>Production causes: <b>haemolysis, rhabdomyolysis, tumour lysis syndrome</b>.</li>
+<li>K+ is <b>98% intracellular</b>; renal route = 90% of excretion — think renal failure in unexplained hyperkalaemia.</li>
+<li>Suspect <b>pseudohyperkalaemia</b> (falsely high sample) if the number doesn't fit the clinical picture.</li>
+</ul></div>
+</article>
+
+<div class="mcq-block"><h3 class="mcq-head">Test Yourself — Metabolic &amp; Endocrine Emergencies</h3>
+
+<div class="mcq"><p class="q"><b>Q1.</b> A &lt;19-year-old type 1 diabetic&gt; presents with vomiting and Kussmaul breathing. Glucose 28, ketones 4.5 mmol/L, pH 7.1, K+ 3.2 mmol/L. What is the best next step?</p>
+<ol class="opts" type="A"><li>Start fixed-rate IV insulin immediately</li><li>Give IV bicarbonate</li><li>Replace potassium before starting insulin</li><li>Give 10% dextrose</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: C.</b> K+ &lt;3.5 must be corrected before insulin — insulin drives K+ into cells risking fatal arrhythmia. Insulin (A) is premature; bicarbonate (B) is not indicated.</div></div>
+
+<div class="mcq"><p class="q"><b>Q2.</b> A &lt;55-year-old in DKA&gt; has just arrived. Which is the single most important initial therapeutic intervention?</p>
+<ol class="opts" type="A"><li>IV fluid replacement</li><li>Fixed-rate insulin infusion</li><li>IV potassium</li><li>Sodium bicarbonate</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: A.</b> The sheet states universal agreement that appropriate fluid replacement is the most important initial intervention, followed by insulin. Insulin (B) comes second.</div></div>
+
+<div class="mcq"><p class="q"><b>Q3.</b> A &lt;28-year-old on insulin&gt; is found drowsy and aggressive. CBG reads 2.8 mmol/L. She can swallow safely. What is the most appropriate treatment?</p>
+<ol class="opts" type="A"><li>IM glucagon</li><li>50% dextrose IV bolus</li><li>Oral / buccal glucose</li><li>Observe and recheck in 1 hour</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: C.</b> Conscious and able to swallow → oral/buccal carbohydrate. Glucagon (A) is for no IV access/inability to swallow; 50% dextrose (B) causes inflammation — 10% is preferred.</div></div>
+
+<div class="mcq"><p class="q"><b>Q4.</b> A &lt;patient&gt; is described with hypoglycaemia symptoms, a documented low plasma glucose, and resolution of symptoms once glucose is corrected. This classic combination is known as?</p>
+<ol class="opts" type="A"><li>Somogyi effect</li><li>Whipple's triad</li><li>Hypoglycaemic unawareness</li><li>Cushing's triad</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: B.</b> Whipple's triad = symptoms + low glucose + relief on normalisation. Somogyi (A) is rebound hyperglycaemia; unawareness (C) is loss of autonomic warning.</div></div>
+
+<div class="mcq"><p class="q"><b>Q5.</b> A &lt;70-year-old with CKD&gt; on an ACE inhibitor has K+ 6.8 mEq/L with peaked T waves on ECG. What is the immediate first step?</p>
+<ol class="opts" type="A"><li>Nebulised salbutamol</li><li>Insulin with glucose</li><li>Furosemide</li><li>IV calcium gluconate</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: D.</b> With ECG changes / severe hyperkalaemia, stabilise the myocardium first with calcium gluconate. Insulin+glucose (B) and salbutamol (A) shift K+ next; furosemide (C) removes it later.</div></div>
+
+</div>
+</section>
+<section class="system" id="sys-tox-environmental" data-system="Toxicology, Anaphylaxis &amp; Environmental">
+<h2 class="sys-title">11. Toxicology, Anaphylaxis &amp; Environmental</h2>
+<p class="sys-intro">Toxidromes and antidotes, IM-adrenaline-first anaphylaxis, and heat/cold/drowning/choking emergencies.</p>
+
+<article class="topic">
+<h3 class="topic-title">Poisoning</h3>
+<div class="box def"><span class="lbl">Definition</span> Dose-related adverse effects following exposure to chemicals or drugs; may be <b>local</b> (skin, eyes, lungs) or <b>systemic</b>. <b>Ingestion</b> is the most common route.</div>
+
+<div class="box buzz"><span class="lbl">MCQ pearls</span>
+<ul>
+<li>Treating the poisoned patient (ABC, supportive care) is <b>more important than identifying the agent</b>; observe poison cases <b>24–48 hours</b> before discharge.</li>
+<li>Toxidromes read off vitals + end-organ signs: <b>mental status, pupil size, peristalsis, skin (dry vs diaphoretic)</b>.</li>
+<li>Pinpoint pupils + ↓RR + ↓consciousness → <b>opioid</b> toxidrome → give <b>naloxone</b>.</li>
+<li>Dry, hot, flushed, dilated pupils, delirium ("mad as a hatter") → <b>anticholinergic</b> (antihistamines, TCAs, atropine) → <b>physostigmine</b>.</li>
+<li>SLUDGE-type secretions, miosis, fasciculations from OPCs → <b>cholinergic/nicotinic</b> → <b>atropine + pralidoxime (PAM2)</b>; after <b>aging</b>, only new AChE synthesis (~10%/day) helps.</li>
+<li>Charcoal does NOT bind <b>PHIALS</b> (Pesticides, Hydrocarbons, Iron, Acids/Alkalies/Alcohols, Lithium, Solvents) → use <b>whole bowel irrigation</b> (PEG/Go-Lytely).</li>
+<li>Dialyzable toxins = <b>STUMBLE</b> (Salicylates, Theophylline, Uremia, Methanol, Barbiturates, Lithium, Ethylene glycol/Ethanol); <b>urinary alkalinization</b> (pH 7.5–8.0) for salicylate.</li>
+</ul></div>
+
+<table class="cmp"><thead><tr><th>Poison</th><th>Antidote</th></tr></thead>
+<tbody>
+<tr><td>Acetaminophen (paracetamol)</td><td><b>N-acetylcysteine (NAC)</b></td></tr>
+<tr><td>Opioids</td><td><b>Naloxone</b></td></tr>
+<tr><td>Benzodiazepines</td><td><b>Flumazenil</b></td></tr>
+<tr><td>Organophosphates</td><td><b>Atropine + Pralidoxime</b></td></tr>
+<tr><td>Anticholinergics</td><td><b>Physostigmine</b></td></tr>
+<tr><td>Carbon monoxide</td><td>Oxygen</td></tr>
+<tr><td>Methemoglobinemia</td><td>Methylene blue</td></tr>
+<tr><td>Cyanide</td><td>Sodium nitrite</td></tr>
+<tr><td>Iron</td><td>Deferoxamine</td></tr>
+<tr><td>Beta-blockers</td><td>Glucagon</td></tr>
+<tr><td>TCA</td><td>Bicarbonate</td></tr>
+<tr><td>Coumadin / rodenticides</td><td>Vitamin K</td></tr>
+<tr><td>Ethylene glycol / methanol</td><td>Fomepizole (Antizol)</td></tr>
+</tbody></table>
+</article>
+
+<article class="topic">
+<h3 class="topic-title">Anaphylaxis</h3>
+<div class="box def"><span class="lbl">Definition</span> Severe, life-threatening <b>type 1 (IgE-mediated)</b> hypersensitivity reaction with rapidly developing <b>airway, breathing and/or circulation</b> problems, usually with skin/mucosal changes; mast cell degranulation releasing histamine, TNF, leukotrienes.</div>
+
+<div class="box flag"><span class="lbl">Red flags</span> <b>IM adrenaline is the most important drug and the first-line treatment</b> — middle third of the lateral thigh (best absorption); <b>no absolute contraindications</b>. Adult/&gt;12y = <b>0.5 ml of 1:1000</b>, repeat every 5 min as needed.</div>
+
+<div class="box buzz"><span class="lbl">MCQ pearls</span>
+<ul>
+<li>Diagnosis (3 criteria): <b>acute onset + sudden progression</b>, <b>life-threatening A/B/C problem</b>, and <b>skin/mucosal change</b> (B + C + E on the sheet).</li>
+<li>First step in suspected anaphylaxis = <b>IM adrenaline 0.5 ml 1:1000</b>, NOT intubation, NOT standing the patient up.</li>
+<li>Cardiorespiratory arrest → <b>IV adrenaline 1 mg (10 ml of 1:10,000)</b>.</li>
+<li>Patient on a <b>β-blocker</b> resistant to treatment → add <b>IV glucagon 1 mg</b>.</li>
+<li>MC drug cause = <b>antibiotics (penicillin)</b>; ACEIs cause non-histaminergic angioedema; food (peanuts) mainly in children.</li>
+<li><b>Mast cell tryptase</b> confirms dx (≥16y): 1st sample on arrival, 2nd within 1–2 h (no later than 4 h).</li>
+<li>Steroids are <b>slow (6–8 h), don't treat the acute attack</b> — they reduce the biphasic response; observe ≥<b>6–12 h</b>; discharge with an adrenaline autoinjector (0.3 mg).</li>
+</ul></div>
+
+<table class="cmp"><thead><tr><th>Age</th><th>IM adrenaline (1:1000)</th></tr></thead>
+<tbody>
+<tr><td>&gt;12 y / adult</td><td><b>0.5 ml</b></td></tr>
+<tr><td>6–12 y</td><td>0.3 ml</td></tr>
+<tr><td>&lt;6 y</td><td>0.15 ml</td></tr>
+</tbody></table>
+</article>
+
+<article class="topic">
+<h3 class="topic-title">Environmental &amp; Choking</h3>
+<div class="box def"><span class="lbl">Definition</span> Heat-related illness ranges from heat oedema to <b>heat stroke</b> (thermoregulatory failure); <b>drowning</b> = respiratory impairment from submersion/immersion; <b>choking</b> = foreign-body airway obstruction.</div>
+
+<div class="box buzz"><span class="lbl">MCQ pearls</span>
+<ul>
+<li><b>Heat stroke triad</b>: core temp <b>&gt;40 °C + encephalopathy + anhydrosis</b> — the worst form, complete thermoregulatory failure.</li>
+<li>Cooling target = <b>38.5 °C</b> (not rapid normothermia → risk of overshoot hypothermia); tepid water + fan is most practical; <b>benzodiazepines</b> reduce shivering/seizures.</li>
+<li>Drowning: <b>no difference fresh vs salt water</b>; extract <b>horizontally</b> to prevent cardiovascular collapse; small fluid volume aspirated (&lt;4 ml/kg) so draining lungs is useless.</li>
+<li>Check an <b>ABG in all submersion</b> patients — significant hypoxia despite being asymptomatic; pulse oximetry may be inaccurate.</li>
+<li>Asymptomatic drowning with normal CXR/ABG at <b>6 hours</b> → safe to discharge; submersion <b>&lt;10 min good, &gt;25 min poor</b> prognosis; <b>steroids not effective</b>.</li>
+<li>Partial choking (can talk) → encourage cough → <b>5 back blows</b> → <b>5 abdominal thrusts</b>; if <b>obese/pregnant</b> use <b>chest thrusts</b>.</li>
+</ul></div>
+
+<table class="cmp"><thead><tr><th>Feature</th><th>Heat exhaustion</th><th>Heat stroke</th></tr></thead>
+<tbody>
+<tr><td>Core temperature</td><td><b>Usually &lt;40 °C</b></td><td><b>&gt;40 °C</b></td></tr>
+<tr><td>Mental status</td><td>Mild alteration</td><td><b>Encephalopathy</b></td></tr>
+<tr><td>Sweating</td><td>Profuse sweating</td><td><b>Anhydrosis</b></td></tr>
+<tr><td>Nature</td><td>Systemic; water/salt depleted</td><td>Complete thermoregulatory failure</td></tr>
+<tr><td>Management</td><td>Cooling, rest, rehydration</td><td>Active cooling to 38.5 °C + ICU support</td></tr>
+</tbody></table>
+</article>
+
+<div class="mcq-block"><h3 class="mcq-head">Test Yourself — Toxicology, Anaphylaxis &amp; Environmental</h3>
+
+<div class="mcq"><p class="q"><b>Q1.</b> A &lt;22-year-old&gt; is brought in unresponsive with a respiratory rate of 6/min and pinpoint pupils after a party. What is the best next step?</p>
+<ol class="opts" type="A"><li>Flumazenil</li><li>Naloxone</li><li>Atropine</li><li>N-acetylcysteine</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: B.</b> Pinpoint pupils + respiratory depression = opioid toxidrome → naloxone. Flumazenil reverses benzodiazepines (not the toxidrome here).</div></div>
+
+<div class="mcq"><p class="q"><b>Q2.</b> A &lt;40-year-old&gt; farmer ingests a sustained-release product that does not bind to activated charcoal. Which decontamination method is indicated?</p>
+<ol class="opts" type="A"><li>Multiple-dose activated charcoal</li><li>Urinary alkalinization</li><li>Whole bowel irrigation with polyethylene glycol</li><li>Gastric lavage only</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: C.</b> Toxins that don't bind charcoal (PHIALS) and sustained-release products are indications for whole bowel irrigation (Go-Lytely). Charcoal is ineffective here.</div></div>
+
+<div class="mcq"><p class="q"><b>Q3.</b> A &lt;30-year-old&gt; develops acute swollen lips, urticaria and stridor minutes after eating. What is the single most important first treatment?</p>
+<ol class="opts" type="A"><li>IM adrenaline 0.5 ml of 1:1000</li><li>IV hydrocortisone 200 mg</li><li>IV chlorphenamine 10 mg</li><li>Intubate immediately</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: A.</b> IM adrenaline is the most important drug and first-line in anaphylaxis. Steroids are slow (6–8 h) and don't treat the acute attack.</div></div>
+
+<div class="mcq"><p class="q"><b>Q4.</b> A &lt;72-year-old&gt; on a β-blocker has anaphylaxis that remains resistant after repeated IM adrenaline and fluids. What should be added?</p>
+<ol class="opts" type="A"><li>A second autoinjector for discharge</li><li>IV glucagon 1 mg</li><li>H2 blocker</li><li>FFP 2 units</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: B.</b> β-blocked patients are resistant to classical treatment; IV glucagon 1 mg increases the body's response to adrenaline. FFP is for hereditary angioedema/C1 inhibitor deficiency.</div></div>
+
+<div class="mcq"><p class="q"><b>Q5.</b> A young athlete collapses during exertion in heat with core temp 41 °C, confusion and dry skin. What is the cooling target?</p>
+<ol class="opts" type="A"><li>35 °C</li><li>36.5 °C</li><li>37 °C</li><li>38.5 °C</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: D.</b> This is heat stroke (temp &gt;40 °C + encephalopathy + anhydrosis). Cool to 38.5 °C, not full normothermia, to avoid overshoot hypothermia.</div></div>
+
+</div>
+</section>
+<section class="system" id="sys-gi-abdominal" data-system="GI &amp; Abdominal Emergencies">
+<h2 class="sys-title">12. GI &amp; Abdominal Emergencies</h2>
+<p class="sys-intro">Resuscitate first, risk-stratify, then scope — and never miss a surgical abdomen.</p>
+
+<article class="topic">
+<h3 class="topic-title">Upper GI Bleeding</h3>
+
+<div class="box def"><span class="lbl">Definition</span> Bleeding from a source <b>proximal to the ligament of Treitz</b>; mortality has stayed ~<b>10%</b> for 50 years.</div>
+
+<div class="box flag"><span class="lbl">Red flags</span> <b>Haemodynamic instability</b> (hypotension, tachycardia, syncope, fresh PR bleed) or <b>known/suspected varices</b> &rarr; high risk: call for help, 2 large-bore (&ge;16G) IV, major haemorrhage protocol, urgent senior GI + critical care.</div>
+
+<table class="cmp"><thead><tr><th>Feature</th><th>Non-variceal (PUD)</th><th>Variceal</th></tr></thead>
+<tbody>
+<tr><td>Frequency</td><td><b>MC cause</b> of UGIB</td><td>Uncommon (even in known liver disease)</td></tr>
+<tr><td>Source</td><td>Erosion into vessel at ulcer base</td><td>Dilated distal-oesophageal collaterals from <b>&uarr; portal pressure</b></td></tr>
+<tr><td>Clues</td><td>NSAIDs (<b>4&times; risk</b>), prior PUD/gastritis, H. pylori</td><td>Decompensated liver disease: <b>jaundice, ascites, encephalopathy</b></td></tr>
+<tr><td>Mortality / rebleed</td><td>Lower; endoscopy controls ~90%</td><td><b>50%</b> mortality; up to <b>30%</b> rebleed</td></tr>
+<tr><td>Drug therapy</td><td>PPI <b>post-endoscopy</b> (NICE: not pre-scope)</td><td><b>Terlipressin + antibiotic</b> (ciprofloxacin/ceftriaxone) in ED</td></tr>
+<tr><td>If endoscopy fails</td><td>Surgery, angiography/embolisation</td><td>Balloon tamponade (Sengstaken/Minnesota) &rarr; TIPSS</td></tr>
+</tbody></table>
+
+<div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
+<li><b>Glasgow-Blatchford = ED tool of choice</b>; score <b>0</b> &rarr; consider discharge + outpatient endoscopy (NICE).</li>
+<li><b>Rockall</b> = mortality (not rebleed); needs endoscopy for full score; pre-scope &gt;3 = high risk.</li>
+<li>Stem with <b>jaundice/ascites/encephalopathy</b> or prior variceal bleed &rarr; variceal; alcohol alone &rarr; still think PUD.</li>
+<li>Suspected variceal bleed &rarr; <b>Terlipressin 2 mg + ceftriaxone</b> (20% get infection within 48 h) before scope.</li>
+<li>Transfuse RBC at Hb <b>&lt;7 g/dL</b> (or <b>&lt;9</b> in unstable coronary disease); over-transfusion harms.</li>
+<li><b>Secure the airway before a Sengstaken tube</b> (aspiration risk); don't leave tube &gt;24&ndash;36 h.</li>
+</ul></div>
+</article>
+
+<article class="topic">
+<h3 class="topic-title">Abdominal Pain</h3>
+
+<div class="box def"><span class="lbl">Definition</span> Acute abdominal pain triaged by <b>embryological referral pattern</b> + can't-miss vascular/surgical causes; pain intensity may bear <b>no relationship</b> to severity.</div>
+
+<div class="box flag"><span class="lbl">Red flags</span> <b>Surgical abdomen</b> = peritoneal signs (rigidity, absent bowel sounds), abdominal mass, jaundice/pallor, abnormal vitals. <b>Rapid shock after acute pain &rarr; intra-abdominal haemorrhage</b>; SBP doesn't fall until 30&ndash;40% blood loss.</div>
+
+<table class="cmp"><thead><tr><th>Can't-miss cause</th><th>Discriminating clue (per sheet)</th></tr></thead>
+<tbody>
+<tr><td><b>Mesenteric ischaemia</b></td><td><b>Pain out of proportion</b> to exam; CAD risk factors / AF; diarrhoea in 31&ndash;40%</td></tr>
+<tr><td><b>AAA</b></td><td><b>Syncope</b> + tearing pain / vascular disease, HTN, AF; bedside US detects it</td></tr>
+<tr><td><b>Ectopic pregnancy</b></td><td>Reproductive-age woman + pain &plusmn; syncope/instability &rarr; <b>get pregnancy test</b>; leading cause of 1st-trimester maternal death</td></tr>
+<tr><td><b>Perforated viscus</b></td><td>Peritonitis; free air; surgical cause (esp. elderly, late/atypical)</td></tr>
+<tr><td><b>Appendicitis</b></td><td>Periumbilical (midgut referred) pain; &lt;20% of elderly have classic picture</td></tr>
+</tbody></table>
+
+<div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
+<li><b>Pain out of proportion to exam = mesenteric ischaemia</b> until proven otherwise.</li>
+<li>Foregut &rarr; epigastric, midgut &rarr; periumbilical, hindgut &rarr; lower/infraumbilical referred pain.</li>
+<li>Reproductive-age woman + abdominal pain &rarr; <b>pregnancy test</b> (rule out ectopic).</li>
+<li>Elderly: blunted response (normal WBC/no fever despite sepsis) &rarr; <b>low threshold for imaging + surgical consult</b>; misdiagnosis nearly doubles mortality &gt;80 y.</li>
+<li>Referred pain: <b>shoulder</b> = diaphragm (ruptured spleen), <b>right infrascapular</b> = biliary, epigastric = MI.</li>
+<li>Rapid shock after acute pain &rarr; intra-abdominal bleed; <b>tachycardia/normal vitals don't exclude</b> serious disease.</li>
+</ul></div>
+</article>
+
+<div class="mcq-block"><h3 class="mcq-head">Test Yourself — GI &amp; Abdominal Emergencies</h3>
+
+<div class="mcq"><p class="q"><b>Q1.</b> A 45-year-old man with known alcoholic liver disease presents with large hematemesis, jaundice and ascites; pulse 120, BP 80/40. After resuscitation, which medication should be given in the ED?</p>
+<ol class="opts" type="A"><li>IV omeprazole 40 mg</li><li>Terlipressin 2 mg IV bolus + ceftriaxone</li><li>IV vitamin K</li><li>Tranexamic acid infusion</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: B.</b> Jaundice/ascites point to a variceal bleed &rarr; Terlipressin + prophylactic antibiotic in the ED. PPIs are not started pre-endoscopy (NICE); vitamin K and tranexamic acid have no evidence here.</div></div>
+
+<div class="mcq"><p class="q"><b>Q2.</b> A stable patient with a single melaena episode has a <b>Glasgow-Blatchford score of 0</b>. What is the most appropriate plan?</p>
+<ol class="opts" type="A"><li>Admit to critical care for emergency endoscopy</li><li>Insert a Sengstaken-Blakemore tube</li><li>Consider discharge with outpatient endoscopy follow-up</li><li>Transfuse 2 units of packed red cells</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: C.</b> Blatchford 0 is low risk; NICE allows early discharge with outpatient endoscopy. Critical care/balloon tamponade are for high-risk/variceal bleeds; transfusion is for Hb &lt;7.</div></div>
+
+<div class="mcq"><p class="q"><b>Q3.</b> A 70-year-old with atrial fibrillation has severe, sudden abdominal pain. Examination is unremarkable with a soft, minimally tender abdomen despite his distress. Most likely diagnosis?</p>
+<ol class="opts" type="A"><li>Mesenteric ischaemia</li><li>Adynamic postoperative ileus</li><li>Mallory-Weiss tear</li><li>Viral gastroenteritis</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: A.</b> Pain out of proportion to exam with AF/CAD risk is the classic mesenteric ischaemia stem. Ileus follows surgery; the others don't fit this vascular picture.</div></div>
+
+<div class="mcq"><p class="q"><b>Q4.</b> A 26-year-old woman presents with acute lower abdominal pain and one episode of syncope. What is the essential early test?</p>
+<ol class="opts" type="A"><li>Abdominal X-ray</li><li>Liver function tests</li><li>Coagulation screen</li><li>Pregnancy test</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: D.</b> Any reproductive-age woman with acute abdominal pain needs a pregnancy test to exclude ectopic pregnancy — the leading cause of first-trimester maternal death from haemorrhage.</div></div>
+
+<div class="mcq"><p class="q"><b>Q5.</b> An actively bleeding UGIB patient with stable coronary disease has a haemoglobin result back. At what threshold does restricting transfusion reduce mortality (i.e. transfuse below this level)?</p>
+<ol class="opts" type="A"><li>Hb &lt;9 g/dL (unstable coronary disease)</li><li>Hb &lt;7 g/dL</li><li>Hb &lt;10 g/dL routinely</li><li>Transfuse all bleeding patients regardless of Hb</li></ol>
+<button class="reveal" type="button">Show answer</button>
+<div class="ans"><b>Answer: B.</b> The sheet's restrictive threshold is Hb &lt;7 g/dL (or &lt;9 only in <i>unstable</i> coronary artery disease). Over-transfusion carries complications.</div></div>
+
+</div>
+</section>
+   <section id="mock-section">
+     <h2 class="sys-title">Mock Exam &mdash; 70 Questions (mixed)</h2>
+     <p class="sys-intro">One mixed paper across both Family Medicine and Emergency, weighted 35 / 35. Options are reshuffled each attempt, so there's no pattern to memorise.</p>
+     <div id="mockStart">
+       <h2>70 questions &middot; 80 minutes</h2>
+       <p>Sit this as a dress rehearsal: no notes, one pass, commit to an answer for every question. You'll get a score and full explanations at the end.</p>
+       <button id="startMockBtn">Start timed mock exam</button>
+     </div>
+     <div id="mockBar">
+       <span class="timer" id="timer">80:00</span>
+       <span class="prog" id="prog">Answered 0 / 70</span>
+       <button id="gradeBtn">Grade exam</button>
+     </div>
+     <div id="scorecard"></div>
+     <div id="mockQuestions" style="display:none"></div>
+   </section>
+
+   <div class="footer">Compiled from the official sheets students usually study from &middot; for revision only &mdash; verify any doses/protocols against a primary source before clinical use.</div>
+ </div>
+</div>
+</div>
+<script>
+// ---- sidebar / nav ----
+var ham=document.getElementById('hamburger'), sb=document.getElementById('sidebar');
+if(ham) ham.onclick=function(){sb.classList.toggle('open')};
+document.querySelectorAll('.navlink').forEach(function(a){
+ a.addEventListener('click',function(){ if(window.innerWidth<=900) sb.classList.remove('open'); });
+});
+// scroll spy
+var sections=[].slice.call(document.querySelectorAll('.system, #mock-section'));
+var links=[].slice.call(document.querySelectorAll('.navlink'));
+function spy(){
+ var pos=window.scrollY+90, cur=null;
+ sections.forEach(function(s){ if(s.offsetTop<=pos) cur=s.id; });
+ links.forEach(function(l){ l.classList.toggle('active', l.getAttribute('data-target')===cur); });
+}
+window.addEventListener('scroll',spy); spy();
+// ---- topic collapse ----
+document.querySelectorAll('.topic').forEach(function(t){
+ var title=t.querySelector('.topic-title');
+ if(title && !t.querySelector('.topic-body')){
+   var body=document.createElement('div'); body.className='topic-body';
+   var n=title.nextSibling;
+   while(n){ var nx=n.nextSibling; body.appendChild(n); n=nx; }
+   t.appendChild(body);
+ }
+ t.classList.add('collapsed'); title.addEventListener('click',function(){ t.classList.toggle('collapsed'); });
+});
+function setAll(collapsed){ document.querySelectorAll('.topic').forEach(function(t){ t.classList.toggle('collapsed',collapsed); }); }
+document.getElementById('expandAll').onclick=function(){setAll(false)};
+document.getElementById('collapseAll').onclick=function(){setAll(true)};
+// ---- reveal answers ----
+document.querySelectorAll('.mcq .reveal').forEach(function(b){
+ b.addEventListener('click',function(){
+   var m=b.closest('.mcq'); m.classList.toggle('revealed');
+   b.textContent=m.classList.contains('revealed')?'Hide answer':'Show answer';
+ });
+});
+var ansShown=false;
+document.getElementById('toggleAns').onclick=function(){
+ ansShown=!ansShown;
+ document.querySelectorAll('.mcq').forEach(function(m){
+   m.classList.toggle('revealed',ansShown);
+   var b=m.querySelector('.reveal'); if(b) b.textContent=ansShown?'Hide answer':'Show answer';
+ });
+ this.textContent=ansShown?'Hide all answers':'Show all answers';
+};
+// ---- search filter ----
+var search=document.getElementById('search');
+search.addEventListener('input',function(){
+ var q=this.value.trim().toLowerCase();
+ document.querySelectorAll('.topic').forEach(function(t){
+   var txt=t.textContent.toLowerCase();
+   t.classList.toggle('hiddenbysearch', q.length>1 && txt.indexOf(q)===-1);
+ });
+ document.querySelectorAll('.system').forEach(function(s){
+   var vis=[].slice.call(s.querySelectorAll('.topic')).some(function(t){return !t.classList.contains('hiddenbysearch')});
+   s.style.display=(q.length>1 && !vis)?'none':'';
+ });
+});
+// ---- MOCK EXAM ----
+var MOCK=[{"id": 1, "system": "Family Medicine: Principles", "q": "A 58-year-old man with diabetes, hypertension and chronic knee pain sees the same family physician who has cared for him for 12 years, attends to his acute problems, his chronic disease, and his immunizations, and coordinates his specialist referrals. Which core principle of family medicine is BEST illustrated by this ongoing, total relationship that is not terminated by cure or incurability of illness?", "options": ["Continuous and comprehensive care", "Tertiary prevention only", "Doctor-centred consultation", "Disease-oriented evidence"], "answer": 0, "explanation": "Family medicine provides continuing, total and comprehensive care across all problems, ages and organ systems, not terminated by cure or incurability. Tertiary prevention is only one component and does not capture the breadth/continuity described."}, {"id": 2, "system": "Emergency: Resuscitation & Trauma", "q": "A 25-year-old man falls off a truck and hits his head. On arrival he is unconscious with noisy, gurgling breathing and you cannot exclude a cervical spine injury. Which maneuver should you use to open his airway?", "options": ["Head tilt-chin lift", "Jaw thrust", "Insert an oropharyngeal airway immediately", "Perform a cricothyroidotomy"], "answer": 1, "explanation": "Jaw thrust is the airway-opening maneuver of choice when cervical spine injury cannot be ruled out. Head tilt-chin lift causes excessive C-spine movement and risks paralysis in trauma."}, {"id": 3, "system": "Family Medicine: Principles", "q": "Taking all symptoms, illnesses and health problems arising in a community in an average month, what proportion are self-managed by various means before any contact with a primary care physician, according to the flow of care described in the sheet?", "options": ["About one in four", "About three out of four", "About one in ten", "About one half"], "answer": 1, "explanation": "The sheet states 3 out of 4 community health problems are self-managed, with only 1 in 4 reaching a primary care physician and only about 1 in 10 of those leading to hospital referral. 'One in ten' refers to the referral fraction, not self-management."}, {"id": 4, "system": "Emergency: Resuscitation & Trauma", "q": "A 45-year-old man shot in the right chest is in severe respiratory distress with absent breath sounds, hyperresonance, hypotension, and a trachea deviated to the left. What is the immediate management?", "options": ["Urgent needle decompression followed by chest tube", "Obtain a chest X-ray to confirm before acting", "Insert a large-bore chest drain only", "Occlude the wound on three sides"], "answer": 0, "explanation": "This is tension pneumothorax, a clinical diagnosis that must be treated by urgent needle decompression before CXR, then followed by a chest tube at the safe triangle. Awaiting X-ray delays life-saving treatment."}, {"id": 5, "system": "Family Medicine: Principles", "q": "A patient becomes angry during a consultation because his referral was delayed. According to the consultation sheet's approach to dealing with anger, which is the MOST appropriate first step?", "options": ["Immediately defer the consultation to another day", "Confront the patient firmly to establish authority", "Avoid confrontation, facilitate discussion and let him ventilate his feelings", "Prescribe a sedative to calm him"], "answer": 2, "explanation": "For anger the sheet advises avoiding confrontation, facilitating discussion, ventilating feelings and exploring reasons. Confronting firmly is the opposite of the recommended approach."}, {"id": 6, "system": "Emergency: Resuscitation & Trauma", "q": "A trauma patient has a chest drain inserted for a hemothorax. Which finding mandates urgent thoracotomy?", "options": ["Immediate drainage of more than 1500 ml of blood", "Drainage of 100 ml over the first hour", "Stony dullness on percussion", "Decreased breath sounds on the affected side"], "answer": 0, "explanation": "Per the sheet, thoracotomy is indicated if the chest tube drains immediately >1500 ml, or 200 ml/h for at least 2 continuous hours. Dullness and decreased breath sounds are diagnostic of hemothorax but do not alone mandate thoracotomy."}, {"id": 7, "system": "Family Medicine: Principles", "q": "Studies cited in the communication sheet note that obtaining a history provides a correct diagnosis in over 50% of all patients and in as many as 80% in primary care. The sheet also reports that 90% of complaints about doctors arise from which single failure?", "options": ["Errors in physical examination", "Failure of communication rather than poor medicine", "Incorrect prescriptions", "Inadequate investigations"], "answer": 1, "explanation": "The sheet states most complaints (90%) about doctors are due to failure of communication rather than poor medicine. Examination and investigation each account for only about 9% of diagnostic complaints, far less than history/communication."}, {"id": 8, "system": "Emergency: Resuscitation & Trauma", "q": "During a witnessed adult cardiac arrest the monitor shows ventricular fibrillation and CPR is ongoing. According to the shockable-rhythm algorithm, when should the first dose of epinephrine be given?", "options": ["At the very beginning, before any shock", "After 2 shocks", "After 3 shocks", "Only once amiodarone has failed"], "answer": 1, "explanation": "For a shockable rhythm (VF/pulseless VT) the sheet gives epinephrine after 2 shocks and amiodarone or lidocaine after 3 shocks. Giving epinephrine at the very beginning applies to non-shockable rhythms (asystole/PEA)."}, {"id": 9, "system": "Family Medicine: Principles", "q": "When facilitating a consultation, a family physician repeats back a significant phrase the patient has just used, mirroring the patient's own words to encourage elaboration. According to the communication sheet, this facilitation technique is termed:", "options": ["Summarizing", "Clarifying", "Reflecting", "Leading"], "answer": 2, "explanation": "Reflecting is repeating and so reflecting back a phrase, idea or significant words the patient has just said. Summarizing covers all or part of the account; clarifying makes clear what the patient is trying to express."}, {"id": 10, "system": "Emergency: Resuscitation & Trauma", "q": "You are performing high-quality CPR on an adult in cardiac arrest. Which combination matches the recommended quality benchmarks?", "options": ["Compression rate 80/min, depth 3-4 cm", "Compression rate 100-120/min, depth 5-6 cm", "Compression rate 140/min, depth 7 cm", "Compression rate 60/min, depth 2 cm"], "answer": 1, "explanation": "Quality CPR benchmarks are a compression rate of 100-120/min and depth of 5-6 cm with full chest recoil. The other options fall outside the rate and depth targets stated in the sheet."}, {"id": 11, "system": "Family Medicine: Principles", "q": "A medical student counselling a patient newly diagnosed with irritable bowel syndrome is asked about prognosis. Based on the IBS counselling sheet, which statement is correct?", "options": ["It is a curable organic disease that resolves with antibiotics", "It is life-threatening if untreated", "About 50% improve at one year and only about 5% worsen", "All patients require lifelong tricyclic antidepressants"], "answer": 2, "explanation": "The IBS sheet states 50% improve at one year and only 5% worsen; it is functional (not organic), not life-threatening, and manageable but not curable. TCAs (amitriptyline) are reserved for resistant cases, not all patients."}, {"id": 12, "system": "Emergency: Cardiorespiratory", "q": "A 60-year-old man has crushing retrosternal chest pain radiating to the jaw with diaphoresis. The ECG shows ST segment elevation greater than 1 mm in contiguous leads. He presents within 90 minutes and PCI is available on-site. What is the preferred reperfusion strategy?", "options": ["Immediate thrombolysis with streptokinase", "Exercise stress testing", "Primary PCI (urgent)", "Wait for troponin results before acting"], "answer": 2, "explanation": "For STEMI, urgent primary PCI is the preferred method in the acute setting with a door-to-balloon time of 90 plus or minus 30 minutes. Thrombolysis is reserved for when PCI cannot be delivered within 120 minutes."}, {"id": 13, "system": "Family Medicine: Principles", "q": "An evidence-based medicine teaching session asks for the single best resource that represents the gold standard for evidence regarding a therapeutic decision. According to the EBM sheet, which is it?", "options": ["A high-quality textbook", "Expert opinion", "The prospectively designed double-blind randomized clinical trial", "A case series"], "answer": 2, "explanation": "The sheet states the prospectively designed double-blind RCT is the gold standard for evidence on therapeutic decisions. Textbooks are described as out-of-date and experts as frequently wrong."}, {"id": 14, "system": "Emergency: Cardiorespiratory", "q": "A 68-year-old hypertensive man presents with sudden tearing chest pain radiating to the back. BP is 180/100 in the right arm and 150/95 in the left arm, and CXR shows a widened mediastinum. CT confirms a dissection limited to the descending aorta (Stanford type B). What is the appropriate management?", "options": ["Urgent open surgical repair", "Immediate thrombolysis", "High-flow oxygen and aspirin alone", "Medical management with esmolol or labetalol"], "answer": 3, "explanation": "Stanford type B dissection (descending aorta) is managed medically with beta-blockade (esmolol or labetalol) and blood pressure control. Open surgery is reserved for type A dissection involving the ascending aorta/arch."}, {"id": 15, "system": "Family Medicine: Principles", "q": "According to the EBM sheet, evidence dealing with outcomes of importance to patients, such as change in morbidity, mortality, symptom improvement or quality of life, is best described as which of the following?", "options": ["Disease-oriented evidence (DOE)", "A surrogate end point", "Patient-oriented evidence that matters (POEM)", "A meta-analysis"], "answer": 2, "explanation": "POEM deals with outcomes important to patients (morbidity, mortality, symptoms, quality of life, cost). DOE deals with surrogate end points such as lab values that may not reflect patient outcomes."}, {"id": 16, "system": "Emergency: Cardiorespiratory", "q": "A patient with pleuritic chest pain and dyspnea has an ECG. Which ECG finding is described as specific for pulmonary embolism?", "options": ["ST elevation in contiguous leads", "S1Q3T3 pattern", "Sinus tachycardia", "Diffuse concave-upward ST elevation"], "answer": 1, "explanation": "S1Q3T3 is the specific (though not most common) ECG finding in PE; sinus tachycardia is the most common finding. Diffuse concave-upward ST elevation suggests pericarditis."}, {"id": 17, "system": "Family Medicine: Principles", "q": "A 45-year-old asymptomatic woman asks at what age screening mammography is offered. Using the periodic health assessment sheet's USPSTF-based schedule, breast cancer screening with mammography (or clinical examination) is performed yearly from which age?", "options": ["From age 21", "From age 30", "From age 40 (mammography); clinical exam from age 20", "From age 65"], "answer": 2, "explanation": "The sheet gives breast cancer screening as clinical exam from age 20 and mammography from age 40, yearly (stop at 75). Age 21 is the start for cervical cytology, not mammography."}, {"id": 18, "system": "Emergency: Cardiorespiratory", "q": "A 30-year-old with asthma presents with a severe exacerbation. Which set of features indicates impending respiratory failure / a life-threatening exacerbation?", "options": ["PEFR 70% predicted with SpO2 96%", "Wheeze on end-exhalation and ability to talk in sentences", "Silent chest, bradycardia, altered mental status and SpO2 below 90%", "Dyspnea on exertion only"], "answer": 2, "explanation": "Silent chest, bradycardia, altered mental status, paradoxical breathing and SpO2 below 90% mark a life-threatening exacerbation. PEFR 70% with normal saturations describes only a mild exacerbation."}, {"id": 19, "system": "Family Medicine: Cardiometabolic", "q": "A 52-year-old man has clinic readings of 150/96 mmHg on the first visit. Per the hypertension counselling sheet using the JNC7 classification, into which category does a sustained systolic of 150 with diastolic of 96 fall?", "options": ["Prehypertension", "Stage 1 hypertension", "Stage 2 hypertension", "Normal"], "answer": 1, "explanation": "By JNC7, stage 1 is SBP 140-159 or DBP 90-99, so 150/96 is stage 1. Stage 2 requires SBP >=160 or DBP >=100; prehypertension is SBP 120-139 or DBP 80-89."}, {"id": 20, "system": "Emergency: Cardiorespiratory", "q": "A patient presents with an irregularly irregular narrow-complex tachycardia and absent P waves but is hemodynamically stable. According to the sheet, what is the first-line rate-control treatment?", "options": ["Synchronized cardioversion", "Magnesium sulfate", "Immediate unsynchronized DC shock", "Beta-blockers"], "answer": 3, "explanation": "This describes atrial fibrillation (irregular irregularity, absent P waves); in the stable patient rate control is with beta-blockers and rhythm control with amiodarone. Immediate electrical cardioversion is reserved for the unstable patient."}, {"id": 21, "system": "Family Medicine: Cardiometabolic", "q": "A 60-year-old hypertensive man develops a persistent dry cough shortly after starting enalapril. According to the antihypertensive section, switching to which class is preferred because it shares the same mechanism benefits but causes no cough or angioedema?", "options": ["Thiazide diuretic", "Calcium channel blocker", "Beta-blocker", "Angiotensin receptor blocker (ARB)"], "answer": 3, "explanation": "The sheet lists ARBs as preferred in patients with severe dry cough or angioedema, since they block angiotensin II without causing cough or angioedema. ACEI cough is a class effect, so an ACEI substitute would not help."}, {"id": 22, "system": "Emergency: Cardiorespiratory", "q": "A patient develops a polymorphic ventricular tachycardia with a twisting-point appearance (torsades de pointes) on a background of QT prolongation. What is the treatment of choice?", "options": ["Adenosine", "Magnesium sulfate", "Amiodarone", "Synchronized cardioversion"], "answer": 1, "explanation": "Torsades de pointes (polymorphic VT from QT prolongation) is treated with magnesium sulfate per the sheet. Amiodarone can prolong QT and is not the listed treatment for torsades."}, {"id": 23, "system": "Family Medicine: Cardiometabolic", "q": "A 47-year-old woman presents with no diabetic symptoms. Per the diabetes counselling sheet's diagnostic thresholds, an HbA1c result of which value would meet the criterion for diabetes mellitus?", "options": ["5.9%", "6.2%", "6.5%", "6.0%"], "answer": 2, "explanation": "The sheet sets the diabetes threshold at HbA1c >=6.5%. Values of 5.7-6.4% fall in the pre-diabetes range, so 5.9%, 6.0% and 6.2% are all pre-diabetic rather than diabetic."}, {"id": 24, "system": "Emergency: Cardiorespiratory", "q": "A monitor shows a regular bradycardia with a dropped beat that is NOT preceded by progressive PR prolongation (Mobitz II second-degree block). What is the recommended treatment?", "options": ["Atropine and observe", "Magnesium sulfate", "Pacemaker", "Synchronized cardioversion"], "answer": 2, "explanation": "Mobitz II (dropped beat without PR prolongation) is treated with a pacemaker, as is third-degree (complete) block. This is distinct from Mobitz I, which shows progressive PR prolongation before the dropped beat."}, {"id": 25, "system": "Family Medicine: Cardiometabolic", "q": "A diabetic patient with known heart failure needs an additional oral agent. Based on the diabetes sheet, which agent is specifically noted as a disadvantage (not used) in patients with heart failure?", "options": ["Metformin", "Sitagliptin (DPP-4 inhibitor)", "Liraglutide (GLP-1 agonist)", "Pioglitazone (thiazolidinedione)"], "answer": 3, "explanation": "The sheet states pioglitazone (a thiazolidinedione) is not used in patients with heart failure. Metformin's main contraindication listed is renal impairment, and DPP-4 and GLP-1 agents are not flagged for HF in the sheet."}, {"id": 26, "system": "Emergency: Neurological", "q": "A patient is brought in actively convulsing and is still seizing on your evaluation, suggesting status epilepticus. IV access is not yet established. According to the sheet, what is the recommended first-line field intervention?", "options": ["Rectal diazepam", "IV phenytoin loading dose", "IM midazolam 0.2 mg/kg", "IV levetiracetam"], "answer": 2, "explanation": "The sheet recommends IM midazolam 0.2 mg/kg as first-line field management of status epilepticus, with IV lorazepam 0.1 mg/kg once access is established. Rectal diazepam is not recommended due to erratic absorption, and phenytoin/levetiracetam are second-line."}, {"id": 27, "system": "Family Medicine: Cardiometabolic", "q": "When calculating CHD risk in the dyslipidemia sheet, a patient is counted with their major risk factors. According to the sheet, which factor REMOVES one from the total risk-factor count?", "options": ["HDL greater than 60 mg/dL", "Current cigarette smoking", "Family history of premature CHD", "Hypertension"], "answer": 0, "explanation": "The dyslipidemia sheet notes that if HDL >60 mg/dL it removes 1 from the total risk-factor count, because high HDL is protective. Smoking, hypertension and family history are positive risk factors that add to the count."}, {"id": 28, "system": "Emergency: Neurological", "q": "A patient overdoses on isoniazid and develops prolonged seizures that are refractory to repeated benzodiazepines. What additional agent is required to terminate the seizures?", "options": ["Pyridoxine", "Phenytoin", "Magnesium sulfate", "Propofol only"], "answer": 0, "explanation": "Isoniazid depletes GABA, so seizures are benzodiazepine-refractory and require pyridoxine to replenish GABA. Phenytoin is ineffective for most drug-induced seizures and can be harmful in some overdoses."}, {"id": 29, "system": "Family Medicine: Cardiometabolic", "q": "A patient's fasting lipid panel shows a triglyceride level of 650 mg/dL with an elevated LDL. Per the dyslipidemia sheet, what should be the FIRST treatment priority?", "options": ["Lower the LDL first with a high-intensity statin", "Lower the triglycerides first to prevent pancreatitis", "Start niacin to raise HDL", "No drug therapy is needed at this level"], "answer": 1, "explanation": "The sheet states that although the usual target is lowering LDL, if triglycerides exceed 500 mg/dL you first lower triglycerides to prevent pancreatitis. The most effective TG-lowering drug is fibric acid or niacin, not a statin."}, {"id": 30, "system": "Emergency: Neurological", "q": "A 28-year-old woman at 32 weeks gestation presents with a new generalized seizure preceded by hypertension. Eclampsia is suspected. What is the treatment of choice for the seizures?", "options": ["IV phenytoin", "IM midazolam only", "IV diazepam infusion", "IV magnesium"], "answer": 3, "explanation": "In a seizing pregnant patient, eclampsia must be considered and IV magnesium is the treatment of choice; it is more effective and safer than phenytoin for preventing recurrence and maternal death. Magnesium should not be delayed awaiting definitive results."}, {"id": 31, "system": "Family Medicine: Cardiometabolic", "q": "A 38-year-old woman has fatigue, weight gain, cold intolerance, dry skin and constipation. Thyroid function tests show a high TSH with a low T4. Based on the thyroid sheet, what is the most appropriate management?", "options": ["Carbimazole", "Levothyroxine (T4)", "Radio-iodine therapy", "Propranolol alone"], "answer": 1, "explanation": "High TSH with low T4 indicates primary hypothyroidism, treated with levothyroxine (T4), taken in the morning before food/caffeine. Carbimazole and radio-iodine treat hyperthyroidism, the opposite condition."}, {"id": 32, "system": "Emergency: Neurological", "q": "Which feature is most suggestive that a paroxysmal event was a true epileptic seizure rather than a non-epileptic spell?", "options": ["Maintaining eyes closed during the spell", "Lateral tongue biting and postictal disorientation", "Forward pelvic thrusting and asynchronous movements", "A spell lasting longer than 5 minutes with no postictal confusion"], "answer": 1, "explanation": "Lateral tongue biting, postictal disorientation/amnesia and cyanosis suggest a true seizure. Eyes held closed, pelvic thrusting, asynchronous movements and short or absent postictal confusion point to non-epileptic spells."}, {"id": 33, "system": "Family Medicine: Cardiometabolic", "q": "A 55-year-old asymptomatic woman is found to have a TSH of 8 mIU/L with normal T3 and T4. According to the thyroid sheet, which finding would justify treating this subclinical hypothyroidism?", "options": ["Normal lipid profile", "Age over 50 alone", "TSH greater than 10 mIU/L", "A single normal anti-TPO titre"], "answer": 2, "explanation": "The sheet says subclinical hypothyroidism is typically not treated, but consider treatment if TSH >10 mIU/L, pregnancy/planning pregnancy, symptoms present, resistant depression, or elevated TPO antibodies. A TSH of 8 with none of these does not require treatment; only TSH >10 from the listed options qualifies."}, {"id": 34, "system": "Emergency: Neurological", "q": "A comatose patient with altered mental status is being managed with neuroprotective resuscitation. Which measure aligns with the principles listed in the sheet?", "options": ["Lay the patient flat with the head down", "Elevate the head of the bed to 30 degrees and avoid hypotension", "Allow permissive hyperthermia", "Target hyperoxia to maximize oxygen delivery"], "answer": 1, "explanation": "Neuroprotective resuscitation elevates the head of bed to 30 degrees (if no thoracic spine injury), avoids hypotension, hypoxia, hyperoxia and hyperthermia, and treats seizures. The other options contradict these principles."}, {"id": 35, "system": "Family Medicine: Women's Health & Geriatrics", "q": "A 68-year-old postmenopausal woman has a DEXA scan reported with a T-score of -2.8 at the femoral neck. According to the women's health/osteoporosis sheet, this T-score corresponds to which diagnosis?", "options": ["Normal bone mineral density", "Osteopenia", "Osteoporosis", "Osteomalacia"], "answer": 2, "explanation": "By DEXA T-score, osteoporosis is BMD <= -2.5; osteopenia is -1 to -2.5 and normal is >= -1. A T-score of -2.8 is therefore osteoporosis. Osteomalacia is a defect of mineralization, not defined by the T-score."}, {"id": 36, "system": "Emergency: Metabolic & Endocrine", "q": "A 20-year-old with type 1 diabetes presents with vomiting and abdominal pain. Which set of values satisfies the diagnostic criteria for DKA used in the sheet?", "options": ["Glucose 13 mmol/L, ketones 4.0 mmol/L, venous HCO3 12 mmol/L", "Glucose 9 mmol/L, ketones 1.0 mmol/L, HCO3 20 mmol/L", "Glucose 13 mmol/L, no ketones, pH 7.4", "Glucose 8 mmol/L, ketones 0.5 mmol/L, pH 7.35"], "answer": 0, "explanation": "DKA criteria are ketonaemia >3.0 mmol/L (or significant ketonuria), blood glucose >11.0 mmol/L (or known DM), and venous HCO3 <15.0 mmol/L or venous pH <7.3. Only the second option meets all three thresholds."}, {"id": 37, "system": "Family Medicine: Common Presentations", "q": "A mother brings her 4-year-old with a 6-day cold whose clear nasal discharge has turned thick and green. The child is afebrile and feeding well. According to the URTI sheet, what does the green nasal discharge indicate?", "options": ["Definite bacterial superinfection requiring amoxicillin", "It is a normal course of the common cold and does not mean bacterial infection", "Acute bacterial sinusitis requiring augmentin", "Influenza requiring oseltamivir"], "answer": 1, "explanation": "The sheet explicitly states that viscous green nasal discharge does not mean superimposed bacterial infection; it is a normal course of the common cold. Antibiotics are not indicated for the common cold."}, {"id": 38, "system": "Emergency: Metabolic & Endocrine", "q": "In a patient newly diagnosed with DKA, what is the single most important initial therapeutic intervention according to the sheet?", "options": ["IV sodium bicarbonate", "Immediate subcutaneous insulin", "IV phosphate replacement", "Appropriate IV fluid replacement"], "answer": 3, "explanation": "There is universal agreement that the most important initial intervention in DKA is appropriate fluid replacement, followed by insulin. Bicarbonate is not indicated and phosphate should not be routinely given."}, {"id": 39, "system": "Family Medicine: Common Presentations", "q": "An adult with a viral upper respiratory illness asks how long to expect symptoms. Per the common cold section, most symptoms resolve in 7-10 days, but which single symptom may persist for up to 4 weeks?", "options": ["Fever", "Sore throat", "Cough", "Sneezing"], "answer": 2, "explanation": "The sheet states most cold symptoms resolve in 7-10 days but cough may persist up to 4 weeks. Sore throat usually resolves quickly and fever/sneezing are early features."}, {"id": 40, "system": "Emergency: Metabolic & Endocrine", "q": "A DKA patient's first potassium result is 3.2 mmol/L. According to the sheet, what should be done before starting insulin?", "options": ["Start insulin immediately at 0.1 units/kg/hr", "Correct the potassium first", "Give IV sodium bicarbonate", "Give phosphate replacement"], "answer": 1, "explanation": "If potassium is below 3.5 mmol/L it must be corrected prior to starting insulin, because insulin drives potassium into cells and can precipitate arrhythmias and cardiac arrest. Bicarbonate would worsen the hypokalemia."}, {"id": 41, "system": "Family Medicine: Common Presentations", "q": "A 30-year-old presents with a confirmed GABHS sore throat. According to the URTI/pharyngitis sheet, the main reason antibiotics are given for GABHS pharyngitis is to prevent which complication?", "options": ["Otitis media with effusion", "Scarlet fever rash", "Post-streptococcal glomerulonephritis", "Rheumatic fever"], "answer": 3, "explanation": "The sheet lists the goals of GAS treatment as preventing rheumatic fever (but NOT PSGN), shortening illness, and preventing suppurative complications. PSGN is specifically noted as not prevented by treatment."}, {"id": 42, "system": "Emergency: Metabolic & Endocrine", "q": "What is the recommended fixed-rate intravenous insulin infusion regimen for an adult presenting with DKA?", "options": ["0.01 units/kg/hr", "1 unit/kg/hr", "0.1 units/kg/hr", "A single subcutaneous bolus of 10 units"], "answer": 2, "explanation": "A fixed-rate IV insulin infusion calculated at 0.1 units/kg body weight per hour is recommended, with the IV route preferred over subcutaneous because of the delayed onset of SC insulin."}, {"id": 43, "system": "Family Medicine: Common Presentations", "q": "A 65-year-old man reports new epigastric discomfort. Using the dyspepsia sheet's age-based approach, which feature MOST clearly mandates upper endoscopy in this patient?", "options": ["Heartburn relieved by antacids", "His age (60 years or older)", "Smoking history", "Occasional nausea"], "answer": 1, "explanation": "The sheet recommends upper endoscopy for dyspepsia in patients aged 60 or older. Below 60, endoscopy is reserved for alarm features such as weight loss or GI bleeding; antacid-relieved heartburn and nausea alone are not indications."}, {"id": 44, "system": "Emergency: Metabolic & Endocrine", "q": "An unconscious patient with a capillary glucose below 4 mmol/L has no IV access yet. The sheet notes that for IV dextrose, which preparation is preferred to avoid inflammation from hypertonic solutions?", "options": ["Rapid infusion of 100 ml of 10% dextrose", "50 ml of 50% dextrose as a fast push", "Oral carbohydrate", "Buccal glucose gel"], "answer": 0, "explanation": "The sheet states that because hypertonic 50% dextrose can cause inflammation, rapid infusion of 100 ml of 10% dextrose is preferable. Oral and buccal routes require a conscious patient able to swallow."}, {"id": 45, "system": "Family Medicine: Mental Health & Behavioural", "q": "A 26-year-old woman has excessive, hard-to-control worry about many everyday things, present more days than not for the past 8 months, with restlessness, fatigue, poor concentration, irritability, muscle tension and disturbed sleep. According to the mental health sheet, this best fits the diagnosis of:", "options": ["Panic disorder", "Generalized anxiety disorder (GAD)", "Specific phobia", "Major depressive disorder"], "answer": 1, "explanation": "GAD is excessive uncontrollable worry occurring more days than not for at least 6 months plus >=3 associated symptoms (restlessness, fatigue, poor concentration, irritability, muscle tension, sleep disturbance). Panic disorder is discrete attacks peaking within 10 minutes, not persistent worry."}, {"id": 46, "system": "Emergency: Metabolic & Endocrine", "q": "A patient with serum potassium of 6.8 mEq/L shows peaked T waves on ECG. According to the management list, which agent is given first for cardiac membrane stabilization?", "options": ["Calcium gluconate", "Nebulized albuterol", "Insulin plus glucose", "Kayexalate (potassium binder)"], "answer": 0, "explanation": "Calcium gluconate is used for heart (membrane) stabilization in hyperkalemia. Insulin/glucose and beta-agonists shift potassium into cells but do not stabilize the myocardium; binders and dialysis remove potassium more slowly."}, {"id": 47, "system": "Family Medicine: Common Presentations", "q": "A 35-year-old woman has recurrent headaches lasting 6 hours, unilateral and pulsating, with nausea and photophobia, worsened by climbing stairs; she has had eight such attacks. According to the headache sheet's diagnostic criteria, the most likely diagnosis is:", "options": ["Tension headache", "Cluster headache", "Medication overuse headache", "Migraine"], "answer": 3, "explanation": "Migraine criteria require >=5 attacks lasting 4-72 hours with >=2 of (unilateral, pulsating, moderate-severe, aggravated by activity) plus >=1 of (nausea/vomiting, photophobia/phonophobia), all present here. Tension headache is bilateral, pressing and non-pulsating without nausea."}, {"id": 48, "system": "Emergency: Metabolic & Endocrine", "q": "In hyperkalemia, after cardiac stabilization, which therapy listed shifts potassium into the cells?", "options": ["Furosemide", "Insulin plus glucose infusion", "Dialysis", "Kayexalate"], "answer": 1, "explanation": "Insulin plus glucose (along with beta-agonists and bicarbonate for acidosis) shifts potassium into cells. Furosemide, dialysis and Kayexalate act to remove excess potassium from the body rather than shift it intracellularly."}, {"id": 49, "system": "Family Medicine: Common Presentations", "q": "A 45-year-old smoker man is woken nightly by 45-minute attacks of severe unilateral orbital pain with ipsilateral lacrimation and a red eye, occurring once or twice daily for two weeks. Per the headache sheet, the FIRST-line abortive treatment is:", "options": ["Oral propranolol", "Amitriptyline", "High-flow oxygen", "Oral amoxicillin"], "answer": 2, "explanation": "This is cluster headache (severe unilateral orbital pain, lacrimation, 15-180 min, in a middle-aged male smoker). Abortive treatment is high-flow oxygen, DHE or parenteral triptans; propranolol is a migraine preventive, not a cluster abortive."}, {"id": 50, "system": "Emergency: Toxicology, Anaphylaxis & Environmental", "q": "A 30-year-old develops acute swollen lips, wheeze, stridor, SpO2 90% and BP 85/60 after eating at a restaurant. According to the sheet, what is the most important first drug and how should it be given?", "options": ["IV adrenaline 1 mg of 1:10,000", "IV chlorphenamine 10 mg", "IM adrenaline 0.5 ml of 1:1000 in the lateral thigh", "IV hydrocortisone 200 mg"], "answer": 2, "explanation": "Adrenaline is the most important drug in anaphylaxis; the adult/over-12 dose is 0.5 ml of 1:1000 given IM in the middle third of the lateral thigh (best absorption). Antihistamine and corticosteroid are adjuncts and do not treat the acute attack."}, {"id": 51, "system": "Family Medicine: Common Presentations", "q": "A 62-year-old reports brief episodes of spinning lasting about 20 seconds triggered by turning over in bed, with no hearing loss or tinnitus. According to the dizziness sheet, what is the most likely diagnosis and confirmatory test?", "options": ["Meniere's disease confirmed by audiometry", "Acoustic neuroma confirmed by MRI", "Vestibular neuritis confirmed by CT", "Benign paroxysmal positional vertigo confirmed by the Hallpike (Dix-Hallpike) maneuver"], "answer": 3, "explanation": "Brief positional vertigo (10-60 sec) on head movement without hearing loss is BPPV, the most common peripheral cause; the Hallpike maneuver is the cornerstone of diagnosis. Meniere's lasts 1-8 hours with tinnitus and hearing loss."}, {"id": 52, "system": "Emergency: Toxicology, Anaphylaxis & Environmental", "q": "An anaphylactic patient who takes a beta-blocker remains resistant to repeated IM adrenaline, fluids and hydrocortisone. According to the sheet, which additional agent may help?", "options": ["A further dose of IV chlorphenamine", "IV salbutamol", "Sodium bicarbonate", "IV glucagon 1 mg"], "answer": 3, "explanation": "Patients on beta-blockers may be resistant to classical anaphylaxis treatment; the sheet recommends giving 1 mg IV glucagon to increase the body's response to adrenaline. The other agents do not overcome beta-blockade."}, {"id": 53, "system": "Family Medicine: Common Presentations", "q": "A 34-year-old woman complains of fatigue. Per the fatigue sheet, in the primary care setting, approximately what proportion of patients have an organic cause found for their fatigue?", "options": ["About 15%", "About 50%", "About 75%", "Nearly 100%"], "answer": 0, "explanation": "The sheet states only about 15% of primary care patients have an organic cause found; thus ruling out common organic etiologies without over-investigating is usually sufficient. No etiology is identified in about one third of cases."}, {"id": 54, "system": "Emergency: Toxicology, Anaphylaxis & Environmental", "q": "A patient presents with miosis, respiratory depression and a depressed level of consciousness after suspected drug use. Which antidote matches this opioid toxidrome?", "options": ["Naloxone", "Flumazenil", "Atropine", "N-acetylcysteine"], "answer": 0, "explanation": "Naloxone is the antidote for opioids. Flumazenil is for benzodiazepines, atropine is used with pralidoxime for organophosphates, and N-acetylcysteine is for acetaminophen."}, {"id": 55, "system": "Family Medicine: Common Presentations", "q": "A 28-year-old menstruating woman has fatigue. Labs show low Hb, low MCV, high RDW, low ferritin and low transferrin saturation. According to the anemia sheet, which iron study finding is also expected and what is the single most likely diagnosis?", "options": ["High TIBC, with iron deficiency anemia", "Low TIBC, with anemia of chronic disease", "Normal ferritin, with beta-thalassemia trait", "High ferritin, with sideroblastic anemia"], "answer": 0, "explanation": "In IDA the iron study shows low ferritin, low serum iron, low transferrin saturation and HIGH TIBC (transferrin). The microcytic picture with low ferritin and high RDW is classic IDA; thalassemia trait typically has normal/high ferritin and a Mentzer index <13."}, {"id": 56, "system": "Emergency: Toxicology, Anaphylaxis & Environmental", "q": "A farm worker presents with the cholinergic features of an organophosphate poisoning. According to the antidote list, which pairing is correct?", "options": ["Deferoxamine and oxygen", "Methylene blue and sodium nitrite", "Flumazenil and glucagon", "Atropine and pralidoxime"], "answer": 3, "explanation": "Atropine and pralidoxime are the antidotes for organophosphates. Deferoxamine is for iron, methylene blue for methemoglobinemia, sodium nitrite for cyanide, flumazenil for benzodiazepines and glucagon for beta-blockers."}, {"id": 57, "system": "Family Medicine: MSK & Minor Injuries", "q": "A 35-year-old labourer has 4 days of lower back pain after lifting, with no leg pain, fever, weight loss or neurological deficit. According to the back pain sheet, what is the most appropriate management?", "options": ["Urgent MRI of the lumbar spine", "Conservative care: continue activity as tolerated, analgesics such as NSAIDs or paracetamol", "Immediate referral for surgery", "Strict bed rest for two weeks"], "answer": 1, "explanation": "Simple mechanical low back pain without red flags is managed conservatively with continued activity as tolerated and analgesics (NSAIDs, paracetamol, muscle relaxants); 90% recover at 6 weeks. Prolonged bed rest is to be avoided and imaging/surgery are not indicated without red flags."}, {"id": 58, "system": "Emergency: Toxicology, Anaphylaxis & Environmental", "q": "A patient presents with a tricyclic antidepressant overdose. Which antidote is listed for TCA toxicity?", "options": ["Sodium bicarbonate", "Vitamin K", "Fomepizole", "Physostigmine"], "answer": 0, "explanation": "Bicarbonate is the listed antidote for TCA toxicity. Vitamin K is for warfarin/coumadin, fomepizole for ethylene glycol/methanol, and physostigmine for anticholinergics."}, {"id": 59, "system": "Family Medicine: MSK & Minor Injuries", "q": "A 50-year-old with back pain reports urinary incontinence, numbness over the groin and inner thighs, and decreased anal sphincter tone. According to the back pain red flags, this presentation indicates:", "options": ["Simple mechanical back pain", "Inflammatory spondyloarthropathy", "Referred renal pain", "Cauda equina syndrome, a medical emergency"], "answer": 3, "explanation": "Saddle anesthesia, bladder/bowel incontinence and decreased anal sphincter tone are hallmarks of cauda equina syndrome, which the sheet labels a medical emergency. These features are not part of simple mechanical or inflammatory back pain."}, {"id": 60, "system": "Emergency: Toxicology, Anaphylaxis & Environmental", "q": "An elderly debilitated patient is found after prolonged heat exposure with a core temperature of 41 C, encephalopathy and anhydrosis (heat stroke). According to the sheet, what is the target core temperature when cooling?", "options": ["35 C", "37 C", "38.5 C", "Rapid normothermia as fast as possible"], "answer": 2, "explanation": "The aim of cooling in heat stroke is a target core temperature of 38.5 C, not rapid normothermia, because overcooling causes overshoot hypothermia. Spraying with tepid water and using a fan is the most practical cooling method."}, {"id": 61, "system": "Family Medicine: MSK & Minor Injuries", "q": "A patient sustains a clean facial laceration that is sutured. Using the minor injuries suture table, when should facial sutures be removed?", "options": ["After 3 to 5 days", "After 7 to 10 days", "After 10 to 14 days", "After 14 to 21 days"], "answer": 0, "explanation": "The suture table specifies facial sutures (5-0 or 6-0) removed at three to five days. Trunk/extremities are 7-10 days, joint surfaces 10-14 days, and palms/soles 14-21 days."}, {"id": 62, "system": "Emergency: Toxicology, Anaphylaxis & Environmental", "q": "A conscious adult is choking but can still talk and cough. According to the sheet, what is the correct initial step?", "options": ["Immediately give 5 abdominal thrusts", "Deliver 5 back blows at once", "Encourage him to produce a forceful cough", "Perform blind finger sweep"], "answer": 2, "explanation": "With partial obstruction (patient can still talk), encourage a forceful cough first; if that fails after 5-10 seconds, give 5 back blows then 5 abdominal thrusts. Abdominal thrusts are not the first step in partial obstruction."}, {"id": 63, "system": "Family Medicine: Women's Health & Geriatrics", "q": "A 24-year-old woman has oligomenorrhea, hirsutism and acne, with polycystic ovaries on ultrasound. According to the women's health sheet using the Rotterdam criteria, how many of the three features are required to diagnose PCOS, and what is the first-line treatment?", "options": ["All three features required; first-line is metformin", "Two of three features required; first-line is lifestyle modification", "One feature is sufficient; first-line is clomiphene", "Two of three features required; first-line is spironolactone"], "answer": 1, "explanation": "Rotterdam criteria require 2 of 3 (hyperandrogenism, oligo/anovulation, polycystic ovaries). The sheet names lifestyle modification as first-line and the cornerstone of treatment; clomiphene/letrozole are for ovulation induction and spironolactone for hirsutism."}, {"id": 64, "system": "Emergency: GI & Abdominal", "q": "A 45-year-old man with known alcoholic liver disease presents with large-volume hematemesis, pulse 120, BP 80/40, jaundice and ascites. A variceal bleed is suspected. According to the sheet, which medication should be given in the ED to any patient with suspected variceal hemorrhage?", "options": ["IV omeprazole 40 mg", "IV octreotide infusion only", "IV terlipressin 2 mg bolus", "IV vitamin K 10 mg"], "answer": 2, "explanation": "IV terlipressin (a vasopressin analogue) should be given in the ED to any patient with suspected variceal hemorrhage; it reduces blood loss and mortality. IV PPIs are not recommended pre-endoscopy and vitamin K has no evidence."}, {"id": 65, "system": "Family Medicine: Women's Health & Geriatrics", "q": "A 78-year-old man on eight regular medications is reviewed in clinic. According to the geriatrics sheet, polypharmacy is most simply defined as the use of how many drugs by the same patient at the same time?", "options": ["More than 3 drugs", "More than 8 drugs", "More than 5 drugs", "More than 10 drugs"], "answer": 2, "explanation": "The geriatrics sheet defines polypharmacy as the usage of more than 5 drugs by the same patient at the same time. The other thresholds (e.g., >=10) describe a subgroup, not the basic definition."}, {"id": 66, "system": "Emergency: GI & Abdominal", "q": "In a patient with suspected variceal upper GI bleeding from cirrhosis, which additional therapy is recommended because about 20% of cirrhotic patients with acute variceal bleeding develop a bacterial infection within 48 hours?", "options": ["Prophylactic antibiotics (ciprofloxacin or ceftriaxone)", "Tranexamic acid", "Prophylactic vitamin K", "Routine IV PPI"], "answer": 0, "explanation": "All patients with suspected or confirmed variceal UGI bleeding should receive prophylactic antibiotics (ciprofloxacin or ceftriaxone). Tranexamic acid and vitamin K have no supporting evidence in the sheet."}, {"id": 67, "system": "Family Medicine: Mental Health & Behavioural", "q": "A 30-year-old reports depressed mood and loss of interest most of the day nearly every day for the past three weeks, plus insomnia, fatigue, poor concentration and feelings of worthlessness. According to the mental health sheet, the minimum symptom duration that supports a major depressive episode is:", "options": ["At least 2 weeks", "At least 2 years", "At least 6 months", "At least 1 week"], "answer": 0, "explanation": "A major depressive episode requires depressed mood and/or anhedonia plus at least five symptoms causing significant impairment for at least 2 weeks. Two years defines dysthymic disorder and 1 week describes a manic episode."}, {"id": 68, "system": "Emergency: GI & Abdominal", "q": "A hemodynamically unstable patient with upper GI bleeding needs red cell transfusion. According to the restrictive threshold in the sheet, at what hemoglobin is transfusion indicated in a patient WITHOUT unstable coronary artery disease?", "options": ["Less than 7 g/dL", "Less than 9 g/dL", "Less than 11 g/dL", "Less than 13 g/dL"], "answer": 0, "explanation": "Restricting transfusion to a hemoglobin less than 7 g/dL reduces mortality; the threshold rises to less than 9 g/dL only in unstable coronary artery disease. Over-transfusion has complications."}, {"id": 69, "system": "Family Medicine: Mental Health & Behavioural", "q": "A 45-year-old man who smokes 25 cigarettes a day is ready to quit. According to the smoking cessation sheet, which pharmacotherapy is described as doubling the rate of smoking cessation?", "options": ["Nicotine replacement therapy (NRT)", "Low-tar cigarettes", "E-cigarettes (ENDS)", "No medication, brief advice alone"], "answer": 0, "explanation": "The sheet states NRT doubles the rate of smoking cessation. Low-tar cigarettes have no health benefit and e-cigarettes have no evidence as part of a cessation plan; only 2-3% succeed with no treatment or support."}, {"id": 70, "system": "Emergency: GI & Abdominal", "q": "An elderly patient presents with acute abdominal pain that is out of proportion to the physical findings, a history of atrial fibrillation and cardiovascular disease. Which diagnosis does this clue most strongly suggest?", "options": ["Spontaneous bacterial peritonitis", "Adynamic ileus", "Costochondritis", "Mesenteric ischemia"], "answer": 3, "explanation": "Pain out of proportion to examination, especially with AF and cardiovascular disease, is the classic clue for mesenteric ischemia. SBP is linked to cirrhosis/ascites and ileus follows surgery rather than presenting with severe disproportionate pain."}];
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
+var timerId=null, secondsLeft=80*60, started=false;
+function fmt(s){var m=Math.floor(s/60),x=s%60;return (m<10?'0':'')+m+':'+(x<10?'0':'')+x;}
+function tick(){ secondsLeft--; document.getElementById('timer').textContent=fmt(Math.max(0,secondsLeft));
+ if(secondsLeft<=0){clearInterval(timerId); gradeMock(true);} }
+function buildMock(){
+ var host=document.getElementById('mockQuestions'); host.innerHTML='';
+ MOCK.forEach(function(item,idx){
+   var opts=item.options.map(function(o,i){return {t:o,correct:i===item.answer};});
+   shuffle(opts);
+   item._opts=opts;
+   var div=document.createElement('div'); div.className='mq'; div.id='mq'+(idx+1);
+   var h='<div class="qh">Q'+(idx+1)+' · '+item.system+'</div><p class="qt">'+item.q+'</p>';
+   opts.forEach(function(o,i){
+     h+='<label data-qi="'+idx+'" data-oi="'+i+'"><input type="radio" name="q'+idx+'" value="'+i+'" style="margin-right:8px"> '+o.t+'</label>';
+   });
+   h+='<div class="exp"></div>';
+   div.innerHTML=h; host.appendChild(div);
+ });
+ host.querySelectorAll('label').forEach(function(l){
+   l.addEventListener('click',function(){
+     var qi=l.getAttribute('data-qi');
+     host.querySelectorAll('label[data-qi="'+qi+'"]').forEach(function(x){x.classList.remove('sel')});
+     l.classList.add('sel');
+     updateProg();
+   });
+ });
+}
+function updateProg(){
+ var ans=0; MOCK.forEach(function(it,idx){ if(document.querySelector('label.sel[data-qi="'+idx+'"]')) ans++; });
+ document.getElementById('prog').textContent='Answered '+ans+' / '+MOCK.length;
+}
+function startMock(){
+ if(started) return; started=true;
+ document.getElementById('mockStart').style.display='none';
+ document.getElementById('mockBar').style.display='flex';
+ document.getElementById('mockQuestions').style.display='block';
+ buildMock(); updateProg();
+ timerId=setInterval(tick,1000);
+ document.getElementById('mock-section').scrollIntoView();
+}
+function gradeMock(auto){
+ if(timerId) clearInterval(timerId);
+ var correct=0;
+ MOCK.forEach(function(item,idx){
+   var mq=document.getElementById('mq'+(idx+1)); mq.classList.add('graded');
+   var sel=mq.querySelector('label.sel');
+   item._opts.forEach(function(o,i){
+     var lab=mq.querySelector('label[data-oi="'+i+'"]');
+     if(o.correct) lab.classList.add('correct');
+   });
+   if(sel){
+     var oi=+sel.getAttribute('data-oi');
+     if(item._opts[oi].correct){correct++;} else {sel.classList.add('wrong');}
+   }
+   var corrText=item._opts.filter(function(o){return o.correct})[0].t;
+   mq.querySelector('.exp').innerHTML='<b>Correct: '+corrText+'.</b> '+item.explanation;
+ });
+ var pct=Math.round(correct/MOCK.length*100);
+ var grade = pct>=80?'Excellent (A)':pct>=70?'Strong (B+)':pct>=60?'Solid (B / pass range)':pct>=50?'Borderline — review weak systems':'Needs more revision';
+ var sc=document.getElementById('scorecard'); sc.style.display='block';
+ sc.innerHTML='<div class="grade">'+(auto?'Time! ':'')+'Your score</div><div class="big">'+correct+' / '+MOCK.length+'  ('+pct+'%)</div><div class="grade">'+grade+'</div><button onclick="resetMock()">Retake (reshuffles)</button>';
+ sc.scrollIntoView({behavior:'smooth'});
+}
+function resetMock(){
+ started=false; secondsLeft=80*60;
+ document.getElementById('scorecard').style.display='none';
+ document.getElementById('timer').textContent='80:00';
+ startMock();
+}
+document.getElementById('startMockBtn').onclick=startMock;
+document.getElementById('gradeBtn').onclick=function(){ if(confirm('Grade the exam now?')) gradeMock(false); };
+</script>
+</body></html>
