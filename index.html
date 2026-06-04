@@ -128,7 +128,17 @@ mark{background:#ffe680;color:#000;padding:0 2px;border-radius:2px}
 #mockBar button{margin-left:auto;background:#16a34a;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-weight:600;cursor:pointer}
 #mockBar button.secondary{background:#334; margin-left:0}
 .mq{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:14px 16px;margin:11px 0;scroll-margin-top:120px}
-.mq .qh{font-weight:600;margin:0 0 4px;color:var(--brand2);font-size:12.5px;text-transform:uppercase;letter-spacing:.05em}
+.mq .qh{font-weight:600;margin:0;color:var(--brand2);font-size:12.5px;text-transform:uppercase;letter-spacing:.05em}
+.qrow{display:flex;align-items:center;gap:8px;margin:0 0 6px}
+.flagbtn{margin-left:auto;background:#fff;border:1px solid var(--line);color:#b91c1c;border-radius:6px;padding:3px 10px;font-size:11.5px;font-weight:600;cursor:pointer;white-space:nowrap}
+.flagbtn:hover{background:#fdecec;border-color:#f1b0b0}
+.mq.flagged{border-color:#dc2626;box-shadow:0 0 0 2px #fdecec}
+.mq.flagged .flagbtn{background:#dc2626;color:#fff;border-color:#dc2626}
+#mockQuestions.review-flags .mq:not(.flagged){display:none}
+#mockBar #flagsBtn{margin-left:auto;background:#b91c1c}
+#mockBar #flagsBtn:hover{background:#9f1414}
+#mockBar #flagsBtn.active{background:#7f1d1d;box-shadow:0 0 0 2px #ffd0d0}
+#mockBar #gradeBtn{margin-left:8px}
 .mq .qt{margin:0 0 11px;font-size:14.6px}
 .mq label{display:block;border:1px solid var(--line);border-radius:8px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:14px}
 .mq label:hover{background:#f2f6fc}
@@ -1190,6 +1200,7 @@ mark{background:#ffe680;color:#000;padding:0 2px;border-radius:2px}
        <span class="paper-tag" id="paperTag">Paper A</span>
        <span class="timer" id="timer">90:00</span>
        <span class="prog" id="prog">Answered 0 / 70</span>
+       <button id="flagsBtn">&#9873; Flags (0)</button>
        <button id="gradeBtn">Grade exam</button>
      </div>
      <div id="scorecard"></div>
@@ -1269,13 +1280,13 @@ function fmt(s){var m=Math.floor(s/60),x=s%60;return (m<10?'0':'')+m+':'+(x<10?'
 function tick(){ secondsLeft--; document.getElementById('timer').textContent=fmt(Math.max(0,secondsLeft));
  if(secondsLeft<=0){clearInterval(timerId); gradeMock(true);} }
 function buildMock(){
- var host=document.getElementById('mockQuestions'); host.innerHTML='';
+ var host=document.getElementById('mockQuestions'); host.innerHTML=''; host.classList.remove('review-flags');
  MOCK.forEach(function(item,idx){
    var opts=item.options.map(function(o,i){return {t:o,correct:i===item.answer};});
    shuffle(opts);
    item._opts=opts;
    var div=document.createElement('div'); div.className='mq'; div.id='mq'+(idx+1);
-   var h='<div class="qh">Q'+(idx+1)+' · '+item.system+'</div><p class="qt">'+item.q+'</p>';
+   var h='<div class="qrow"><span class="qh">Q'+(idx+1)+' · '+item.system+'</span><button type="button" class="flagbtn" data-fi="'+idx+'">&#9873; Flag</button></div><p class="qt">'+item.q+'</p>';
    opts.forEach(function(o,i){
      h+='<label data-qi="'+idx+'" data-oi="'+i+'"><input type="radio" name="q'+idx+'" value="'+i+'" style="margin-right:8px"> '+o.t+'</label>';
    });
@@ -1290,6 +1301,31 @@ function buildMock(){
      updateProg();
    });
  });
+ host.querySelectorAll('.flagbtn').forEach(function(b){
+   b.addEventListener('click',function(){
+     var mq=b.closest('.mq'); var on=mq.classList.toggle('flagged');
+     b.innerHTML = on ? '⚑ Flagged' : '⚑ Flag';
+     updateFlagCount();
+   });
+ });
+ var fb=document.getElementById('flagsBtn'); if(fb) fb.classList.remove('active');
+ updateFlagCount();
+}
+function updateFlagCount(){
+ var fb=document.getElementById('flagsBtn'); if(!fb) return;
+ var n=document.querySelectorAll('#mockQuestions .mq.flagged').length;
+ var host=document.getElementById('mockQuestions');
+ fb.textContent = host.classList.contains('review-flags') ? ('⚑ Showing '+n+' flagged') : ('⚑ Flags ('+n+')');
+}
+function toggleFlagReview(){
+ var host=document.getElementById('mockQuestions');
+ var fb=document.getElementById('flagsBtn');
+ var n=host.querySelectorAll('.mq.flagged').length;
+ if(n===0){ alert('No flagged questions yet — click "⚑ Flag" on any question to mark it for review.'); return; }
+ var on=host.classList.toggle('review-flags');
+ fb.classList.toggle('active',on);
+ updateFlagCount();
+ if(on){ var first=host.querySelector('.mq.flagged'); if(first) first.scrollIntoView({behavior:'smooth',block:'start'}); }
 }
 function updateProg(){
  var ans=0; MOCK.forEach(function(it,idx){ if(document.querySelector('label.sel[data-qi="'+idx+'"]')) ans++; });
@@ -1310,6 +1346,10 @@ function startMock(paper){
 }
 function gradeMock(auto){
  if(timerId) clearInterval(timerId);
+ var host=document.getElementById('mockQuestions');
+ if(host) host.classList.remove('review-flags');
+ var fb=document.getElementById('flagsBtn'); if(fb) fb.classList.remove('active');
+ updateFlagCount();
  var correct=0;
  MOCK.forEach(function(item,idx){
    var mq=document.getElementById('mq'+(idx+1)); mq.classList.add('graded');
@@ -1345,6 +1385,7 @@ function switchPaper(p){
 }
 document.getElementById('startMockA').onclick=function(){startMock('A')};
 document.getElementById('startMockB').onclick=function(){startMock('B')};
+document.getElementById('flagsBtn').onclick=toggleFlagReview;
 document.getElementById('gradeBtn').onclick=function(){ if(confirm('Grade the exam now?')) gradeMock(false); };
 </script>
 </body></html>
