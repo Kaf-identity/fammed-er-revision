@@ -122,7 +122,12 @@ a{color:var(--brand);text-decoration:none}
 .box.buzz{border-color:var(--buzz);background:var(--buzzbg)} .box.buzz .lbl{background:var(--buzz)}
 .mnem{background:#fff7ed;border:1px dashed #f0b366;border-radius:9px;padding:8px 12px;margin:9px 0;font-size:13.5px}
 /* tables */
+.tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:12px 0;border-radius:8px}
+.tbl-wrap>table.cmp{margin:0}
 table.cmp{border-collapse:collapse;width:100%;margin:12px 0;font-size:13.3px;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+#sb-close{display:none;position:absolute;top:12px;right:12px;width:32px;height:32px;line-height:28px;text-align:center;background:#1b2a48;color:#fff;border:1px solid #2a3a59;border-radius:8px;font-size:20px;cursor:pointer;z-index:3;padding:0}
+#sb-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:55}
+#sb-backdrop.show{display:block}
 table.cmp th,table.cmp td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
 table.cmp thead th{background:var(--brand2);color:#fff;font-size:12.5px;position:sticky;top:0}
 table.cmp tbody tr:nth-child(even){background:#f6f9fc}
@@ -184,8 +189,12 @@ mark{background:#ffe680;color:#000;padding:0 2px;border-radius:2px}
  #sidebar{position:fixed;left:0;top:0;z-index:60;transform:translateX(-100%);transition:transform .2s}
  #sidebar.open{transform:translateX(0)}
  #hamburger{display:inline-block}
+ #sb-close{display:block}
  .wrap{padding:16px 14px 70px}
  .topic > .box,.topic > table,.topic > .mnem{margin-left:0;margin-right:0}
+ .topic-body{padding:13px 14px}
+ table.cmp{font-size:12.4px}
+ table.cmp th,table.cmp td{padding:7px 8px}
  body{font-size:15px}
 }
 @media print{
@@ -197,6 +206,7 @@ mark{background:#ffe680;color:#000;padding:0 2px;border-radius:2px}
 </style></head><body>
 <div id="layout">
 <aside id="sidebar">
+ <button id="sb-close" aria-label="Close menu" title="Close menu">&times;</button>
  <div class="brand"><h1>Family Medicine & Emergency</h1><div class="sub">All you need to know to ace the exam &middot; JUST curriculum</div></div>
  <div class="countdown">Exam format<br><b>70 MCQs &middot; 90 minutes</b><br>~77&nbsp;s per question</div>
  <button class="navtool primary" onclick="document.getElementById('mock-section').scrollIntoView()">Take a Mock Exam (A / B)</button>
@@ -220,6 +230,7 @@ mark{background:#ffe680;color:#000;padding:0 2px;border-radius:2px}
  <button class="navtool" id="expandAll">Expand all topics</button>
  <button class="navtool" id="collapseAll">Collapse all topics</button>
 </aside>
+<div id="sb-backdrop"></div>
 <div id="main">
  <div id="topbar">
    <button id="hamburger">&#9776;</button>
@@ -1253,13 +1264,27 @@ mark{background:#ffe680;color:#000;padding:0 2px;border-radius:2px}
 <script>
 // ---- sidebar / nav ----
 var ham=document.getElementById('hamburger'), sb=document.getElementById('sidebar');
-if(ham) ham.onclick=function(){sb.classList.toggle('open')};
+var backdrop=document.getElementById('sb-backdrop');
+function openSb(){ sb.classList.add('open'); if(backdrop) backdrop.classList.add('show'); }
+function closeSb(){ sb.classList.remove('open'); if(backdrop) backdrop.classList.remove('show'); }
+if(ham) ham.onclick=function(){ sb.classList.contains('open')?closeSb():openSb(); };
+var sbClose=document.getElementById('sb-close'); if(sbClose) sbClose.onclick=closeSb;
+if(backdrop) backdrop.onclick=closeSb;
 document.querySelectorAll('.navlink').forEach(function(a){
  a.addEventListener('click',function(){
-   if(window.innerWidth<=900) sb.classList.remove('open');
+   if(window.innerWidth<=900) closeSb();
    var tgt=a.getAttribute('data-target'); var el=document.getElementById(tgt);
    if(el && el.classList.contains('system')) el.classList.remove('sec-collapsed');
  });
+});
+document.querySelectorAll('#sidebar .navtool').forEach(function(b){
+ b.addEventListener('click',function(){ if(window.innerWidth<=900) closeSb(); });
+});
+// ---- make wide comparison tables scrollable (no cut-off on mobile) ----
+document.querySelectorAll('table.cmp').forEach(function(t){
+ if(t.parentElement && t.parentElement.classList.contains('tbl-wrap')) return;
+ var w=document.createElement('div'); w.className='tbl-wrap';
+ t.parentNode.insertBefore(w,t); w.appendChild(t);
 });
 // scroll spy
 var sections=[].slice.call(document.querySelectorAll('.system, #mock-section'));
