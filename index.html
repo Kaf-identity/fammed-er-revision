@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Family Medicine & Emergency Quick Review</title>
+<title>Family Medicine & Emergency — All You Need to Know</title>
 <style>
 :root{
  --bg:#f4f6f9; --panel:#ffffff; --ink:#1f2733; --muted:#5b6878; --line:#e3e8ef;
@@ -55,6 +55,19 @@ a{color:var(--brand);text-decoration:none}
 .part-banner .part-kicker{font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:#bcd2ff}
 .part-banner h2{margin:2px 0 4px;font-size:25px;border:none;color:#fff;padding:0}
 .part-banner p{margin:0;font-size:13px;color:#dce6ff;font-style:italic}
+/* ===== Emergency (Part 2) red / maroon theme ===== */
+.part-banner.er{background:linear-gradient(135deg,#6d1414,#dc2626)}
+.part-banner.er .part-kicker{color:#ffd0d0}
+.part-banner.er p{color:#ffe2e2}
+.system.er{--brand:#b91c1c;--brand2:#7f1d1d;--def:#c0271f;--defbg:#fdecec}
+.system.er .topic-title:before{color:#b91c1c}
+.system.er table.cmp td:first-child{background:#fbecec}
+.system.er .mcq button.reveal{background:#b91c1c}
+.system.er .mcq button.reveal:hover{background:#9f1414}
+.system.er .mcq-head{color:#ffc0c0}
+.navsec.er{color:#e59595}
+#sidebar ul.er-nav li a.navlink:hover{background:#2a1414;color:#fff}
+#sidebar ul.er-nav li a.navlink.active{background:#2a1414;color:#fff;border-left-color:#dc2626}
 /* system */
 .system{background:transparent;margin:0 0 30px;scroll-margin-top:64px}
 .sys-title{font-size:23px;color:var(--brand2);border-bottom:3px solid var(--def);padding-bottom:8px;margin:30px 0 6px}
@@ -147,8 +160,8 @@ mark{background:#ffe680;color:#000;padding:0 2px;border-radius:2px}
 </style></head><body>
 <div id="layout">
 <aside id="sidebar">
- <div class="brand"><h1>Family Medicine & Emergency Quick Review</h1><div class="sub">Compiled from official study sheets</div></div>
- <div class="countdown">Exam format<br><b>70 MCQs &middot; 80 minutes</b><br>~68&nbsp;s per question</div>
+ <div class="brand"><h1>Family Medicine & Emergency</h1><div class="sub">All you need to know to ace the exam &middot; JUST curriculum</div></div>
+ <div class="countdown">Exam format<br><b>70 MCQs &middot; 90 minutes</b><br>~77&nbsp;s per question</div>
  <button class="navtool primary" onclick="document.getElementById('mock-section').scrollIntoView()">Take a Mock Exam (A / B)</button>
  <div class="navsec">Part 1 &middot; Family Medicine</div>
  <ul><li><a href="#sys-fm-principles" class="navlink" data-target="sys-fm-principles">1. Family Medicine Principles &amp;amp; Consultation Skills</a></li>
@@ -157,8 +170,8 @@ mark{background:#ffe680;color:#000;padding:0 2px;border-radius:2px}
 <li><a href="#sys-msk-injuries" class="navlink" data-target="sys-msk-injuries">4. Musculoskeletal &amp;amp; Minor Injuries</a></li>
 <li><a href="#sys-womens-geriatrics" class="navlink" data-target="sys-womens-geriatrics">5. Women&#x27;s Health &amp;amp; Geriatrics</a></li>
 <li><a href="#sys-mental-behavioral" class="navlink" data-target="sys-mental-behavioral">6. Mental Health &amp;amp; Behavioural</a></li></ul>
- <div class="navsec">Part 2 &middot; Emergency</div>
- <ul><li><a href="#sys-resus-trauma" class="navlink" data-target="sys-resus-trauma">7. Resuscitation &amp;amp; Trauma</a></li>
+ <div class="navsec er">Part 2 &middot; Emergency</div>
+ <ul class="er-nav"><li><a href="#sys-resus-trauma" class="navlink" data-target="sys-resus-trauma">7. Resuscitation &amp;amp; Trauma</a></li>
 <li><a href="#sys-cardioresp" class="navlink" data-target="sys-cardioresp">8. Cardiorespiratory Emergencies</a></li>
 <li><a href="#sys-neuro-emergencies" class="navlink" data-target="sys-neuro-emergencies">9. Neurological Emergencies</a></li>
 <li><a href="#sys-metabolic-emergencies" class="navlink" data-target="sys-metabolic-emergencies">10. Metabolic &amp;amp; Endocrine Emergencies</a></li>
@@ -179,17 +192,18 @@ mark{background:#ffe680;color:#000;padding:0 2px;border-radius:2px}
  </div>
  <div class="wrap">
    <div class="intro-card">
-     <h2>Family Medicine & Emergency &mdash; quick review</h2>
+     <h2>Family Medicine & Emergency &mdash; all you need to know to ace the exam</h2>
      <p>One cohesive hub for the joint exam: <b>Part 1 Family Medicine</b> and <b>Part 2 Emergency</b>, across 12 clinical clusters. Every topic is stripped to its <b>essential definition, the single most useful comparison table, and the MCQ pearls</b> that map a question stem to its answer.</p>
      <p><b>How to use it:</b> topics start collapsed &mdash; tap any topic to open it. Sweep a cluster, lock in the tables and the amber pearls, then test yourself with the 5 exam-style questions at the end of each cluster. Use the search box to jump anywhere. Finish with the two full mock papers (A &amp; B). Depth is priority-weighted: the highest-yield topics are covered in more detail, the rest kept tight.</p>
      <div class="pills"><span class="pill">2 parts &middot; 12 clusters &middot; 38 topics</span><span class="pill">Priority-weighted depth</span><span class="pill">60 practice MCQs</span><span class="pill">2 mock papers &middot; 140 questions</span></div>
+     <p style="margin-top:14px;font-size:12px;color:#cdd9f5;font-style:italic">Disclaimer: all content is compiled from the official study sheets of the Jordan University of Science and Technology (JUST) curriculum.</p>
    </div>
 <div class="part-banner" id="part-fammed"><span class="part-kicker">Part 1</span><h2>Family Medicine</h2><p>Chronic disease, common presentations &amp; the principles of general practice.</p></div>
 <section class="system" id="sys-fm-principles" data-system="Family Medicine Principles &amp; Consultation Skills">
 <h2 class="sys-title">1. Family Medicine Principles &amp; Consultation Skills</h2>
 <p class="sys-intro">First-contact, continuous, comprehensive, coordinated care — and the evidence base behind it.</p>
 
-<article class="topic"><h3 class="topic-title">Family Medicine (Principles) <span class="tier">DEEP</span></h3>
+<article class="topic"><h3 class="topic-title">Family Medicine (Principles)</h3>
 <div class="box def"><span class="lbl">Def</span> Specialty of <b>breadth</b>: continuing, comprehensive care across all ages, both sexes, every organ system &amp; disease.</div>
 
 <div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
@@ -200,7 +214,7 @@ mark{background:#ffe680;color:#000;padding:0 2px;border-radius:2px}
 </ul></div>
 </article>
 
-<article class="topic"><h3 class="topic-title">Evidence-Based Medicine <span class="tier">DEEP</span></h3>
+<article class="topic"><h3 class="topic-title">Evidence-Based Medicine</h3>
 <div class="box def"><span class="lbl">Def</span> Integration of best research evidence + clinical expertise + <b>patient values</b> (all THREE).</div>
 
 <div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
@@ -212,7 +226,7 @@ mark{background:#ffe680;color:#000;padding:0 2px;border-radius:2px}
 </ul></div>
 </article>
 
-<article class="topic"><h3 class="topic-title">Consultation <span class="tier">SUMMARISED</span></h3>
+<article class="topic"><h3 class="topic-title">Consultation</h3>
 <div class="box def"><span class="lbl">Def</span> Central act of medicine = interview (why pt came) + exposition (dx, tx, advice); opening puts pt at ease.</div>
 
 <div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
@@ -222,7 +236,7 @@ mark{background:#ffe680;color:#000;padding:0 2px;border-radius:2px}
 </ul></div>
 </article>
 
-<article class="topic"><h3 class="topic-title">Communication <span class="tier">SUMMARISED</span></h3>
+<article class="topic"><h3 class="topic-title">Communication</h3>
 <div class="box def"><span class="lbl">Def</span> Multi-level info exchange; aims = be heard/accepted, be understood, get action.</div>
 
 <div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
@@ -232,7 +246,7 @@ mark{background:#ffe680;color:#000;padding:0 2px;border-radius:2px}
 </ul></div>
 </article>
 
-<article class="topic"><h3 class="topic-title">Counselling <span class="tier">SUMMARISED</span></h3>
+<article class="topic"><h3 class="topic-title">Counselling</h3>
 <div class="box def"><span class="lbl">Def</span> Structured pt education + behaviour-change: introduce &rarr; assess knowledge &rarr; explain disease &rarr; lifestyle then drugs.</div>
 
 <div class="box buzz"><span class="lbl">MCQ pearls</span><ul>
@@ -242,7 +256,7 @@ mark{background:#ffe680;color:#000;padding:0 2px;border-radius:2px}
 </ul></div>
 </article>
 
-<article class="topic"><h3 class="topic-title">Periodic Health Assessment <span class="tier">SUMMARISED</span></h3>
+<article class="topic"><h3 class="topic-title">Periodic Health Assessment</h3>
 <div class="box def"><span class="lbl">Def</span> Systematic prevention via immunizations + screening; good screen = sensitive, specific, safe, acceptable, cost-effective.</div>
 
 <table class="cmp"><thead><tr><th>Screen</th><th>Start age</th><th>Tool / frequency</th></tr></thead><tbody>
@@ -524,7 +538,7 @@ mark{background:#ffe680;color:#000;padding:0 2px;border-radius:2px}
 </section>
 <section class="system" id="sys-msk-injuries" data-system="Musculoskeletal &amp; Minor Injuries">
 <h2 class="sys-title">4. Musculoskeletal &amp; Minor Injuries</h2>
-<p class="sys-intro">Back pain and outpatient wound care &mdash; both summarised, but know the red flags, suture table and tetanus rules.</p>
+<p class="sys-intro">Back pain and outpatient wound care &mdash; know the red flags, suture table and tetanus rules.</p>mdash; know the red flags, suture table and tetanus rules.</p>
 
 <article class="topic"><h3 class="topic-title">Back Pain</h3>
 <div class="box def"><span class="lbl">Definition</span> Pain from spinal muscles, nerves, bones or joints; ~90% benign &amp; self-limiting (resolve &lt;4 wks). Mechanical = worse with activity, <b>better with rest</b>; red-flag = constant/night pain.</div>
@@ -580,7 +594,7 @@ mark{background:#ffe680;color:#000;padding:0 2px;border-radius:2px}
 </section>
 <section class="system" id="sys-womens-geriatrics" data-system="Women's Health &amp; Geriatrics">
 <h2 class="sys-title">5. Women's Health &amp; Geriatrics</h2>
-<p class="sys-intro">Two summarised topics, both PYQ-dense — screening ages and geriatric syndromes.</p>
+<p class="sys-intro">Both PYQ-dense — screening ages and geriatric syndromes.</p>
 
 <article class="topic"><h3 class="topic-title">Women's Health</h3>
 <div class="box def"><span class="lbl">Definition</span> Female-specific care — breast &amp; cervical screening, PCOS, menopause, osteoporosis.</div>
@@ -711,8 +725,8 @@ mark{background:#ffe680;color:#000;padding:0 2px;border-radius:2px}
 
 </div>
 </section>
-<div class="part-banner" id="part-er"><span class="part-kicker">Part 2</span><h2>Emergency Medicine</h2><p>Acute, time-critical presentations &mdash; resuscitation, toxicology &amp; the can&rsquo;t-miss diagnoses.</p></div>
-<section class="system" id="sys-resus-trauma" data-system="Resuscitation &amp; Trauma">
+<div class="part-banner er" id="part-er"><span class="part-kicker">Part 2</span><h2>Emergency Medicine</h2><p>Acute, time-critical presentations &mdash; resuscitation, toxicology &amp; the can&rsquo;t-miss diagnoses.</p></div>
+<section class="system er" id="sys-resus-trauma" data-system="Resuscitation &amp; Trauma">
 <h2 class="sys-title">7. Resuscitation &amp; Trauma</h2>
 <p class="sys-intro">Systematic primary survey, shock recognition, life-threats, and cardiac-arrest algorithms.</p>
 
@@ -777,7 +791,7 @@ mark{background:#ffe680;color:#000;padding:0 2px;border-radius:2px}
 
 </div>
 </section>
-<section class="system" id="sys-cardioresp" data-system="Cardiorespiratory Emergencies">
+<section class="system er" id="sys-cardioresp" data-system="Cardiorespiratory Emergencies">
 <h2 class="sys-title">8. Cardiorespiratory Emergencies</h2>
 <p class="sys-intro">Rule out the can't-miss killers first, then narrow the differential.</p>
 
@@ -881,7 +895,7 @@ mark{background:#ffe680;color:#000;padding:0 2px;border-radius:2px}
 
 </div>
 </section>
-<section class="system" id="sys-neuro-emergencies" data-system="Neurological Emergencies">
+<section class="system er" id="sys-neuro-emergencies" data-system="Neurological Emergencies">
 <h2 class="sys-title">9. Neurological Emergencies</h2>
 <p class="sys-intro">Seizure &amp; status epilepticus (with stepwise management) plus the altered-mental-status workup.</p>
 
@@ -949,7 +963,7 @@ mark{background:#ffe680;color:#000;padding:0 2px;border-radius:2px}
 
 </div>
 </section>
-<section class="system" id="sys-metabolic-emergencies" data-system="Metabolic &amp; Endocrine Emergencies">
+<section class="system er" id="sys-metabolic-emergencies" data-system="Metabolic &amp; Endocrine Emergencies">
 <h2 class="sys-title">10. Metabolic &amp; Endocrine Emergencies</h2>
 <p class="sys-intro">Glucose and potassium crises seen in the ED — diagnose on numbers, treat in the right order.</p>
 
@@ -1020,7 +1034,7 @@ mark{background:#ffe680;color:#000;padding:0 2px;border-radius:2px}
 
 </div>
 </section>
-<section class="system" id="sys-tox-environmental" data-system="Toxicology, Anaphylaxis &amp; Environmental">
+<section class="system er" id="sys-tox-environmental" data-system="Toxicology, Anaphylaxis &amp; Environmental">
 <h2 class="sys-title">11. Toxicology, Anaphylaxis &amp; Environmental</h2>
 <p class="sys-intro">Toxidromes &amp; antidotes, IM-adrenaline-first anaphylaxis, and heat/cold/water/airway emergencies.</p>
 
@@ -1088,7 +1102,7 @@ mark{background:#ffe680;color:#000;padding:0 2px;border-radius:2px}
 
 </div>
 </section>
-<section class="system" id="sys-gi-abdominal" data-system="GI &amp; Abdominal Emergencies">
+<section class="system er" id="sys-gi-abdominal" data-system="GI &amp; Abdominal Emergencies">
 <h2 class="sys-title">12. GI &amp; Abdominal Emergencies</h2>
 <p class="sys-intro">Resuscitate first, find the source second — and never miss a variceal bleed or a vascular catastrophe.</p>
 
@@ -1163,9 +1177,9 @@ mark{background:#ffe680;color:#000;padding:0 2px;border-radius:2px}
 </section>
    <section id="mock-section">
      <h2 class="sys-title">Mock Exams &mdash; two full papers (70 Q each)</h2>
-     <p class="sys-intro">Two complete mixed papers (A &amp; B), each 70 questions / 80 minutes, weighted 35 Family Medicine / 35 Emergency. Two papers because the real exam differs between sessions &mdash; sit both. Options reshuffle each attempt, so there's no pattern to memorise.</p>
+     <p class="sys-intro">Two complete mixed papers (A &amp; B), each 70 questions / 90 minutes, weighted 35 Family Medicine / 35 Emergency. Two papers because the real exam differs between sessions &mdash; sit both. Options reshuffle each attempt, so there's no pattern to memorise.</p>
      <div id="mockStart">
-       <h2>Choose a paper &middot; 70 questions &middot; 80 minutes</h2>
+       <h2>Choose a paper &middot; 70 questions &middot; 90 minutes</h2>
        <p>Sit each as a dress rehearsal: no notes, one pass, commit to an answer for every question. You'll get a score and full explanations at the end, and can then switch to the other paper.</p>
        <div style="margin-top:14px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
          <button id="startMockA">Start Paper A</button>
@@ -1174,7 +1188,7 @@ mark{background:#ffe680;color:#000;padding:0 2px;border-radius:2px}
      </div>
      <div id="mockBar">
        <span class="paper-tag" id="paperTag">Paper A</span>
-       <span class="timer" id="timer">80:00</span>
+       <span class="timer" id="timer">90:00</span>
        <span class="prog" id="prog">Answered 0 / 70</span>
        <button id="gradeBtn">Grade exam</button>
      </div>
@@ -1182,7 +1196,7 @@ mark{background:#ffe680;color:#000;padding:0 2px;border-radius:2px}
      <div id="mockQuestions" style="display:none"></div>
    </section>
 
-   <div class="footer">Compiled from the official sheets students usually study from &middot; for revision only &mdash; verify any doses/protocols against a primary source before clinical use.</div>
+   <div class="footer">All content compiled from the official study sheets of the Jordan University of Science and Technology (JUST) curriculum &middot; for revision only &mdash; verify any doses/protocols against a primary source before clinical use.</div>
  </div>
 </div>
 </div>
@@ -1250,7 +1264,7 @@ var MOCKS={A:[{"id": 1, "system": "Family Medicine: Cardiometabolic", "q": "A 46
 var curPaper='A';
 var MOCK=MOCKS.A;
 function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
-var timerId=null, secondsLeft=80*60, started=false;
+var timerId=null, secondsLeft=90*60, started=false;
 function fmt(s){var m=Math.floor(s/60),x=s%60;return (m<10?'0':'')+m+':'+(x<10?'0':'')+x;}
 function tick(){ secondsLeft--; document.getElementById('timer').textContent=fmt(Math.max(0,secondsLeft));
  if(secondsLeft<=0){clearInterval(timerId); gradeMock(true);} }
@@ -1290,7 +1304,7 @@ function startMock(paper){
  document.getElementById('mockQuestions').style.display='block';
  document.getElementById('paperTag').textContent='Paper '+curPaper;
  buildMock(); updateProg();
- secondsLeft=80*60; document.getElementById('timer').textContent='80:00';
+ secondsLeft=90*60; document.getElementById('timer').textContent='90:00';
  timerId=setInterval(tick,1000);
  document.getElementById('mock-section').scrollIntoView();
 }
@@ -1319,9 +1333,9 @@ function gradeMock(auto){
  sc.scrollIntoView({behavior:'smooth'});
 }
 function resetMock(){
- started=false; secondsLeft=80*60;
+ started=false; secondsLeft=90*60;
  document.getElementById('scorecard').style.display='none';
- document.getElementById('timer').textContent='80:00';
+ document.getElementById('timer').textContent='90:00';
  startMock(curPaper);
 }
 function switchPaper(p){
