@@ -45,11 +45,25 @@ a{color:var(--brand);text-decoration:none}
 #topbar button:hover{background:#f0f4fa;border-color:#c9d4e3}
 #hamburger{display:none}
 .wrap{max-width:1000px;margin:0 auto;padding:22px 26px 80px}
-.intro-card{background:linear-gradient(135deg,#0b2a6b,#1d4ed8);color:#fff;border-radius:16px;padding:22px 24px;margin-bottom:22px}
-.intro-card h2{margin:0 0 8px;font-size:21px}
-.intro-card p{margin:6px 0;font-size:14px;color:#dce6ff}
-.intro-card .pills{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
-.intro-card .pill{background:rgba(255,255,255,.16);padding:5px 11px;border-radius:20px;font-size:12px}
+.intro-card{background:linear-gradient(150deg,#e8f0ff,#ffffff 70%);border:2px solid var(--brand);border-radius:16px;padding:22px 24px;margin-bottom:22px;color:var(--ink);box-shadow:0 1px 4px rgba(16,30,54,.06)}
+.intro-card .kick{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--brand);font-weight:700}
+.intro-card h2{margin:4px 0 3px;font-size:24px;line-height:1.15;color:var(--brand2)}
+.intro-card .sub{color:var(--muted);font-size:14px;margin:0 0 16px}
+.intro-card .tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.intro-card .tile{background:#eef4ff;border:1px solid #d6e2f7;border-radius:11px;padding:12px 10px;text-align:center}
+.intro-card .tile b{display:block;font-size:21px;line-height:1;color:var(--brand2)}
+.intro-card .tile span{display:block;font-size:11px;color:var(--muted);margin-top:5px}
+.intro-card .intro-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:16px}
+.intro-card .cta{background:var(--brand);color:#fff;font-weight:700;border:none;border-radius:10px;padding:11px 20px;font-size:14px;cursor:pointer}
+.intro-card .cta:hover{background:#1b43c0}
+.intro-card .ghost{background:#fff;color:var(--brand2);border:1px solid var(--line);border-radius:10px;padding:11px 16px;font-size:13px;cursor:pointer}
+.intro-card .ghost:hover{background:#f0f4fa}
+.intro-card .howto{margin-top:12px}
+.intro-card .howto summary{cursor:pointer;color:var(--brand);font-size:13px;font-weight:600;list-style:none}
+.intro-card .howto summary::-webkit-details-marker{display:none}
+.intro-card .howto p{margin:8px 0 0;font-size:13.5px;color:var(--muted)}
+.intro-card .disc{margin-top:14px;font-size:12px;color:var(--muted);font-style:italic}
+@media(max-width:760px){.intro-card .tiles{grid-template-columns:repeat(2,1fr)}}
 /* part banner */
 .part-banner{background:linear-gradient(135deg,#0b2a6b,#1d4ed8);color:#fff;border-radius:14px;padding:16px 22px;margin:36px 0 18px;scroll-margin-top:64px}
 .part-banner .part-kicker{font-size:11px;text-transform:uppercase;letter-spacing:.18em;color:#bcd2ff}
@@ -210,11 +224,23 @@ mark{background:#ffe680;color:#000;padding:0 2px;border-radius:2px}
  </div>
  <div class="wrap">
    <div class="intro-card">
-     <h2>Family Medicine & Emergency &mdash; all you need to know to ace the exam</h2>
-     <p>One cohesive hub for the joint exam: <b>Part 1 Family Medicine</b> and <b>Part 2 Emergency</b>, across 12 clinical clusters. Every topic is stripped to its <b>essential definition, the single most useful comparison table, and the MCQ pearls</b> that map a question stem to its answer.</p>
-     <p><b>How to use it:</b> everything starts collapsed as folders &mdash; tap a coloured section to open it, then tap any topic inside. Sweep a cluster, lock in the tables and the amber pearls, then test yourself with the 5 exam-style questions at the end of each cluster. Use the search box to jump anywhere. Finish with the two full mock papers (A &amp; B). Depth is priority-weighted: the highest-yield topics are covered in more detail, the rest kept tight.</p>
-     <div class="pills"><span class="pill">2 parts &middot; 12 clusters &middot; 38 topics</span><span class="pill">Priority-weighted depth</span><span class="pill">60 practice MCQs</span><span class="pill">2 mock papers &middot; 140 questions</span></div>
-     <p style="margin-top:14px;font-size:12px;color:#cdd9f5;font-style:italic">Disclaimer: all content is compiled from the official study sheets of the Jordan University of Science and Technology (JUST) curriculum.</p>
+     <div class="kick">JUST &middot; Final revision</div>
+     <h2>Family Medicine & Emergency</h2>
+     <div class="sub">All you need to know to ace the exam.</div>
+     <div class="tiles">
+       <div class="tile"><b>12</b><span>sections</span></div>
+       <div class="tile"><b>38</b><span>topics</span></div>
+       <div class="tile"><b>60</b><span>practice Qs</span></div>
+       <div class="tile"><b>140</b><span>mock Qs</span></div>
+       <div class="tile"><b>90</b><span>min mock</span></div>
+     </div>
+     <div class="intro-actions">
+       <button class="cta" onclick="document.getElementById('mock-section').scrollIntoView()">&#9654; Start a Mock Exam</button>
+       <button class="ghost" onclick="var s=document.getElementById('search');s.scrollIntoView();s.focus()">&#128269; Search topics</button>
+     </div>
+     <details class="howto"><summary>How to use it &#9662;</summary>
+       <p>Everything starts collapsed as folders &mdash; tap a coloured section (blue = Family Medicine, red = Emergency) to open it, then tap any topic inside. Skim the definition, the comparison table and the amber MCQ pearls, then do the 5 questions at the end of each section. Finish with the two 90-minute mock papers (A &amp; B).</p></details>
+     <div class="disc">Disclaimer: all content is compiled from the official study sheets of the Jordan University of Science and Technology (JUST) curriculum.</div>
    </div>
 <div class="part-banner" id="part-fammed"><span class="part-kicker">Part 1</span><h2>Family Medicine</h2><p>Chronic disease, common presentations &amp; the principles of general practice.</p></div>
 <section class="system" id="sys-fm-principles" data-system="Family Medicine Principles &amp; Consultation Skills">
