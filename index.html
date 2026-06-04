@@ -27,9 +27,15 @@ a{color:var(--brand);text-decoration:none}
 #sidebar .countdown b{color:#ffb866}
 .navsec{font-size:10.5px;text-transform:uppercase;letter-spacing:.12em;color:#6f84a4;padding:14px 18px 6px}
 #sidebar ul{list-style:none;margin:0;padding:0}
-#sidebar li a.navlink{display:block;padding:7px 18px;color:var(--sidebarink);font-size:13.4px;border-left:3px solid transparent}
-#sidebar li a.navlink:hover{background:#16223c;color:#fff}
-#sidebar li a.navlink.active{background:#16223c;color:#fff;border-left-color:var(--def);font-weight:600}
+#sidebar li a.navlink{display:block;margin:5px 14px;padding:8px 12px;border-radius:9px;font-size:13.1px;line-height:1.3;color:var(--sidebarink);background:#15203a;border:1px solid #25324f}
+#sidebar li a.navlink:hover{background:#1b2a48;color:#fff}
+#sidebar li a.navlink.active{color:#fff;font-weight:600}
+#sidebar .fm-nav li a.navlink{background:rgba(37,99,235,.12);border-color:rgba(37,99,235,.26);color:#d4e2fb}
+#sidebar .fm-nav li a.navlink:hover{background:rgba(37,99,235,.22);color:#fff}
+#sidebar .fm-nav li a.navlink.active{background:rgba(37,99,235,.32);border-color:rgba(120,158,236,.65);color:#fff}
+#sidebar .er-nav li a.navlink{background:rgba(220,38,38,.11);border-color:rgba(220,38,38,.28);color:#f2cccc}
+#sidebar .er-nav li a.navlink:hover{background:rgba(220,38,38,.20);color:#fff}
+#sidebar .er-nav li a.navlink.active{background:rgba(220,38,38,.32);border-color:rgba(240,135,135,.65);color:#fff}
 #sidebar .navtool{display:block;width:calc(100% - 28px);margin:6px 14px 0;padding:8px 10px;border:1px solid #2a3a59;
  background:#14203a;color:#cfe0f5;border-radius:8px;font-size:12.5px;cursor:pointer;text-align:left}
 #sidebar .navtool:hover{background:#1c2c4d}
@@ -80,8 +86,7 @@ a{color:var(--brand);text-decoration:none}
 .system.er .mcq button.reveal:hover{background:#9f1414}
 .system.er .mcq-head{color:#ffc0c0}
 .navsec.er{color:#e59595}
-#sidebar ul.er-nav li a.navlink:hover{background:#2a1414;color:#fff}
-#sidebar ul.er-nav li a.navlink.active{background:#2a1414;color:#fff;border-left-color:#dc2626}
+/* er-nav capsule colours handled in the navlink block above */
 /* system */
 .system{background:transparent;margin:0 0 30px;scroll-margin-top:64px}
 .system .sys-title{font-size:18px;color:#fff;background:linear-gradient(135deg,#0b2a6b,#1d4ed8);border:none;border-radius:12px;padding:15px 18px;margin:16px 0 14px;cursor:pointer;display:flex;align-items:center;gap:12px;box-shadow:0 2px 6px rgba(16,30,54,.15);user-select:none}
@@ -196,19 +201,19 @@ mark{background:#ffe680;color:#000;padding:0 2px;border-radius:2px}
  <div class="countdown">Exam format<br><b>70 MCQs &middot; 90 minutes</b><br>~77&nbsp;s per question</div>
  <button class="navtool primary" onclick="document.getElementById('mock-section').scrollIntoView()">Take a Mock Exam (A / B)</button>
  <div class="navsec">Part 1 &middot; Family Medicine</div>
- <ul><li><a href="#sys-fm-principles" class="navlink" data-target="sys-fm-principles">1. Family Medicine Principles &amp;amp; Consultation Skills</a></li>
-<li><a href="#sys-cardiometabolic" class="navlink" data-target="sys-cardiometabolic">2. Cardiometabolic &amp;amp; Endocrine</a></li>
+ <ul class="fm-nav"><li><a href="#sys-fm-principles" class="navlink" data-target="sys-fm-principles">1. Family Medicine Principles &amp; Consultation Skills</a></li>
+<li><a href="#sys-cardiometabolic" class="navlink" data-target="sys-cardiometabolic">2. Cardiometabolic &amp; Endocrine</a></li>
 <li><a href="#sys-common-presentations" class="navlink" data-target="sys-common-presentations">3. Common Symptom Presentations</a></li>
-<li><a href="#sys-msk-injuries" class="navlink" data-target="sys-msk-injuries">4. Musculoskeletal &amp;amp; Minor Injuries</a></li>
-<li><a href="#sys-womens-geriatrics" class="navlink" data-target="sys-womens-geriatrics">5. Women&#x27;s Health &amp;amp; Geriatrics</a></li>
-<li><a href="#sys-mental-behavioral" class="navlink" data-target="sys-mental-behavioral">6. Mental Health &amp;amp; Behavioural</a></li></ul>
+<li><a href="#sys-msk-injuries" class="navlink" data-target="sys-msk-injuries">4. Musculoskeletal &amp; Minor Injuries</a></li>
+<li><a href="#sys-womens-geriatrics" class="navlink" data-target="sys-womens-geriatrics">5. Women's Health &amp; Geriatrics</a></li>
+<li><a href="#sys-mental-behavioral" class="navlink" data-target="sys-mental-behavioral">6. Mental Health &amp; Behavioural</a></li></ul>
  <div class="navsec er">Part 2 &middot; Emergency</div>
- <ul class="er-nav"><li><a href="#sys-resus-trauma" class="navlink" data-target="sys-resus-trauma">7. Resuscitation &amp;amp; Trauma</a></li>
+ <ul class="er-nav"><li><a href="#sys-resus-trauma" class="navlink" data-target="sys-resus-trauma">7. Resuscitation &amp; Trauma</a></li>
 <li><a href="#sys-cardioresp" class="navlink" data-target="sys-cardioresp">8. Cardiorespiratory Emergencies</a></li>
 <li><a href="#sys-neuro-emergencies" class="navlink" data-target="sys-neuro-emergencies">9. Neurological Emergencies</a></li>
-<li><a href="#sys-metabolic-emergencies" class="navlink" data-target="sys-metabolic-emergencies">10. Metabolic &amp;amp; Endocrine Emergencies</a></li>
-<li><a href="#sys-tox-environmental" class="navlink" data-target="sys-tox-environmental">11. Toxicology, Anaphylaxis &amp;amp; Environmental</a></li>
-<li><a href="#sys-gi-abdominal" class="navlink" data-target="sys-gi-abdominal">12. GI &amp;amp; Abdominal Emergencies</a></li></ul>
+<li><a href="#sys-metabolic-emergencies" class="navlink" data-target="sys-metabolic-emergencies">10. Metabolic &amp; Endocrine Emergencies</a></li>
+<li><a href="#sys-tox-environmental" class="navlink" data-target="sys-tox-environmental">11. Toxicology, Anaphylaxis &amp; Environmental</a></li>
+<li><a href="#sys-gi-abdominal" class="navlink" data-target="sys-gi-abdominal">12. GI &amp; Abdominal Emergencies</a></li></ul>
  <div class="navsec">Exam</div>
  <ul><li><a href="#mock-section" class="navlink" data-target="mock-section">Mock Exams (A &amp; B)</a></li></ul>
  <div class="navsec">Tools</div>
